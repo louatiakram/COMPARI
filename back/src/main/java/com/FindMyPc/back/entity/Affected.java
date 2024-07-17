@@ -16,7 +16,7 @@ import lombok.Setter;
 public class Affected {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     
     private float priceBD;
     private float priceAD;
