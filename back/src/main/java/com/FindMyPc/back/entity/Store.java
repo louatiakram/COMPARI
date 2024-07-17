@@ -1,5 +1,6 @@
 package com.FindMyPc.back.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,9 +23,11 @@ public class Store {
     private String logo;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Affected> affected;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Rating> ratings;
 
     public List<Affected> getAffected() {

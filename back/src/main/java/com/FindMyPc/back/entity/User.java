@@ -1,5 +1,6 @@
 package com.FindMyPc.back.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,15 +24,8 @@ public class User {
     private String image;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Rating> ratings;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Wishlist> wishlists;
-
-
-    public List<Rating> getRatings() {
-        return ratings;
-    }
 
     public List<Wishlist> getWishlists() {
         return wishlists;

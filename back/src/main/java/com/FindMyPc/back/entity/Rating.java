@@ -1,5 +1,6 @@
 package com.FindMyPc.back.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,10 +20,12 @@ public class Rating {
 
     @ManyToOne
     @JoinColumn(name = "store_id")
+    @JsonBackReference
     private Store store;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
+    @JsonBackReference
     private Product product;
 
     @ManyToOne
