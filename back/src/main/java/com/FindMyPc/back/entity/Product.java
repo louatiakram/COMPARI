@@ -1,18 +1,15 @@
 package com.FindMyPc.back.entity;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Entity
 public class Product {
     @Id
@@ -31,18 +28,4 @@ public class Product {
     
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Wishlist> wishlists;
-
-    public List<Affected> getAffected() {
-        return affected;
-    }
-
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public List<Wishlist> getWishlists() {
-        return wishlists;
-    }
-
-
 }
