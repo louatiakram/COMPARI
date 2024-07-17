@@ -7,7 +7,10 @@ import java.util.Optional;
 
 public interface StoreService {
     List<Store> getAllStores();
+
     Optional<Store> getStoreById(int id);
+
     Store saveStore(Store store);
+
     void deleteStore(int id);
 }

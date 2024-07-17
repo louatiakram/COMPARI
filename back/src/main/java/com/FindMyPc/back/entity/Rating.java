@@ -1,11 +1,7 @@
 package com.FindMyPc.back.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @Data
@@ -18,17 +14,17 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ratingID;
-    
+
     private String content;
-    
+
     @ManyToOne
     @JoinColumn(name = "store_id")
     private Store store;
-    
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-    
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

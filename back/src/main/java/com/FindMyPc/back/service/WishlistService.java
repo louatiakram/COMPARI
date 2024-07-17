@@ -7,7 +7,10 @@ import java.util.Optional;
 
 public interface WishlistService {
     List<Wishlist> getAllWishlists();
+
     Optional<Wishlist> getWishlistById(int id);
+
     Wishlist saveWishlist(Wishlist wishlist);
+
     void deleteWishlist(int id);
 }

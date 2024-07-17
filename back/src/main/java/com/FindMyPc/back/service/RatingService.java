@@ -7,7 +7,10 @@ import java.util.Optional;
 
 public interface RatingService {
     List<Rating> getAllRatings();
+
     Optional<Rating> getRatingById(int id);
+
     Rating saveRating(Rating rating);
+
     void deleteRating(int id);
 }

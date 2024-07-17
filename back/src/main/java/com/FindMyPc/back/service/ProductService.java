@@ -8,8 +8,12 @@ import java.util.Optional;
 
 public interface ProductService {
     List<Product> getAllProducts();
+
     Optional<Product> getProductById(int id);
+
     Product saveProduct(Product product);
+
     void deleteProduct(int id);
+
     Page<Product> getProductsPaginated(int page, int size);
 }

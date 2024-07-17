@@ -1,10 +1,7 @@
 package com.FindMyPc.back.entity;
+
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -18,12 +15,12 @@ public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int storeID;
-    
+
     private String name;
     private String location;
     private String websiteURL;
     private String logo;
-    
+
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private List<Affected> affected;
 

@@ -64,7 +64,6 @@ public class ProductController {
     }
 
 
-
     @GetMapping("/paginated")
     public Page<Product> getProductsPaginated(@RequestParam int page, @RequestParam int size) {
         return productService.getProductsPaginated(page, size);
