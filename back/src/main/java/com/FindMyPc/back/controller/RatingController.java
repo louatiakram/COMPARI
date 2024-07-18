@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/ratings")
+@RequestMapping("/api/rating")
 public class RatingController {
 
     @Autowired
