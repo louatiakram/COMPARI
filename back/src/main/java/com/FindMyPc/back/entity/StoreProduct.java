@@ -4,14 +4,11 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Entity
-public class Affected {
+public class StoreProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -28,12 +25,4 @@ public class Affected {
     @JoinColumn(name = "store_id")
     @JsonBackReference
     private Store store;
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public Store getStore() {
-        return store;
-    }
 }

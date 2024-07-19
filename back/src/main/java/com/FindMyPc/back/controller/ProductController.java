@@ -42,7 +42,7 @@ public class ProductController {
             product.setName(productDetails.getName());
             product.setDescription(productDetails.getDescription());
             product.setImage(productDetails.getImage());
-            product.setAffected(productDetails.getAffected());
+            product.setStoreProduct(productDetails.getStoreProduct());
             product.setRatings(productDetails.getRatings());
             product.setWishlists(productDetails.getWishlists());
             return ResponseEntity.ok(productService.saveProduct(product));

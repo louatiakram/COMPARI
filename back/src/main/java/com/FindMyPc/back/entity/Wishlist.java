@@ -4,12 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Entity
 public class Wishlist {
     @Id
@@ -25,12 +22,4 @@ public class Wishlist {
     @JoinColumn(name = "product_id")
     @JsonBackReference
     private Product product;
-
-    public User getUser() {
-        return user;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
 }

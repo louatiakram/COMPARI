@@ -9,8 +9,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Entity
 public class Store {
     @Id
@@ -24,17 +22,9 @@ public class Store {
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<Affected> affected;
+    private List<StoreProduct> storeProduct;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Rating> ratings;
-
-    public List<Affected> getAffected() {
-        return affected;
-    }
-
-    public List<Rating> getRatings() {
-        return ratings;
-    }
 }

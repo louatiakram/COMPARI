@@ -4,12 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Entity
 public class Rating {
     @Id
@@ -31,16 +28,4 @@ public class Rating {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public Store getStore() {
-        return store;
-    }
-
-    public User getUser() {
-        return user;
-    }
 }
