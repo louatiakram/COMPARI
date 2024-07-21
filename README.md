@@ -24,16 +24,16 @@ Follow these steps to set up the project locally:
    ```bash
    git clone https://github.com/yourusername/compari-backend.git
    cd compari-backend
-   ```
+   
 2. Configure the PostgreSQL database settings in src/main/resources/application.properties:
    ```bash
    spring.datasource.url=jdbc:postgresql://localhost:5432/compari
    spring.datasource.username=yourusername
    spring.datasource.password=yourpassword
-   ```
-3.Run the application:
+   
+3. Run the application:
    ```bash
-./mvnw spring-boot:run
-```
+   ./mvnw spring-boot:run
+
 
 ### Front-end (Angular)
