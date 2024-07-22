@@ -13,6 +13,9 @@ public interface StoreProductService {
     Optional<StoreProduct> getAffectedById(int id);
 
     StoreProduct saveAffected(StoreProduct storeProduct);
+    
+    StoreProduct updateAffected(StoreProduct storeProduct);
+
 
     void deleteAffected(int id);
 

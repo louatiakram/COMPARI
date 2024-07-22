@@ -12,6 +12,9 @@ public interface ProductService {
     Optional<Product> getProductById(int id);
 
     Product saveProduct(Product product);
+    
+    Product updateProduct(Product product);
+
 
     void deleteProduct(int id);
 

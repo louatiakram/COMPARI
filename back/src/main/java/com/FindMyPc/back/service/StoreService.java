@@ -11,6 +11,9 @@ public interface StoreService {
     Optional<Store> getStoreById(int id);
 
     Store saveStore(Store store);
+    
+    Store updateStore(Store store);
+
 
     void deleteStore(int id);
 }

@@ -29,7 +29,11 @@ public class StoreServiceImpl implements StoreService {
     public Store saveStore(Store store) {
         return storeRepository.save(store);
     }
-
+    
+    @Override
+    public Store updateStore(Store store) {
+        return storeRepository.save(store);
+    }
     @Override
     public void deleteStore(int id) {
         storeRepository.deleteById(id);

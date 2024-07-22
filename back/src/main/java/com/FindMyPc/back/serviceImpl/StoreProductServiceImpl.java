@@ -33,6 +33,11 @@ public class StoreProductServiceImpl implements StoreProductService {
     public StoreProduct saveAffected(StoreProduct storeProduct) {
         return storeProductRepository.save(storeProduct);
     }
+    
+    @Override
+    public StoreProduct updateAffected(StoreProduct storeProduct) {
+        return storeProductRepository.save(storeProduct);
+    }
 
     @Override
     public void deleteAffected(int id) {

@@ -11,6 +11,8 @@ public interface RatingService {
     Optional<Rating> getRatingById(int id);
 
     Rating saveRating(Rating rating);
+    
+    Rating updateRating(Rating rating);
 
     void deleteRating(int id);
 }
