@@ -3,6 +3,7 @@ package com.FindMyPc.back.controller;
 import com.FindMyPc.back.entity.User;
 import com.FindMyPc.back.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,14 +50,15 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
+    public ResponseEntity<String> deleteUser(@PathVariable int id) {
         Optional<User> user = userService.getUserById(id);
 
         if (user.isPresent()) {
             userService.deleteUser(id);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok("User with ID " + id + " has been deleted successfully.");
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("User with ID " + id + " not found.");
         }
     }
 }

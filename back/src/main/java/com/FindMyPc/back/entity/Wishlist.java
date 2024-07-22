@@ -13,7 +13,7 @@ public class Wishlist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int wishlistID;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;

@@ -25,7 +25,8 @@ public class Rating {
     @JsonBackReference
     private Product product;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 }
