@@ -27,7 +27,7 @@ public class WishlistController {
     public ResponseEntity<WishlistResponseDto> getWishlistById(@PathVariable int id) {
         Optional<WishlistResponseDto> wishlist = wishlistService.getWishlistById(id);
         return wishlist.map(responseDto -> new ResponseEntity<>(responseDto, HttpStatus.OK))
-                       .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping

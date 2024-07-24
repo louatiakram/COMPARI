@@ -13,7 +13,7 @@ public interface StoreProductService {
     Optional<StoreProductResponseDto> getAffectedById(int id);
 
     StoreProductResponseDto saveAffected(StoreProductResponseDto StoreProductResponseDto);
-    
+
     StoreProductResponseDto updateAffected(StoreProductResponseDto StoreProductResponseDto);
 
 

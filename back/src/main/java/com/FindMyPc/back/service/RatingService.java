@@ -10,14 +10,14 @@ public interface RatingService {
 
     Optional<RatingResponseDto> getRatingById(int id);
 
-    
-    RatingResponseDto saveProductRating(RatingResponseDto RatingResponseDto, Integer userId,Integer productID);
-    
-    RatingResponseDto saveStoreRating(RatingResponseDto RatingResponseDto,  Integer storeID, Integer userId);
 
-    RatingResponseDto updateProductRating(RatingResponseDto RatingResponseDto, Integer userId,Integer productID);
-    
-    RatingResponseDto updateStoreRating(RatingResponseDto RatingResponseDto,  Integer storeID, Integer userId);
+    RatingResponseDto saveProductRating(RatingResponseDto RatingResponseDto, Integer userId, Integer productID);
+
+    RatingResponseDto saveStoreRating(RatingResponseDto RatingResponseDto, Integer storeID, Integer userId);
+
+    RatingResponseDto updateProductRating(RatingResponseDto RatingResponseDto, Integer userId, Integer productID);
+
+    RatingResponseDto updateStoreRating(RatingResponseDto RatingResponseDto, Integer storeID, Integer userId);
 
 
     void deleteRating(int id);

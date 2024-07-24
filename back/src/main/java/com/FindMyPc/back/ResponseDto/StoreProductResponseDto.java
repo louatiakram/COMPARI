@@ -13,5 +13,5 @@ public class StoreProductResponseDto {
     private float priceBD;
     private float priceAD;
     private ProductResponseDto product;
-    private StoreResponseDto store;      
+    private StoreResponseDto store;
 }

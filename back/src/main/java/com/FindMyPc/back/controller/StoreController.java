@@ -27,7 +27,7 @@ public class StoreController {
     public ResponseEntity<StoreResponseDto> getStoreById(@PathVariable int id) {
         Optional<StoreResponseDto> store = storeService.getStoreById(id);
         return store.map(response -> new ResponseEntity<>(response, HttpStatus.OK))
-                    .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
