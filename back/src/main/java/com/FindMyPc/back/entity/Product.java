@@ -28,7 +28,7 @@ public class Product {
     @JsonManagedReference
     private List<Rating> ratings;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "products")
     @JsonManagedReference
-    private List<Wishlist> wishlists;
+    private List<Wishlist> wishlists;	
 }

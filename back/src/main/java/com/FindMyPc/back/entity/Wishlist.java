@@ -1,5 +1,9 @@
 package com.FindMyPc.back.entity;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,8 +22,11 @@ public class Wishlist {
     @JsonBackReference
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    @JsonBackReference
-    private Product product;
+    @ManyToMany
+    @JoinTable(
+        name = "wishlist_products",
+        joinColumns = @JoinColumn(name = "wishlist_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> products;
 }

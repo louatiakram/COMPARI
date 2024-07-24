@@ -1,6 +1,8 @@
 package com.FindMyPc.back.ResponseDto;
 
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class WishlistResponseDto {
     private int wishlistID;
     private UserResponseDto user;        
-    private ProductResponseDto product;  
+    private List<ProductResponseDto> products;
     
 }

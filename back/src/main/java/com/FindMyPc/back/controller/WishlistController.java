@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("api/wishlists")
+@RequestMapping("/api/wishlists")
 public class WishlistController {
+
+    private static final Logger logger = Logger.getLogger(WishlistController.class.getName());
 
     @Autowired
     private WishlistService wishlistService;
@@ -24,20 +27,23 @@ public class WishlistController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WishlistResponseDto> getWishlistById(@PathVariable("id") int id) {
+    public ResponseEntity<WishlistResponseDto> getWishlistById(@PathVariable int id) {
         Optional<WishlistResponseDto> wishlist = wishlistService.getWishlistById(id);
-        return wishlist.map(ResponseEntity::ok)
-                       .orElseGet(() -> ResponseEntity.notFound().build());
+        return wishlist.map(response -> new ResponseEntity<>(response, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping
-    public ResponseEntity<WishlistResponseDto> saveToWishlist(@RequestBody WishlistResponseDto wishlistResponseDto) {
-        WishlistResponseDto savedWishlist = wishlistService.saveToWishlist(wishlistResponseDto);
+    @PostMapping("/user/{userId}/products/{productId}")
+    public ResponseEntity<WishlistResponseDto> saveToWishlist(
+            @PathVariable Integer userId, 
+            @PathVariable Integer productId) {
+
+        WishlistResponseDto savedWishlist = wishlistService.saveToWishlist(userId, productId);
         return new ResponseEntity<>(savedWishlist, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFromWishlist(@PathVariable("id") int id) {
+    public ResponseEntity<Void> deleteFromWishlist(@PathVariable int id) {
         wishlistService.deleteFromWishlist(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

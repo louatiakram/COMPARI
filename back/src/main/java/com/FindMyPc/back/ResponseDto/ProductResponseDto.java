@@ -17,5 +17,7 @@ public class ProductResponseDto {
     private String image;
     private List<StoreProductResponseDto> storeProduct;
     private List<RatingResponseDto> ratings;
+   /* private List<WishlistResponseDto> wishlists;*/
+
 }
  
