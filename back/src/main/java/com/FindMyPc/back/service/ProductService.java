@@ -1,22 +1,21 @@
 package com.FindMyPc.back.service;
 
-import com.FindMyPc.back.entity.Product;
+import com.FindMyPc.back.ResponseDto.ProductResponseDto;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-    List<Product> getAllProducts();
+    List<ProductResponseDto> getAllProducts();
 
-    Optional<Product> getProductById(int id);
+    Optional<ProductResponseDto> getProductById(int id);
 
-    Product saveProduct(Product product);
+    ProductResponseDto saveProduct(ProductResponseDto productResponseDto);
     
-    Product updateProduct(Product product);
-
+    ProductResponseDto updateProduct(ProductResponseDto productResponseDto);
 
     void deleteProduct(int id);
 
-    Page<Product> getProductsPaginated(int page, int size);
+    Page<ProductResponseDto> getProductsPaginated(int page, int size);
 }

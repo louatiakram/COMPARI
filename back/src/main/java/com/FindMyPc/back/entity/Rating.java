@@ -15,12 +15,12 @@ public class Rating {
 
     private String content;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "store_id")
     @JsonBackReference
     private Store store;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     @JsonBackReference
     private Product product;

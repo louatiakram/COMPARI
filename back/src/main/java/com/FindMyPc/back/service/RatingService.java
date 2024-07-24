@@ -1,18 +1,24 @@
 package com.FindMyPc.back.service;
 
-import com.FindMyPc.back.entity.Rating;
+import com.FindMyPc.back.ResponseDto.RatingResponseDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface RatingService {
-    List<Rating> getAllRatings();
+    List<RatingResponseDto> getAllRatings();
 
-    Optional<Rating> getRatingById(int id);
+    Optional<RatingResponseDto> getRatingById(int id);
 
-    Rating saveRating(Rating rating);
     
-    Rating updateRating(Rating rating);
+    RatingResponseDto saveProductRating(RatingResponseDto RatingResponseDto, Integer userId,Integer productID);
+    
+    RatingResponseDto saveStoreRating(RatingResponseDto RatingResponseDto,  Integer storeID, Integer userId);
+
+    RatingResponseDto updateProductRating(RatingResponseDto RatingResponseDto, Integer userId,Integer productID);
+    
+    RatingResponseDto updateStoreRating(RatingResponseDto RatingResponseDto,  Integer storeID, Integer userId);
+
 
     void deleteRating(int id);
 }

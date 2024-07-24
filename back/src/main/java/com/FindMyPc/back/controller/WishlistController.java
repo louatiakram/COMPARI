@@ -1,8 +1,9 @@
 package com.FindMyPc.back.controller;
 
-import com.FindMyPc.back.entity.Wishlist;
+import com.FindMyPc.back.ResponseDto.WishlistResponseDto;
 import com.FindMyPc.back.service.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,51 +11,34 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/wishlist")
+@RequestMapping("/api/wishlists")
 public class WishlistController {
 
     @Autowired
     private WishlistService wishlistService;
 
     @GetMapping
-    public List<Wishlist> getAllWishlists() {
-        return wishlistService.getAllWishlists();
+    public ResponseEntity<List<WishlistResponseDto>> getAllWishlists() {
+        List<WishlistResponseDto> wishlists = wishlistService.getAllWishlists();
+        return new ResponseEntity<>(wishlists, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Wishlist> getWishlistById(@PathVariable int id) {
-        Optional<Wishlist> wishlist = wishlistService.getWishlistById(id);
-        return wishlist.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<WishlistResponseDto> getWishlistById(@PathVariable int id) {
+        Optional<WishlistResponseDto> wishlist = wishlistService.getWishlistById(id);
+        return wishlist.map(responseDto -> new ResponseEntity<>(responseDto, HttpStatus.OK))
+                       .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
-    public Wishlist createWishlist(@RequestBody Wishlist wishlist) {
-        return wishlistService.saveWishlist(wishlist);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Wishlist> updateWishlist(@PathVariable int id, @RequestBody Wishlist wishlistDetails) {
-        Optional<Wishlist> optionalWishlist = wishlistService.getWishlistById(id);
-
-        if (optionalWishlist.isPresent()) {
-            Wishlist wishlist = optionalWishlist.get();
-            wishlist.setUser(wishlistDetails.getUser());
-            wishlist.setProduct(wishlistDetails.getProduct());
-            return ResponseEntity.ok(wishlistService.saveWishlist(wishlist));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<WishlistResponseDto> createWishlist(@RequestBody WishlistResponseDto wishlistResponseDto) {
+        WishlistResponseDto createdWishlist = wishlistService.saveWishlist(wishlistResponseDto);
+        return new ResponseEntity<>(createdWishlist, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteWishlist(@PathVariable int id) {
-        Optional<Wishlist> wishlist = wishlistService.getWishlistById(id);
-
-        if (wishlist.isPresent()) {
-            wishlistService.deleteWishlist(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        wishlistService.deleteWishlist(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

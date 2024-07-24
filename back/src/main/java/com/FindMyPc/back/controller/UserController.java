@@ -1,6 +1,7 @@
 package com.FindMyPc.back.controller;
 
-import com.FindMyPc.back.entity.User;
+import com.FindMyPc.back.RequestDto.UserRequestDto;
+import com.FindMyPc.back.ResponseDto.UserResponseDto;
 import com.FindMyPc.back.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,57 +9,41 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    @PostMapping
+    public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto userRequestDto) {
+        UserResponseDto createdUser = userService.createUser(userRequestDto);
+        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+    }
+
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public ResponseEntity<List<UserResponseDto>> getAllUsers() {
+        List<UserResponseDto> users = userService.getAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable int id) {
-        Optional<User> user = userService.getUserById(id);
-        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public ResponseEntity<UserResponseDto> getUserById(@PathVariable int id) {
+        UserResponseDto user = userService.getUserById(id);
+        return user != null ? new ResponseEntity<>(user, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User userDetails) {
-        Optional<User> optionalUser = userService.getUserById(id);
-
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            user.setUsername(userDetails.getUsername());
-            user.setEmail(userDetails.getEmail());
-            user.setPassword(userDetails.getPassword());
-            user.setImage(userDetails.getImage());
-            return ResponseEntity.ok(userService.saveUser(user));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<UserResponseDto> updateUser(@PathVariable int id, @RequestBody UserRequestDto userRequestDto) {
+        UserResponseDto updatedUser = userService.updateUser(id, userRequestDto);
+        return updatedUser != null ? new ResponseEntity<>(updatedUser, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable int id) {
-        Optional<User> user = userService.getUserById(id);
-
-        if (user.isPresent()) {
-            userService.deleteUser(id);
-            return ResponseEntity.ok("User with ID " + id + " has been deleted successfully.");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("User with ID " + id + " not found.");
-        }
+    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
+        userService.deleteUser(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

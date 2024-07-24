@@ -1,18 +1,18 @@
 package com.FindMyPc.back.service;
 
-import com.FindMyPc.back.entity.Store;
+import com.FindMyPc.back.ResponseDto.StoreResponseDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface StoreService {
-    List<Store> getAllStores();
+    List<StoreResponseDto> getAllStores();
 
-    Optional<Store> getStoreById(int id);
+    Optional<StoreResponseDto> getStoreById(int id);
 
-    Store saveStore(Store store);
+    StoreResponseDto saveStore(StoreResponseDto StoreResponseDto);
     
-    Store updateStore(Store store);
+    StoreResponseDto updateStore(StoreResponseDto StoreResponseDto);
 
 
     void deleteStore(int id);

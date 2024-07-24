@@ -1,8 +1,9 @@
 package com.FindMyPc.back.controller;
 
-import com.FindMyPc.back.entity.Rating;
+import com.FindMyPc.back.ResponseDto.RatingResponseDto;
 import com.FindMyPc.back.service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,53 +11,60 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/rating")
+@RequestMapping("/api/ratings")
 public class RatingController {
 
     @Autowired
     private RatingService ratingService;
 
     @GetMapping
-    public List<Rating> getAllRatings() {
-        return ratingService.getAllRatings();
+    public ResponseEntity<List<RatingResponseDto>> getAllRatings() {
+        List<RatingResponseDto> ratings = ratingService.getAllRatings();
+        return new ResponseEntity<>(ratings, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Rating> getRatingById(@PathVariable int id) {
-        Optional<Rating> rating = ratingService.getRatingById(id);
-        return rating.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<RatingResponseDto> getRatingById(@PathVariable int id) {
+        Optional<RatingResponseDto> rating = ratingService.getRatingById(id);
+        return rating.map(responseDto -> new ResponseEntity<>(responseDto, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping
-    public Rating createRating(@RequestBody Rating rating) {
-        return ratingService.saveRating(rating);
+    @PostMapping("/product/{productId}/user/{userId}")
+    public ResponseEntity<RatingResponseDto> createProductRating(@RequestBody RatingResponseDto ratingResponseDto,
+                                                                 @PathVariable("productId") Integer productId,
+                                                                 @PathVariable("userId") Integer userId) {
+        RatingResponseDto savedRating = ratingService.saveProductRating(ratingResponseDto, userId, productId);
+        return new ResponseEntity<>(savedRating, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Rating> updateRating(@PathVariable int id, @RequestBody Rating ratingDetails) {
-        Optional<Rating> optionalRating = ratingService.getRatingById(id);
+    @PostMapping("/store/{storeId}/user/{userId}")
+    public ResponseEntity<RatingResponseDto> createStoreRating(@RequestBody RatingResponseDto ratingResponseDto,
+                                                               @PathVariable("storeId") Integer storeId,
+                                                               @PathVariable("userId") Integer userId) {
+        RatingResponseDto savedRating = ratingService.saveStoreRating(ratingResponseDto, storeId, userId);
+        return new ResponseEntity<>(savedRating, HttpStatus.CREATED);
+    }
 
-        if (optionalRating.isPresent()) {
-            Rating rating = optionalRating.get();
-            rating.setContent(ratingDetails.getContent());
-            rating.setStore(ratingDetails.getStore());
-            rating.setProduct(ratingDetails.getProduct());
-            rating.setUser(ratingDetails.getUser());
-            return ResponseEntity.ok(ratingService.saveRating(rating));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PutMapping("/product/{productId}/user/{userId}")
+    public ResponseEntity<RatingResponseDto> updateProductRating(@RequestBody RatingResponseDto ratingResponseDto,
+                                                                 @PathVariable("productId") Integer productId,
+                                                                 @PathVariable("userId") Integer userId) {
+        RatingResponseDto updatedRating = ratingService.updateProductRating(ratingResponseDto, userId, productId);
+        return new ResponseEntity<>(updatedRating, HttpStatus.OK);
+    }
+
+    @PutMapping("/store/{storeId}/user/{userId}")
+    public ResponseEntity<RatingResponseDto> updateStoreRating(@RequestBody RatingResponseDto ratingResponseDto,
+                                                               @PathVariable("storeId") Integer storeId,
+                                                               @PathVariable("userId") Integer userId) {
+        RatingResponseDto updatedRating = ratingService.updateStoreRating(ratingResponseDto, storeId, userId);
+        return new ResponseEntity<>(updatedRating, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRating(@PathVariable int id) {
-        Optional<Rating> rating = ratingService.getRatingById(id);
-
-        if (rating.isPresent()) {
-            ratingService.deleteRating(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        ratingService.deleteRating(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -1,18 +1,17 @@
 package com.FindMyPc.back.service;
 
-import com.FindMyPc.back.entity.Wishlist;
+import com.FindMyPc.back.ResponseDto.WishlistResponseDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface WishlistService {
-    List<Wishlist> getAllWishlists();
+    List<WishlistResponseDto> getAllWishlists();
 
-    Optional<Wishlist> getWishlistById(int id);
+    Optional<WishlistResponseDto> getWishlistById(int id);
 
-    Wishlist saveWishlist(Wishlist wishlist);
+    WishlistResponseDto saveWishlist(WishlistResponseDto WishlistResponseDto);
     
-    Wishlist updateWishlist(Wishlist wishlist);
 
     void deleteWishlist(int id);
 }

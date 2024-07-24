@@ -1,18 +1,14 @@
 package com.FindMyPc.back.service;
 
-import com.FindMyPc.back.entity.User;
-
 import java.util.List;
-import java.util.Optional;
+
+import com.FindMyPc.back.RequestDto.UserRequestDto;
+import com.FindMyPc.back.ResponseDto.UserResponseDto;
 
 public interface UserService {
-    List<User> getAllUsers();
-
-    Optional<User> getUserById(int id);
-
-    User saveUser(User user);
-    
-    User updateUser(User user);
-
-    void deleteUser(int id);
+    UserResponseDto createUser(UserRequestDto userRequestDto);
+    List<UserResponseDto> getAllUsers();
+    UserResponseDto getUserById(int userId);
+    UserResponseDto updateUser(int userId, UserRequestDto userRequestDto);
+    void deleteUser(int userId);
 }

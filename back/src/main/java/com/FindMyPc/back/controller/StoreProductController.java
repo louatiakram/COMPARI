@@ -1,10 +1,12 @@
 package com.FindMyPc.back.controller;
 
-
-import com.FindMyPc.back.entity.StoreProduct;
+import com.FindMyPc.back.ResponseDto.StoreProductResponseDto;
 import com.FindMyPc.back.service.StoreProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,58 +14,50 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/storeproduct")
+@RequestMapping("/api/store-products")
 public class StoreProductController {
 
     @Autowired
     private StoreProductService storeProductService;
 
     @GetMapping
-    public List<StoreProduct> getAllAffected() {
-        return storeProductService.getAllAffected();
+    public ResponseEntity<List<StoreProductResponseDto>> getAllStoreProducts() {
+        List<StoreProductResponseDto> storeProducts = storeProductService.getAllAffected();
+        return new ResponseEntity<>(storeProducts, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StoreProduct> getAffectedById(@PathVariable int id) {
-        Optional<StoreProduct> affected = storeProductService.getAffectedById(id);
-        return affected.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<StoreProductResponseDto> getStoreProductById(@PathVariable int id) {
+        Optional<StoreProductResponseDto> storeProduct = storeProductService.getAffectedById(id);
+        return storeProduct.map(response -> new ResponseEntity<>(response, HttpStatus.OK))
+                           .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
-    public StoreProduct createAffected(@RequestBody StoreProduct storeProduct) {
-        return storeProductService.saveAffected(storeProduct);
+    public ResponseEntity<StoreProductResponseDto> createStoreProduct(@RequestBody StoreProductResponseDto storeProductResponseDto) {
+        StoreProductResponseDto savedStoreProduct = storeProductService.saveAffected(storeProductResponseDto);
+        return new ResponseEntity<>(savedStoreProduct, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StoreProduct> updateAffected(@PathVariable int id, @RequestBody StoreProduct storeProductDetails) {
-        Optional<StoreProduct> optionalAffected = storeProductService.getAffectedById(id);
-
-        if (optionalAffected.isPresent()) {
-            StoreProduct storeProduct = optionalAffected.get();
-            storeProduct.setPriceBD(storeProductDetails.getPriceBD());
-            storeProduct.setPriceAD(storeProductDetails.getPriceAD());
-            storeProduct.setProduct(storeProductDetails.getProduct());
-            storeProduct.setStore(storeProductDetails.getStore());
-            return ResponseEntity.ok(storeProductService.saveAffected(storeProduct));
-        } else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<StoreProductResponseDto> updateStoreProduct(@PathVariable int id, @RequestBody StoreProductResponseDto storeProductResponseDto) {
+        storeProductResponseDto.setId(id);
+        StoreProductResponseDto updatedStoreProduct = storeProductService.updateAffected(storeProductResponseDto);
+        if (updatedStoreProduct != null) {
+            return new ResponseEntity<>(updatedStoreProduct, HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAffected(@PathVariable int id) {
-        Optional<StoreProduct> affected = storeProductService.getAffectedById(id);
-
-        if (affected.isPresent()) {
-            storeProductService.deleteAffected(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Void> deleteStoreProduct(@PathVariable int id) {
+        storeProductService.deleteAffected(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/paginated")
-    public Page<StoreProduct> getAffectedPaginated(@RequestParam int page, @RequestParam int size) {
-        return storeProductService.getAffectedPaginated(page, size);
+    public ResponseEntity<Page<StoreProductResponseDto>> getStoreProductsPaginated(@PageableDefault(size = 10) Pageable pageable) {
+        Page<StoreProductResponseDto> storeProductPage = storeProductService.getAffectedPaginated(pageable.getPageNumber(), pageable.getPageSize());
+        return new ResponseEntity<>(storeProductPage, HttpStatus.OK);
     }
 }
