@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 public class WishlistResponseDto {
     private int wishlistID;
     private UserResponseDto user;        
-
+    private ProductResponseDto product;  
     
 }

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/wishlists")
+@RequestMapping("api/wishlists")
 public class WishlistController {
 
     @Autowired
@@ -24,21 +24,21 @@ public class WishlistController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WishlistResponseDto> getWishlistById(@PathVariable int id) {
+    public ResponseEntity<WishlistResponseDto> getWishlistById(@PathVariable("id") int id) {
         Optional<WishlistResponseDto> wishlist = wishlistService.getWishlistById(id);
-        return wishlist.map(responseDto -> new ResponseEntity<>(responseDto, HttpStatus.OK))
-                       .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return wishlist.map(ResponseEntity::ok)
+                       .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<WishlistResponseDto> createWishlist(@RequestBody WishlistResponseDto wishlistResponseDto) {
-        WishlistResponseDto createdWishlist = wishlistService.saveWishlist(wishlistResponseDto);
-        return new ResponseEntity<>(createdWishlist, HttpStatus.CREATED);
+    public ResponseEntity<WishlistResponseDto> saveToWishlist(@RequestBody WishlistResponseDto wishlistResponseDto) {
+        WishlistResponseDto savedWishlist = wishlistService.saveToWishlist(wishlistResponseDto);
+        return new ResponseEntity<>(savedWishlist, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteWishlist(@PathVariable int id) {
-        wishlistService.deleteWishlist(id);
+    public ResponseEntity<Void> deleteFromWishlist(@PathVariable("id") int id) {
+        wishlistService.deleteFromWishlist(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

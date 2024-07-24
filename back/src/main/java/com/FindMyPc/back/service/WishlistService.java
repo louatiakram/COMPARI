@@ -10,8 +10,8 @@ public interface WishlistService {
 
     Optional<WishlistResponseDto> getWishlistById(int id);
 
-    WishlistResponseDto saveWishlist(WishlistResponseDto WishlistResponseDto);
+    WishlistResponseDto saveToWishlist(WishlistResponseDto WishlistResponseDto);
     
 
-    void deleteWishlist(int id);
+    void deleteFromWishlist(int id);
 }

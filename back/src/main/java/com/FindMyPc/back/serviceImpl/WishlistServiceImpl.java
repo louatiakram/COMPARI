@@ -2,7 +2,11 @@ package com.FindMyPc.back.serviceImpl;
 
 import com.FindMyPc.back.ResponseDto.WishlistResponseDto;
 import com.FindMyPc.back.entity.Wishlist;
+import com.FindMyPc.back.entity.Product;
+import com.FindMyPc.back.entity.User;
 import com.FindMyPc.back.repository.WishlistRepository;
+import com.FindMyPc.back.repository.ProductRepository;
+import com.FindMyPc.back.repository.UserRepository;
 import com.FindMyPc.back.service.WishlistService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,12 @@ public class WishlistServiceImpl implements WishlistService {
 
     @Autowired
     private WishlistRepository wishlistRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -36,18 +46,25 @@ public class WishlistServiceImpl implements WishlistService {
     }
 
     @Override
-    public WishlistResponseDto saveWishlist(WishlistResponseDto wishlistResponseDto) {
-        Wishlist wishlist = modelMapper.map(wishlistResponseDto, Wishlist.class);
+    public WishlistResponseDto saveToWishlist(WishlistResponseDto wishlistResponseDto) {
+        User user = userRepository.findById(wishlistResponseDto.getUser().getUserID())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Product product = productRepository.findById(wishlistResponseDto.getProduct().getProductID())
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        Wishlist wishlist = new Wishlist();
+        wishlist.setUser(user);
+        wishlist.setProduct(product);
+
         Wishlist savedWishlist = wishlistRepository.save(wishlist);
         return modelMapper.map(savedWishlist, WishlistResponseDto.class);
     }
 
-
     @Override
-    public void deleteWishlist(int id) {
+    public void deleteFromWishlist(int id) {
         if (wishlistRepository.existsById(id)) {
             wishlistRepository.deleteById(id);
         }
-        // Handle the case where the wishlist does not exist
+        // Handle the case where the wishlist entry does not exist
     }
 }
