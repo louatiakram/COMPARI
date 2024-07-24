@@ -16,6 +16,5 @@ public class StoreResponseDto {
     private String location;
     private String websiteURL;
     private String logo;
-    private List<StoreProductResponseDto> storeProduct;
     private List<RatingResponseDto> ratings;
 }

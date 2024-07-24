@@ -1,5 +1,6 @@
 package com.FindMyPc.back.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,7 +22,7 @@ public class Store {
     private String logo;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference
     private List<StoreProduct> storeProduct;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)

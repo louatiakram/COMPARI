@@ -15,7 +15,6 @@ public class ProductResponseDto {
     private String name;
     private String description;
     private String image;
-    private List<StoreProductResponseDto> storeProduct;
     private List<RatingResponseDto> ratings;
 }
  
