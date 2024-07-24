@@ -12,7 +12,7 @@ public interface ProductService {
     Optional<ProductResponseDto> getProductById(int id);
 
     ProductResponseDto saveProduct(ProductResponseDto productResponseDto);
-    
+
     ProductResponseDto updateProduct(ProductResponseDto productResponseDto);
 
     void deleteProduct(int id);

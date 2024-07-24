@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class WishlistResponseDto {
     private int wishlistID;
-    private UserResponseDto user;        
+    private UserResponseDto user;
 
-    
+
 }
