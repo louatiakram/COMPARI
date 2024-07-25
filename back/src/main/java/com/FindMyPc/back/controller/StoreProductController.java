@@ -30,7 +30,7 @@ public class StoreProductController {
     public ResponseEntity<StoreProductResponseDto> getStoreProductById(@PathVariable int id) {
         Optional<StoreProductResponseDto> storeProduct = storeProductService.getAffectedById(id);
         return storeProduct.map(response -> new ResponseEntity<>(response, HttpStatus.OK))
-                           .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping

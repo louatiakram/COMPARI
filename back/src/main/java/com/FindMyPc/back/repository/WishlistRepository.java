@@ -8,5 +8,5 @@ import java.util.Optional;
 
 //WishlistRepository.java
 public interface WishlistRepository extends JpaRepository<Wishlist, Integer> {
- Optional<Wishlist> findByUser(User user);
+    Optional<Wishlist> findByUser(User user);
 }

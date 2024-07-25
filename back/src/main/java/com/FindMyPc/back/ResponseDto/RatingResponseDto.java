@@ -12,8 +12,7 @@ public class RatingResponseDto {
     private int ratingID;
     private String content;
 
-    private UserResponseDto user;    
-    
-    
-    
+    private UserResponseDto user;
+
+
 }

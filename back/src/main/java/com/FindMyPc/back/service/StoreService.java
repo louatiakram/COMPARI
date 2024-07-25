@@ -11,7 +11,7 @@ public interface StoreService {
     Optional<StoreResponseDto> getStoreById(int id);
 
     StoreResponseDto saveStore(StoreResponseDto StoreResponseDto);
-    
+
     StoreResponseDto updateStore(StoreResponseDto StoreResponseDto);
 
 

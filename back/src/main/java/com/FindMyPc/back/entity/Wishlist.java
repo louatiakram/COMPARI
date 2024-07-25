@@ -1,12 +1,12 @@
 package com.FindMyPc.back.entity;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -24,9 +24,9 @@ public class Wishlist {
 
     @ManyToMany
     @JoinTable(
-        name = "wishlist_products",
-        joinColumns = @JoinColumn(name = "wishlist_id"),
-        inverseJoinColumns = @JoinColumn(name = "product_id")
+            name = "wishlist_products",
+            joinColumns = @JoinColumn(name = "wishlist_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> products;
 }

@@ -28,7 +28,7 @@ public class ProductController {
     public ResponseEntity<ProductResponseDto> getProductById(@PathVariable int id) {
         Optional<ProductResponseDto> product = productService.getProductById(id);
         return product.map(response -> new ResponseEntity<>(response, HttpStatus.OK))
-                      .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping

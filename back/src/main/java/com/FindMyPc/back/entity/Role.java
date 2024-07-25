@@ -13,11 +13,10 @@ import lombok.NoArgsConstructor;
 
 public class Role {
 
-	@Id
-	private Integer roleId;
+    @Id
+    private Integer roleId;
 
-	private String role;
-
+    private String role;
 
 
 }

@@ -3,7 +3,9 @@ package com.FindMyPc.back.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -30,5 +32,5 @@ public class Product {
 
     @ManyToMany(mappedBy = "products")
     @JsonManagedReference
-    private List<Wishlist> wishlists;	
+    private List<Wishlist> wishlists;
 }
