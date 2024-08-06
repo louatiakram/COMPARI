@@ -38,7 +38,15 @@
       "Fredag",
       "Lørdag"
     ],
-    "shortDays": ["Søn", "Man", "Tir", "Ons", "Tor", "Fre", "Lør"],
+    "shortDays": [
+      "Søn",
+      "Man",
+      "Tir",
+      "Ons",
+      "Tor",
+      "Fre",
+      "Lør"
+    ],
     "toolbar": {
       "exportToSVG": "Download SVG",
       "exportToPNG": "Download PNG",

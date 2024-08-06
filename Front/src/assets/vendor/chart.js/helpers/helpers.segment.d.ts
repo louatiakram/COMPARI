@@ -13,20 +13,21 @@
  * @private
  **/
 export function _boundSegment(segment: {
-    start: number;
-    end: number;
-    loop: boolean;
-    style?: object;
+  start: number;
+  end: number;
+  loop: boolean;
+  style?: object;
 }, points: PointElement[], bounds?: {
-    property: string;
-    start: number;
-    end: number;
+  property: string;
+  start: number;
+  end: number;
 }): {
-    start: number;
-    end: number;
-    loop: boolean;
-    style?: object;
+  start: number;
+  end: number;
+  loop: boolean;
+  style?: object;
 }[];
+
 /**
  * Returns the segments of the line that are inside given bounds
  * @param {LineElement} line
@@ -37,15 +38,16 @@ export function _boundSegment(segment: {
  * @private
  */
 export function _boundSegments(line: LineElement, bounds?: {
-    property: string;
-    start: number;
-    end: number;
+  property: string;
+  start: number;
+  end: number;
 }): {
-    start: number;
-    end: number;
-    loop: boolean;
-    style?: object;
+  start: number;
+  end: number;
+  loop: boolean;
+  style?: object;
 }[];
+
 /**
  * Compute the continuous segments that define the whole line
  * There can be skipped points within a segment, if spanGaps is true.
@@ -55,11 +57,12 @@ export function _boundSegments(line: LineElement, bounds?: {
  * @private
  */
 export function _computeSegments(line: LineElement, segmentOptions?: object): Segment[];
+
 export type LineElement = import('../elements/element.line.js').default;
 export type PointElement = import('../elements/element.point.js').default;
 export type Segment = {
-    start: number;
-    end: number;
-    loop: boolean;
-    style?: any;
+  start: number;
+  end: number;
+  loop: boolean;
+  style?: any;
 };

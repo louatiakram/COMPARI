@@ -1,5 +1,5 @@
 tinymce.Resource.add('tinymce.html-i18n.help-keynav.ko_KR',
-'<h1>키보드 탐색 시작</h1>\n' +
+  '<h1>키보드 탐색 시작</h1>\n' +
   '\n' +
   '<dl>\n' +
   '  <dt>메뉴 모음 포커스 표시</dt>\n' +

@@ -16,7 +16,7 @@
       processor: 'regexp',
       default: new RegExp('^' + link().source + '$', 'i')
     });
-    registerOption('link_default_target', { processor: 'string' });
+    registerOption('link_default_target', {processor: 'string'});
     registerOption('link_default_protocol', {
       processor: 'string',
       default: 'https'

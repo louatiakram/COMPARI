@@ -38,7 +38,15 @@
       "Piatnica",
       "Subota"
     ],
-    "shortDays": ["Nd", "Pn", "Aŭ", "Sr", "Čć", "Pt", "Sb"],
+    "shortDays": [
+      "Nd",
+      "Pn",
+      "Aŭ",
+      "Sr",
+      "Čć",
+      "Pt",
+      "Sb"
+    ],
     "toolbar": {
       "exportToSVG": "Spampavać SVG",
       "exportToPNG": "Spampavać PNG",

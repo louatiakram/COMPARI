@@ -5,7 +5,7 @@ export * from './helpers.collection.js';
 export * from './helpers.config.js';
 export * from './helpers.curve.js';
 export * from './helpers.dom.js';
-export { default as easingEffects } from './helpers.easing.js';
+export {default as easingEffects} from './helpers.easing.js';
 export * from './helpers.extras.js';
 export * from './helpers.interpolation.js';
 export * from './helpers.intl.js';

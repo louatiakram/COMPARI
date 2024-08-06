@@ -52,10 +52,10 @@ export interface ParsingOptions {
    * How to parse the dataset. The parsing can be disabled by specifying parsing: false at chart options or dataset. If parsing is disabled, data must be sorted and in the formats the associated chart type and scales use internally.
    */
   parsing:
-  {
-    [key: string]: string;
-  }
-  | false;
+    {
+      [key: string]: string;
+    }
+    | false;
 
   /**
    * Chart.js is fastest if you provide data with indices that are unique, sorted, and consistent across datasets and provide the normalized: true option to let Chart.js know that you have done so.
@@ -87,7 +87,7 @@ export interface ControllerDatasetOptions extends ParsingOptions {
    */
   stack: string;
   /**
-     * Configures the visibility state of the dataset. Set it to true, to hide the dataset from the chart.
+   * Configures the visibility state of the dataset. Set it to true, to hide the dataset from the chart.
    * @default false
    */
   hidden: boolean;
@@ -95,9 +95,9 @@ export interface ControllerDatasetOptions extends ParsingOptions {
 
 export interface BarControllerDatasetOptions
   extends ControllerDatasetOptions,
-  ScriptableAndArrayOptions<BarOptions, ScriptableContext<'bar'>>,
-  ScriptableAndArrayOptions<CommonHoverOptions, ScriptableContext<'bar'>>,
-  AnimationOptions<'bar'> {
+    ScriptableAndArrayOptions<BarOptions, ScriptableContext<'bar'>>,
+    ScriptableAndArrayOptions<CommonHoverOptions, ScriptableContext<'bar'>>,
+    AnimationOptions<'bar'> {
   /**
    * The ID of the x axis to plot this dataset on.
    */
@@ -156,13 +156,13 @@ export interface BarControllerChartOptions {
 export type BarController = DatasetController
 export declare const BarController: ChartComponent & {
   prototype: BarController;
-  new (chart: Chart, datasetIndex: number): BarController;
+  new(chart: Chart, datasetIndex: number): BarController;
 };
 
 export interface BubbleControllerDatasetOptions
   extends ControllerDatasetOptions,
-  ScriptableAndArrayOptions<PointOptions, ScriptableContext<'bubble'>>,
-  ScriptableAndArrayOptions<PointHoverOptions, ScriptableContext<'bubble'>> {
+    ScriptableAndArrayOptions<PointOptions, ScriptableContext<'bubble'>>,
+    ScriptableAndArrayOptions<PointHoverOptions, ScriptableContext<'bubble'>> {
   /**
    * The ID of the x axis to plot this dataset on.
    */
@@ -183,18 +183,18 @@ export interface BubbleDataPoint extends Point {
 export type BubbleController = DatasetController
 export declare const BubbleController: ChartComponent & {
   prototype: BubbleController;
-  new (chart: Chart, datasetIndex: number): BubbleController;
+  new(chart: Chart, datasetIndex: number): BubbleController;
 };
 
 export interface LineControllerDatasetOptions
   extends ControllerDatasetOptions,
-  ScriptableAndArrayOptions<PointPrefixedOptions, ScriptableContext<'line'>>,
-  ScriptableAndArrayOptions<PointPrefixedHoverOptions, ScriptableContext<'line'>>,
-  ScriptableOptions<Omit<LineOptions, keyof CommonElementOptions>, ScriptableContext<'line'>>,
-  ScriptableAndArrayOptions<CommonElementOptions, ScriptableContext<'line'>>,
-  ScriptableOptions<Omit<LineHoverOptions, keyof CommonHoverOptions>, ScriptableContext<'line'>>,
-  ScriptableAndArrayOptions<CommonHoverOptions, ScriptableContext<'line'>>,
-  AnimationOptions<'line'> {
+    ScriptableAndArrayOptions<PointPrefixedOptions, ScriptableContext<'line'>>,
+    ScriptableAndArrayOptions<PointPrefixedHoverOptions, ScriptableContext<'line'>>,
+    ScriptableOptions<Omit<LineOptions, keyof CommonElementOptions>, ScriptableContext<'line'>>,
+    ScriptableAndArrayOptions<CommonElementOptions, ScriptableContext<'line'>>,
+    ScriptableOptions<Omit<LineHoverOptions, keyof CommonHoverOptions>, ScriptableContext<'line'>>,
+    ScriptableAndArrayOptions<CommonHoverOptions, ScriptableContext<'line'>>,
+    AnimationOptions<'line'> {
   /**
    * The ID of the x axis to plot this dataset on.
    */
@@ -229,7 +229,7 @@ export interface LineControllerChartOptions {
 export type LineController = DatasetController
 export declare const LineController: ChartComponent & {
   prototype: LineController;
-  new (chart: Chart, datasetIndex: number): LineController;
+  new(chart: Chart, datasetIndex: number): LineController;
 };
 
 export type ScatterControllerDatasetOptions = LineControllerDatasetOptions;
@@ -241,14 +241,14 @@ export type ScatterControllerChartOptions = LineControllerChartOptions;
 export type ScatterController = LineController
 export declare const ScatterController: ChartComponent & {
   prototype: ScatterController;
-  new (chart: Chart, datasetIndex: number): ScatterController;
+  new(chart: Chart, datasetIndex: number): ScatterController;
 };
 
 export interface DoughnutControllerDatasetOptions
   extends ControllerDatasetOptions,
-  ScriptableAndArrayOptions<ArcOptions, ScriptableContext<'doughnut'>>,
-  ScriptableAndArrayOptions<ArcHoverOptions, ScriptableContext<'doughnut'>>,
-  AnimationOptions<'doughnut'> {
+    ScriptableAndArrayOptions<ArcOptions, ScriptableContext<'doughnut'>>,
+    ScriptableAndArrayOptions<ArcHoverOptions, ScriptableContext<'doughnut'>>,
+    AnimationOptions<'doughnut'> {
 
   /**
    * Sweep to allow arcs to cover.
@@ -344,12 +344,13 @@ export interface DoughnutController extends DatasetController {
   readonly offsetY: number;
 
   calculateTotal(): number;
+
   calculateCircumference(value: number): number;
 }
 
 export declare const DoughnutController: ChartComponent & {
   prototype: DoughnutController;
-  new (chart: Chart, datasetIndex: number): DoughnutController;
+  new(chart: Chart, datasetIndex: number): DoughnutController;
 };
 
 export interface DoughnutMetaExtensions {
@@ -366,7 +367,7 @@ export type PieMetaExtensions = DoughnutMetaExtensions;
 export type PieController = DoughnutController
 export declare const PieController: ChartComponent & {
   prototype: PieController;
-  new (chart: Chart, datasetIndex: number): PieController;
+  new(chart: Chart, datasetIndex: number): PieController;
 };
 
 export interface PolarAreaControllerDatasetOptions extends DoughnutControllerDatasetOptions {
@@ -392,16 +393,17 @@ export interface PolarAreaControllerChartOptions {
 export interface PolarAreaController extends DoughnutController {
   countVisibleElements(): number;
 }
+
 export declare const PolarAreaController: ChartComponent & {
   prototype: PolarAreaController;
-  new (chart: Chart, datasetIndex: number): PolarAreaController;
+  new(chart: Chart, datasetIndex: number): PolarAreaController;
 };
 
 export interface RadarControllerDatasetOptions
   extends ControllerDatasetOptions,
-  ScriptableAndArrayOptions<PointOptions & PointHoverOptions & PointPrefixedOptions & PointPrefixedHoverOptions, ScriptableContext<'radar'>>,
-  ScriptableAndArrayOptions<LineOptions & LineHoverOptions, ScriptableContext<'radar'>>,
-  AnimationOptions<'radar'> {
+    ScriptableAndArrayOptions<PointOptions & PointHoverOptions & PointPrefixedOptions & PointPrefixedHoverOptions, ScriptableContext<'radar'>>,
+    ScriptableAndArrayOptions<LineOptions & LineHoverOptions, ScriptableContext<'radar'>>,
+    AnimationOptions<'radar'> {
   /**
    * The ID of the x axis to plot this dataset on.
    */
@@ -427,8 +429,9 @@ export type RadarControllerChartOptions = LineControllerChartOptions;
 export type RadarController = DatasetController
 export declare const RadarController: ChartComponent & {
   prototype: RadarController;
-  new (chart: Chart, datasetIndex: number): RadarController;
+  new(chart: Chart, datasetIndex: number): RadarController;
 };
+
 interface ChartMetaCommon<TElement extends Element = Element, TDatasetElement extends Element = Element> {
   type: string;
   controller: DatasetController;
@@ -469,7 +472,7 @@ export type ChartMeta<
   TElement extends Element = Element,
   TDatasetElement extends Element = Element,
 > = DeepPartial<
-{ [key in ChartType]: ChartTypeRegistry[key]['metaExtensions'] }[TType]
+  { [key in ChartType]: ChartTypeRegistry[key]['metaExtensions'] }[TType]
 > & ChartMetaCommon<TElement, TDatasetElement>;
 
 export interface ActiveDataPoint {
@@ -509,37 +512,59 @@ export declare class Chart<
   constructor(item: ChartItem, config: ChartConfiguration<TType, TData, TLabel> | ChartConfigurationCustomTypesPerDataset<TType, TData, TLabel>);
 
   clear(): this;
+
   stop(): this;
 
   resize(width?: number, height?: number): void;
+
   ensureScalesHaveIDs(): void;
+
   buildOrUpdateScales(): void;
+
   buildOrUpdateControllers(): void;
+
   reset(): void;
+
   update(mode?: UpdateMode | ((ctx: { datasetIndex: number }) => UpdateMode)): void;
+
   render(): void;
+
   draw(): void;
 
   isPointInArea(point: Point): boolean;
+
   getElementsAtEventForMode(e: Event, mode: string, options: InteractionOptions, useFinalPosition: boolean): InteractionItem[];
 
   getSortedVisibleDatasetMetas(): ChartMeta[];
+
   getDatasetMeta(datasetIndex: number): ChartMeta;
+
   getVisibleDatasetCount(): number;
+
   isDatasetVisible(datasetIndex: number): boolean;
+
   setDatasetVisibility(datasetIndex: number, visible: boolean): void;
+
   toggleDataVisibility(index: number): void;
+
   getDataVisibility(index: number): boolean;
+
   hide(datasetIndex: number, dataIndex?: number): void;
+
   show(datasetIndex: number, dataIndex?: number): void;
 
   getActiveElements(): ActiveElement[];
+
   setActiveElements(active: ActiveDataPoint[]): void;
 
   destroy(): void;
+
   toBase64Image(type?: string, quality?: unknown): string;
+
   bindEvents(): void;
+
   unbindEvents(): void;
+
   updateHoverStyle(items: InteractionItem[], mode: 'dataset', enabled: boolean): void;
 
   notifyPlugins(hook: string, args?: AnyObject): boolean | void;
@@ -553,8 +578,11 @@ export declare class Chart<
   static readonly version: string;
   static readonly instances: { [key: string]: Chart };
   static readonly registry: Registry;
+
   static getChart(key: string | CanvasRenderingContext2D | HTMLCanvasElement): Chart | undefined;
+
   static register(...items: ChartComponentLike[]): void;
+
   static unregister(...items: ChartComponentLike[]): void;
 }
 
@@ -597,62 +625,92 @@ export declare class DatasetController<
   supportsDecimation: boolean;
 
   linkScales(): void;
+
   getAllParsedValues(scale: Scale): number[];
+
   protected getLabelAndValue(index: number): { label: string; value: string };
+
   updateElements(elements: TElement[], start: number, count: number, mode: UpdateMode): void;
+
   update(mode: UpdateMode): void;
+
   updateIndex(datasetIndex: number): void;
+
   protected getMaxOverflow(): boolean | number;
+
   draw(): void;
+
   reset(): void;
+
   getDataset(): ChartDataset;
+
   getMeta(): ChartMeta<TType, TElement, TDatasetElement>;
+
   getScaleForId(scaleID: string): Scale | undefined;
+
   configure(): void;
+
   initialize(): void;
+
   addElements(): void;
+
   buildOrUpdateElements(resetNewElements?: boolean): void;
 
   getStyle(index: number, active: boolean): AnyObject;
+
   protected resolveDatasetElementOptions(mode: UpdateMode): AnyObject;
+
   protected resolveDataElementOptions(index: number, mode: UpdateMode): AnyObject;
+
   /**
    * Utility for checking if the options are shared and should be animated separately.
    * @protected
    */
   protected getSharedOptions(options: AnyObject): undefined | AnyObject;
+
   /**
    * Utility for determining if `options` should be included in the updated properties
    * @protected
    */
   protected includeOptions(mode: UpdateMode, sharedOptions: AnyObject): boolean;
+
   /**
    * Utility for updating an element with new properties, using animations when appropriate.
    * @protected
    */
 
   protected updateElement(element: TElement | TDatasetElement, index: number | undefined, properties: AnyObject, mode: UpdateMode): void;
+
   /**
    * Utility to animate the shared options, that are potentially affecting multiple elements.
    * @protected
    */
 
   protected updateSharedOptions(sharedOptions: AnyObject, mode: UpdateMode, newOptions: AnyObject): void;
+
   removeHoverStyle(element: TElement, datasetIndex: number, index: number): void;
+
   setHoverStyle(element: TElement, datasetIndex: number, index: number): void;
 
   parse(start: number, count: number): void;
+
   protected parsePrimitiveData(meta: ChartMeta<TType, TElement, TDatasetElement>, data: AnyObject[], start: number, count: number): AnyObject[];
+
   protected parseArrayData(meta: ChartMeta<TType, TElement, TDatasetElement>, data: AnyObject[], start: number, count: number): AnyObject[];
+
   protected parseObjectData(meta: ChartMeta<TType, TElement, TDatasetElement>, data: AnyObject[], start: number, count: number): AnyObject[];
+
   protected getParsed(index: number): TParsedData;
+
   protected applyStack(scale: Scale, parsed: unknown[]): number;
+
   protected updateRangeFromParsed(
     range: { min: number; max: number },
     scale: Scale,
     parsed: unknown[],
     stack: boolean | string
   ): void;
+
   protected getMinMax(scale: Scale, canStack?: boolean): { min: number; max: number };
 }
 
@@ -671,10 +729,13 @@ export interface Defaults extends CoreChartOptions<ChartType>, ElementChartOptio
   };
 
   set(values: AnyObject): AnyObject;
+
   set(scope: string, values: AnyObject): AnyObject;
+
   get(scope: string): AnyObject;
 
   describe(scope: string, values: AnyObject): AnyObject;
+
   override(scope: string, values: AnyObject): AnyObject;
 
   /**
@@ -708,6 +769,7 @@ export type Overrides = {
 }
 
 export declare const defaults: Defaults;
+
 export interface InteractionOptions {
   axis?: string;
   intersect?: boolean;
@@ -830,6 +892,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @since 3.0.0
    */
   install?(chart: Chart<TType>, args: EmptyObject, options: O): void;
+
   /**
    * @desc Called when a plugin is starting. This happens when chart is created or plugin is enabled.
    * @param {Chart} chart - The chart instance.
@@ -838,6 +901,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @since 3.0.0
    */
   start?(chart: Chart<TType>, args: EmptyObject, options: O): void;
+
   /**
    * @desc Called when a plugin stopping. This happens when chart is destroyed or plugin is disabled.
    * @param {Chart} chart - The chart instance.
@@ -846,6 +910,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @since 3.0.0
    */
   stop?(chart: Chart<TType>, args: EmptyObject, options: O): void;
+
   /**
    * @desc Called before initializing `chart`.
    * @param {Chart} chart - The chart instance.
@@ -853,6 +918,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   beforeInit?(chart: Chart<TType>, args: EmptyObject, options: O): void;
+
   /**
    * @desc Called after `chart` has been initialized and before the first update.
    * @param {Chart} chart - The chart instance.
@@ -860,6 +926,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   afterInit?(chart: Chart<TType>, args: EmptyObject, options: O): void;
+
   /**
    * @desc Called before updating `chart`. If any plugin returns `false`, the update
    * is cancelled (and thus subsequent render(s)) until another `update` is triggered.
@@ -870,6 +937,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @returns {boolean} `false` to cancel the chart update.
    */
   beforeUpdate?(chart: Chart<TType>, args: { mode: UpdateMode, cancelable: true }, options: O): boolean | void;
+
   /**
    * @desc Called after `chart` has been updated and before rendering. Note that this
    * hook will not be called if the chart update has been previously cancelled.
@@ -879,6 +947,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   afterUpdate?(chart: Chart<TType>, args: { mode: UpdateMode }, options: O): void;
+
   /**
    * @desc Called during the update process, before any chart elements have been created.
    * This can be used for data decimation by changing the data array inside a dataset.
@@ -887,6 +956,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   beforeElementsUpdate?(chart: Chart<TType>, args: EmptyObject, options: O): void;
+
   /**
    * @desc Called during chart reset
    * @param {Chart} chart - The chart instance.
@@ -895,6 +965,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @since version 3.0.0
    */
   reset?(chart: Chart<TType>, args: EmptyObject, options: O): void;
+
   /**
    * @desc Called before updating the `chart` datasets. If any plugin returns `false`,
    * the datasets update is cancelled until another `update` is triggered.
@@ -906,6 +977,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @since version 2.1.5
    */
   beforeDatasetsUpdate?(chart: Chart<TType>, args: { mode: UpdateMode }, options: O): boolean | void;
+
   /**
    * @desc Called after the `chart` datasets have been updated. Note that this hook
    * will not be called if the datasets update has been previously cancelled.
@@ -916,6 +988,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @since version 2.1.5
    */
   afterDatasetsUpdate?(chart: Chart<TType>, args: { mode: UpdateMode, cancelable: true }, options: O): void;
+
   /**
    * @desc Called before updating the `chart` dataset at the given `args.index`. If any plugin
    * returns `false`, the datasets update is cancelled until another `update` is triggered.
@@ -927,7 +1000,13 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    * @returns {boolean} `false` to cancel the chart datasets drawing.
    */
-  beforeDatasetUpdate?(chart: Chart<TType>, args: { index: number; meta: ChartMeta, mode: UpdateMode, cancelable: true }, options: O): boolean | void;
+  beforeDatasetUpdate?(chart: Chart<TType>, args: {
+    index: number;
+    meta: ChartMeta,
+    mode: UpdateMode,
+    cancelable: true
+  }, options: O): boolean | void;
+
   /**
    * @desc Called after the `chart` datasets at the given `args.index` has been updated. Note
    * that this hook will not be called if the datasets update has been previously cancelled.
@@ -938,7 +1017,13 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {UpdateMode} args.mode - The update mode.
    * @param {object} options - The plugin options.
    */
-  afterDatasetUpdate?(chart: Chart<TType>, args: { index: number; meta: ChartMeta, mode: UpdateMode, cancelable: false }, options: O): void;
+  afterDatasetUpdate?(chart: Chart<TType>, args: {
+    index: number;
+    meta: ChartMeta,
+    mode: UpdateMode,
+    cancelable: false
+  }, options: O): void;
+
   /**
    * @desc Called before laying out `chart`. If any plugin returns `false`,
    * the layout update is cancelled until another `update` is triggered.
@@ -948,6 +1033,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @returns {boolean} `false` to cancel the chart layout.
    */
   beforeLayout?(chart: Chart<TType>, args: { cancelable: true }, options: O): boolean | void;
+
   /**
    * @desc Called before scale data limits are calculated. This hook is called separately for each scale in the chart.
    * @param {Chart} chart - The chart instance.
@@ -956,6 +1042,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   beforeDataLimits?(chart: Chart<TType>, args: { scale: Scale }, options: O): void;
+
   /**
    * @desc Called after scale data limits are calculated. This hook is called separately for each scale in the chart.
    * @param {Chart} chart - The chart instance.
@@ -964,6 +1051,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   afterDataLimits?(chart: Chart<TType>, args: { scale: Scale }, options: O): void;
+
   /**
    * @desc Called before scale builds its ticks. This hook is called separately for each scale in the chart.
    * @param {Chart} chart - The chart instance.
@@ -972,6 +1060,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   beforeBuildTicks?(chart: Chart<TType>, args: { scale: Scale }, options: O): void;
+
   /**
    * @desc Called after scale has build its ticks. This hook is called separately for each scale in the chart.
    * @param {Chart} chart - The chart instance.
@@ -980,6 +1069,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   afterBuildTicks?(chart: Chart<TType>, args: { scale: Scale }, options: O): void;
+
   /**
    * @desc Called after the `chart` has been laid out. Note that this hook will not
    * be called if the layout update has been previously cancelled.
@@ -988,6 +1078,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   afterLayout?(chart: Chart<TType>, args: EmptyObject, options: O): void;
+
   /**
    * @desc Called before rendering `chart`. If any plugin returns `false`,
    * the rendering is cancelled until another `render` is triggered.
@@ -997,6 +1088,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @returns {boolean} `false` to cancel the chart rendering.
    */
   beforeRender?(chart: Chart<TType>, args: { cancelable: true }, options: O): boolean | void;
+
   /**
    * @desc Called after the `chart` has been fully rendered (and animation completed). Note
    * that this hook will not be called if the rendering has been previously cancelled.
@@ -1005,6 +1097,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   afterRender?(chart: Chart<TType>, args: EmptyObject, options: O): void;
+
   /**
    * @desc Called before drawing `chart` at every animation frame. If any plugin returns `false`,
    * the frame drawing is cancelled untilanother `render` is triggered.
@@ -1014,6 +1107,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @returns {boolean} `false` to cancel the chart drawing.
    */
   beforeDraw?(chart: Chart<TType>, args: { cancelable: true }, options: O): boolean | void;
+
   /**
    * @desc Called after the `chart` has been drawn. Note that this hook will not be called
    * if the drawing has been previously cancelled.
@@ -1022,6 +1116,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   afterDraw?(chart: Chart<TType>, args: EmptyObject, options: O): void;
+
   /**
    * @desc Called before drawing the `chart` datasets. If any plugin returns `false`,
    * the datasets drawing is cancelled until another `render` is triggered.
@@ -1031,6 +1126,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @returns {boolean} `false` to cancel the chart datasets drawing.
    */
   beforeDatasetsDraw?(chart: Chart<TType>, args: { cancelable: true }, options: O): boolean | void;
+
   /**
    * @desc Called after the `chart` datasets have been drawn. Note that this hook
    * will not be called if the datasets drawing has been previously cancelled.
@@ -1039,6 +1135,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   afterDatasetsDraw?(chart: Chart<TType>, args: EmptyObject, options: O, cancelable: false): void;
+
   /**
    * @desc Called before drawing the `chart` dataset at the given `args.index` (datasets
    * are drawn in the reverse order). If any plugin returns `false`, the datasets drawing
@@ -1051,6 +1148,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @returns {boolean} `false` to cancel the chart datasets drawing.
    */
   beforeDatasetDraw?(chart: Chart<TType>, args: { index: number; meta: ChartMeta }, options: O): boolean | void;
+
   /**
    * @desc Called after the `chart` datasets at the given `args.index` have been drawn
    * (datasets are drawn in the reverse order). Note that this hook will not be called
@@ -1062,6 +1160,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   afterDatasetDraw?(chart: Chart<TType>, args: { index: number; meta: ChartMeta }, options: O): void;
+
   /**
    * @desc Called before processing the specified `event`. If any plugin returns `false`,
    * the event will be discarded.
@@ -1072,7 +1171,13 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {boolean} args.inChartArea - The event position is inside chartArea
    * @param {object} options - The plugin options.
    */
-  beforeEvent?(chart: Chart<TType>, args: { event: ChartEvent, replay: boolean, cancelable: true, inChartArea: boolean }, options: O): boolean | void;
+  beforeEvent?(chart: Chart<TType>, args: {
+    event: ChartEvent,
+    replay: boolean,
+    cancelable: true,
+    inChartArea: boolean
+  }, options: O): boolean | void;
+
   /**
    * @desc Called after the `event` has been consumed. Note that this hook
    * will not be called if the `event` has been previously discarded.
@@ -1084,7 +1189,14 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {boolean} [args.changed] - Set to true if the plugin needs a render. Should only be changed to true, because this args object is passed through all plugins.
    * @param {object} options - The plugin options.
    */
-  afterEvent?(chart: Chart<TType>, args: { event: ChartEvent, replay: boolean, changed?: boolean, cancelable: false, inChartArea: boolean }, options: O): void;
+  afterEvent?(chart: Chart<TType>, args: {
+    event: ChartEvent,
+    replay: boolean,
+    changed?: boolean,
+    cancelable: false,
+    inChartArea: boolean
+  }, options: O): void;
+
   /**
    * @desc Called after the chart as been resized.
    * @param {Chart} chart - The chart instance.
@@ -1093,6 +1205,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   resize?(chart: Chart<TType>, args: { size: { width: number, height: number } }, options: O): void;
+
   /**
    * Called before the chart is being destroyed.
    * @param {Chart} chart - The chart instance.
@@ -1100,6 +1213,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   beforeDestroy?(chart: Chart<TType>, args: EmptyObject, options: O): void;
+
   /**
    * Called after the chart has been destroyed.
    * @param {Chart} chart - The chart instance.
@@ -1107,6 +1221,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
    * @param {object} options - The plugin options.
    */
   afterDestroy?(chart: Chart<TType>, args: EmptyObject, options: O): void;
+
   /**
    * Called after chart is destroyed on all plugins that were installed for that chart. This hook is also invoked for disabled plugins (options === false).
    * @param {Chart} chart - The chart instance.
@@ -1122,7 +1237,12 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
   defaults?: Partial<O>;
 }
 
-export declare type ChartComponentLike = ChartComponent | ChartComponent[] | { [key: string]: ChartComponent } | Plugin | Plugin[];
+export declare type ChartComponentLike =
+  ChartComponent
+  | ChartComponent[]
+  | { [key: string]: ChartComponent }
+  | Plugin
+  | Plugin[];
 
 /**
  * Please use the module's default export which provides a singleton instance
@@ -1135,16 +1255,23 @@ export interface Registry {
   readonly scales: TypedRegistry<Scale>;
 
   add(...args: ChartComponentLike[]): void;
+
   remove(...args: ChartComponentLike[]): void;
 
   addControllers(...args: ChartComponentLike[]): void;
+
   addElements(...args: ChartComponentLike[]): void;
+
   addPlugins(...args: ChartComponentLike[]): void;
+
   addScales(...args: ChartComponentLike[]): void;
 
   getController(id: string): DatasetController | undefined;
+
   getElement(id: string): Element | undefined;
+
   getPlugin(id: string): Plugin | undefined;
+
   getScale(id: string): Scale | undefined;
 }
 
@@ -1201,58 +1328,72 @@ export interface CoreScaleOptions {
    * Adjustment used when calculating the minimum data value.
    */
   suggestedMax: unknown;
+
   /**
    * Callback called before the update process starts.
    */
   beforeUpdate(axis: Scale): void;
+
   /**
    * Callback that runs before dimensions are set.
    */
   beforeSetDimensions(axis: Scale): void;
+
   /**
    * Callback that runs after dimensions are set.
    */
   afterSetDimensions(axis: Scale): void;
+
   /**
    * Callback that runs before data limits are determined.
    */
   beforeDataLimits(axis: Scale): void;
+
   /**
    * Callback that runs after data limits are determined.
    */
   afterDataLimits(axis: Scale): void;
+
   /**
    * Callback that runs before ticks are created.
    */
   beforeBuildTicks(axis: Scale): void;
+
   /**
    * Callback that runs after ticks are created. Useful for filtering ticks.
    */
   afterBuildTicks(axis: Scale): void;
+
   /**
    * Callback that runs before ticks are converted into strings.
    */
   beforeTickToLabelConversion(axis: Scale): void;
+
   /**
    * Callback that runs after ticks are converted into strings.
    */
   afterTickToLabelConversion(axis: Scale): void;
+
   /**
    * Callback that runs before tick rotation is determined.
    */
   beforeCalculateLabelRotation(axis: Scale): void;
+
   /**
    * Callback that runs after tick rotation is determined.
    */
   afterCalculateLabelRotation(axis: Scale): void;
+
   /**
    * Callback that runs before the scale fits to the canvas.
    */
   beforeFit(axis: Scale): void;
+
   /**
    * Callback that runs after the scale fits to the canvas.
    */
   afterFit(axis: Scale): void;
+
   /**
    * Callback that runs at the end of the update process.
    */
@@ -1278,10 +1419,13 @@ export interface Scale<O extends CoreScaleOptions = CoreScaleOptions> extends El
   min: number;
   max: number;
   ticks: Tick[];
+
   getMatchingVisibleMetas(type?: string): ChartMeta[];
 
   drawTitle(chartArea: ChartArea): void;
+
   drawLabels(chartArea: ChartArea): void;
+
   drawGrid(chartArea: ChartArea): void;
 
   /**
@@ -1289,6 +1433,7 @@ export interface Scale<O extends CoreScaleOptions = CoreScaleOptions> extends El
    * @return {number}
    */
   getDecimalForPixel(pixel: number): number;
+
   /**
    * Utility for getting the pixel location of a percentage of scale
    * The coordinate (0, 0) is at the upper-left corner of the canvas
@@ -1296,6 +1441,7 @@ export interface Scale<O extends CoreScaleOptions = CoreScaleOptions> extends El
    * @return {number}
    */
   getPixelForDecimal(decimal: number): number;
+
   /**
    * Returns the location of the tick at the given index
    * The coordinate (0, 0) is at the upper-left corner of the canvas
@@ -1303,6 +1449,7 @@ export interface Scale<O extends CoreScaleOptions = CoreScaleOptions> extends El
    * @return {number}
    */
   getPixelForTick(index: number): number;
+
   /**
    * Used to get the label to display in the tooltip for the given value
    * @param {*} value
@@ -1333,6 +1480,7 @@ export interface Scale<O extends CoreScaleOptions = CoreScaleOptions> extends El
   getValueForPixel(pixel: number): number | undefined;
 
   getBaseValue(): number;
+
   /**
    * Returns the pixel for the minimum chart value
    * The coordinate (0, 0) is at the upper-left corner of the canvas
@@ -1341,38 +1489,66 @@ export interface Scale<O extends CoreScaleOptions = CoreScaleOptions> extends El
   getBasePixel(): number;
 
   init(options: O): void;
+
   parse(raw: unknown, index?: number): unknown;
+
   getUserBounds(): { min: number; max: number; minDefined: boolean; maxDefined: boolean };
+
   getMinMax(canStack: boolean): { min: number; max: number };
+
   getTicks(): Tick[];
+
   getLabels(): string[];
+
   getLabelItems(chartArea?: ChartArea): LabelItem[];
+
   beforeUpdate(): void;
+
   configure(): void;
+
   afterUpdate(): void;
+
   beforeSetDimensions(): void;
+
   setDimensions(): void;
+
   afterSetDimensions(): void;
+
   beforeDataLimits(): void;
+
   determineDataLimits(): void;
+
   afterDataLimits(): void;
+
   beforeBuildTicks(): void;
+
   buildTicks(): Tick[];
+
   afterBuildTicks(): void;
+
   beforeTickToLabelConversion(): void;
+
   generateTickLabels(ticks: Tick[]): void;
+
   afterTickToLabelConversion(): void;
+
   beforeCalculateLabelRotation(): void;
+
   calculateLabelRotation(): void;
+
   afterCalculateLabelRotation(): void;
+
   beforeFit(): void;
+
   fit(): void;
+
   afterFit(): void;
 
   isFullSize(): boolean;
 }
+
 export declare class Scale {
-  constructor(cfg: {id: string, type: string, ctx: CanvasRenderingContext2D, chart: Chart});
+  constructor(cfg: { id: string, type: string, ctx: CanvasRenderingContext2D, chart: Chart });
 }
 
 export interface ScriptableScaleContext {
@@ -1526,36 +1702,42 @@ export interface TypedRegistry<T> {
    * @returns {string} The scope where items defaults were registered to.
    */
   register(item: ChartComponent): string;
+
   get(id: string): T | undefined;
+
   unregister(item: ChartComponent): void;
 }
 
 export interface ChartEvent {
   type:
-  | 'contextmenu'
-  | 'mouseenter'
-  | 'mousedown'
-  | 'mousemove'
-  | 'mouseup'
-  | 'mouseout'
-  | 'click'
-  | 'dblclick'
-  | 'keydown'
-  | 'keypress'
-  | 'keyup'
-  | 'resize';
+    | 'contextmenu'
+    | 'mouseenter'
+    | 'mousedown'
+    | 'mousemove'
+    | 'mouseup'
+    | 'mouseout'
+    | 'click'
+    | 'dblclick'
+    | 'keydown'
+    | 'keypress'
+    | 'keyup'
+    | 'resize';
   native: Event | null;
   x: number | null;
   y: number | null;
 }
+
 export interface ChartComponent {
   id: string;
   defaults?: AnyObject;
   defaultRoutes?: { [property: string]: string };
 
   beforeRegister?(): void;
+
   afterRegister?(): void;
+
   beforeUnregister?(): void;
+
   afterUnregister?(): void;
 }
 
@@ -1794,10 +1976,15 @@ export type Align = 'start' | 'center' | 'end';
 
 export interface VisualElement {
   draw(ctx: CanvasRenderingContext2D, area?: ChartArea): void;
+
   inRange(mouseX: number, mouseY: number, useFinalPosition?: boolean): boolean;
+
   inXRange(mouseX: number, useFinalPosition?: boolean): boolean;
+
   inYRange(mouseY: number, useFinalPosition?: boolean): boolean;
+
   getCenterPoint(useFinalPosition?: boolean): Point;
+
   getRange?(axis: 'x' | 'y'): number;
 }
 
@@ -1930,13 +2117,13 @@ export interface LineOptions extends CommonElementOptions {
   spanGaps: boolean | number;
 
   segment: {
-    backgroundColor: Scriptable<Color|undefined, ScriptableLineSegmentContext>,
-    borderColor: Scriptable<Color|undefined, ScriptableLineSegmentContext>,
-    borderCapStyle: Scriptable<CanvasLineCap|undefined, ScriptableLineSegmentContext>;
-    borderDash: Scriptable<number[]|undefined, ScriptableLineSegmentContext>;
-    borderDashOffset: Scriptable<number|undefined, ScriptableLineSegmentContext>;
-    borderJoinStyle: Scriptable<CanvasLineJoin|undefined, ScriptableLineSegmentContext>;
-    borderWidth: Scriptable<number|undefined, ScriptableLineSegmentContext>;
+    backgroundColor: Scriptable<Color | undefined, ScriptableLineSegmentContext>,
+    borderColor: Scriptable<Color | undefined, ScriptableLineSegmentContext>,
+    borderCapStyle: Scriptable<CanvasLineCap | undefined, ScriptableLineSegmentContext>;
+    borderDash: Scriptable<number[] | undefined, ScriptableLineSegmentContext>;
+    borderDashOffset: Scriptable<number | undefined, ScriptableLineSegmentContext>;
+    borderJoinStyle: Scriptable<CanvasLineJoin | undefined, ScriptableLineSegmentContext>;
+    borderWidth: Scriptable<number | undefined, ScriptableLineSegmentContext>;
   };
 }
 
@@ -1949,20 +2136,26 @@ export interface LineHoverOptions extends CommonHoverOptions {
 
 export interface LineElement<T extends LineProps = LineProps, O extends LineOptions = LineOptions>
   extends Element<T, O>,
-  VisualElement {
+    VisualElement {
   updateControlPoints(chartArea: ChartArea, indexAxis?: 'x' | 'y'): void;
+
   points: Point[];
   readonly segments: Segment[];
+
   first(): Point | false;
+
   last(): Point | false;
+
   interpolate(point: Point, property: 'x' | 'y'): undefined | Point | Point[];
+
   pathSegment(ctx: CanvasRenderingContext2D, segment: Segment, params: AnyObject): undefined | boolean;
+
   path(ctx: CanvasRenderingContext2D): boolean;
 }
 
 export declare const LineElement: ChartComponent & {
   prototype: LineElement;
-  new (cfg: AnyObject): LineElement;
+  new(cfg: AnyObject): LineElement;
 };
 
 export type PointStyle =
@@ -2119,11 +2312,12 @@ export interface BarHoverOptions extends CommonHoverOptions {
 export interface BarElement<
   T extends BarProps = BarProps,
   O extends BarOptions = BarOptions
-> extends Element<T, O>, VisualElement {}
+> extends Element<T, O>, VisualElement {
+}
 
 export declare const BarElement: ChartComponent & {
   prototype: BarElement;
-  new (cfg: AnyObject): BarElement;
+  new(cfg: AnyObject): BarElement;
 };
 
 export interface ElementOptionsByType<TType extends ChartType> {
@@ -2148,6 +2342,7 @@ export declare class BasePlatform {
     canvas: HTMLCanvasElement,
     options?: CanvasRenderingContext2DSettings
   ): CanvasRenderingContext2D | null;
+
   /**
    * Called at chart destruction time, releases any resources associated to the context
    * previously returned by the acquireContext() method.
@@ -2155,6 +2350,7 @@ export declare class BasePlatform {
    * @returns {boolean} true if the method succeeded, else false
    */
   releaseContext(context: CanvasRenderingContext2D): boolean;
+
   /**
    * Registers the specified listener on the given chart.
    * @param {Chart} chart - Chart from which to listen for event
@@ -2163,6 +2359,7 @@ export declare class BasePlatform {
    * the {@link ChartEvent} interface) when an event of the specified type occurs.
    */
   addEventListener(chart: Chart, type: string, listener: (e: ChartEvent) => void): void;
+
   /**
    * Removes the specified listener previously registered with addEventListener.
    * @param {Chart} chart - Chart from which to remove the listener
@@ -2170,10 +2367,12 @@ export declare class BasePlatform {
    * @param listener - The listener function to remove from the event target.
    */
   removeEventListener(chart: Chart, type: string, listener: (e: ChartEvent) => void): void;
+
   /**
    * @returns {number} the current devicePixelRatio of the device this platform is connected to.
    */
   getDevicePixelRatio(): number;
+
   /**
    * @param {HTMLCanvasElement} canvas - The canvas for which to calculate the maximum size
    * @param {number} [width] - Parent element's content width
@@ -2181,12 +2380,17 @@ export declare class BasePlatform {
    * @param {number} [aspectRatio] - The aspect ratio to maintain
    * @returns { width: number, height: number } the maximum size available.
    */
-  getMaximumSize(canvas: HTMLCanvasElement, width?: number, height?: number, aspectRatio?: number): { width: number, height: number };
+  getMaximumSize(canvas: HTMLCanvasElement, width?: number, height?: number, aspectRatio?: number): {
+    width: number,
+    height: number
+  };
+
   /**
    * @param {HTMLCanvasElement} canvas
    * @returns {boolean} true if the canvas is attached to the platform, false if not.
    */
   isAttached(canvas: HTMLCanvasElement): boolean;
+
   /**
    * Updates config with platform specific requirements
    * @param {ChartConfiguration | ChartConfigurationCustomTypes} config
@@ -2194,8 +2398,11 @@ export declare class BasePlatform {
   updateConfig(config: ChartConfiguration | ChartConfigurationCustomTypesPerDataset): void;
 }
 
-export declare class BasicPlatform extends BasePlatform {}
-export declare class DomPlatform extends BasePlatform {}
+export declare class BasicPlatform extends BasePlatform {
+}
+
+export declare class DomPlatform extends BasePlatform {
+}
 
 export declare const Decimation: Plugin;
 
@@ -2203,6 +2410,7 @@ export declare const enum DecimationAlgorithm {
   lttb = 'lttb',
   minmax = 'min-max',
 }
+
 interface BaseDecimationOptions {
   enabled: boolean;
   threshold?: number;
@@ -2220,6 +2428,7 @@ interface MinMaxDecimationOptions extends BaseDecimationOptions {
 export type DecimationOptions = LttbDecimationOptions | MinMaxDecimationOptions;
 
 export declare const Filler: Plugin;
+
 export interface FillerOptions {
   drawTime: 'beforeDraw' | 'beforeDatasetDraw' | 'beforeDatasetsDraw';
   propagate: boolean;
@@ -2380,14 +2589,17 @@ export interface LegendOptions<TType extends ChartType> {
    * @default false
    */
   reverse: boolean;
+
   /**
    * A callback that is called when a click event is registered on a label item.
    */
   onClick(this: LegendElement<TType>, e: ChartEvent, legendItem: LegendItem, legend: LegendElement<TType>): void;
+
   /**
    * A callback that is called when a 'mousemove' event is registered on top of a label item
    */
   onHover(this: LegendElement<TType>, e: ChartEvent, legendItem: LegendItem, legend: LegendElement<TType>): void;
+
   /**
    * A callback that is called when a 'mousemove' event is registered outside of a previously hovered label item.
    */
@@ -2549,6 +2761,7 @@ export interface TitleOptions {
 
 export type TooltipXAlignment = 'left' | 'center' | 'right';
 export type TooltipYAlignment = 'top' | 'center' | 'bottom';
+
 export interface TooltipLabelStyle {
   borderColor: Color;
   backgroundColor: Color;
@@ -2577,6 +2790,7 @@ export interface TooltipLabelStyle {
    */
   borderRadius?: number | BorderRadius;
 }
+
 export interface TooltipModel<TType extends ChartType> extends Element<AnyObject, TooltipOptions<TType>> {
   readonly chart: Chart<TType>;
 
@@ -2628,6 +2842,7 @@ export interface TooltipModel<TType extends ChartType> extends Element<AnyObject
   options: TooltipOptions<TType>;
 
   getActiveElements(): ActiveElement[];
+
   setActiveElements(active: ActiveDataPoint[], eventPosition: Point): void;
 }
 
@@ -2661,22 +2876,31 @@ export interface TooltipCallbacks<
   Item = TooltipItem<TType>> {
 
   beforeTitle(this: Model, tooltipItems: Item[]): string | string[] | void;
+
   title(this: Model, tooltipItems: Item[]): string | string[] | void;
+
   afterTitle(this: Model, tooltipItems: Item[]): string | string[] | void;
 
   beforeBody(this: Model, tooltipItems: Item[]): string | string[] | void;
+
   afterBody(this: Model, tooltipItems: Item[]): string | string[] | void;
 
   beforeLabel(this: Model, tooltipItem: Item): string | string[] | void;
+
   label(this: Model, tooltipItem: Item): string | string[] | void;
+
   afterLabel(this: Model, tooltipItem: Item): string | string[] | void;
 
   labelColor(this: Model, tooltipItem: Item): TooltipLabelStyle | void;
+
   labelTextColor(this: Model, tooltipItem: Item): Color | void;
+
   labelPointStyle(this: Model, tooltipItem: Item): { pointStyle: PointStyle; rotation: number } | void;
 
   beforeFooter(this: Model, tooltipItems: Item[]): string | string[] | void;
+
   footer(this: Model, tooltipItems: Item[]): string | string[] | void;
+
   afterFooter(this: Model, tooltipItems: Item[]): string | string[] | void;
 }
 
@@ -2694,6 +2918,7 @@ export interface ExtendedPlugin<
    * @returns {boolean} `false` to cancel the chart tooltip drawing.
    */
   beforeTooltipDraw?(chart: Chart, args: { tooltip: Model, cancelable: true }, options: O): boolean | void;
+
   /**
    * @desc Called after drawing the `tooltip`. Note that this hook will not
    * be called if the tooltip drawing has been previously cancelled.
@@ -2717,10 +2942,12 @@ export interface TooltipOptions<TType extends ChartType = ChartType> extends Cor
    * @default true
    */
   enabled: Scriptable<boolean, ScriptableTooltipContext<TType>>;
+
   /**
    *   See external tooltip section.
    */
   external(this: TooltipModel<TType>, args: { chart: Chart; tooltip: TooltipModel<TType> }): void;
+
   /**
    * The mode for positioning the tooltip
    */
@@ -2946,6 +3173,7 @@ export interface PluginOptionsByType<TType extends ChartType> {
   title: TitleOptions;
   tooltip: TooltipOptions<TType>;
 }
+
 export interface PluginChartOptions<TType extends ChartType> {
   plugins: PluginOptionsByType<TType>;
 }
@@ -3257,7 +3485,7 @@ export type CategoryScaleOptions = Omit<CartesianScaleOptions, 'min' | 'max'> & 
 export type CategoryScale<O extends CategoryScaleOptions = CategoryScaleOptions> = Scale<O>
 export declare const CategoryScale: ChartComponent & {
   prototype: CategoryScale;
-  new <O extends CategoryScaleOptions = CategoryScaleOptions>(cfg: AnyObject): CategoryScale<O>;
+  new<O extends CategoryScaleOptions = CategoryScaleOptions>(cfg: AnyObject): CategoryScale<O>;
 };
 
 export type LinearScaleOptions = CartesianScaleOptions & {
@@ -3276,8 +3504,8 @@ export type LinearScaleOptions = CartesianScaleOptions & {
    */
   suggestedMax?: number;
   /**
-  * Percentage (string ending with %) or amount (number) for added room in the scale range above and below data.
-  */
+   * Percentage (string ending with %) or amount (number) for added room in the scale range above and below data.
+   */
   grace?: string | number;
 
   ticks: {
@@ -3306,7 +3534,7 @@ export type LinearScaleOptions = CartesianScaleOptions & {
 export type LinearScale<O extends LinearScaleOptions = LinearScaleOptions> = Scale<O>
 export declare const LinearScale: ChartComponent & {
   prototype: LinearScale;
-  new <O extends LinearScaleOptions = LinearScaleOptions>(cfg: AnyObject): LinearScale<O>;
+  new<O extends LinearScaleOptions = LinearScaleOptions>(cfg: AnyObject): LinearScale<O>;
 };
 
 export type LogarithmicScaleOptions = CartesianScaleOptions & {
@@ -3330,7 +3558,7 @@ export type LogarithmicScaleOptions = CartesianScaleOptions & {
 export type LogarithmicScale<O extends LogarithmicScaleOptions = LogarithmicScaleOptions> = Scale<O>
 export declare const LogarithmicScale: ChartComponent & {
   prototype: LogarithmicScale;
-  new <O extends LogarithmicScaleOptions = LogarithmicScaleOptions>(cfg: AnyObject): LogarithmicScale<O>;
+  new<O extends LogarithmicScaleOptions = LogarithmicScaleOptions>(cfg: AnyObject): LogarithmicScale<O>;
 };
 
 export type TimeScaleTimeOptions = {
@@ -3423,20 +3651,23 @@ export type TimeScaleOptions = Omit<CartesianScaleOptions, 'min' | 'max'> & {
 
 export interface TimeScale<O extends TimeScaleOptions = TimeScaleOptions> extends Scale<O> {
   format(value: number, format?: string): string;
+
   getDataTimestamps(): number[];
+
   getLabelTimestamps(): string[];
+
   normalize(values: number[]): number[];
 }
 
 export declare const TimeScale: ChartComponent & {
   prototype: TimeScale;
-  new <O extends TimeScaleOptions = TimeScaleOptions>(cfg: AnyObject): TimeScale<O>;
+  new<O extends TimeScaleOptions = TimeScaleOptions>(cfg: AnyObject): TimeScale<O>;
 };
 
 export type TimeSeriesScale<O extends TimeScaleOptions = TimeScaleOptions> = TimeScale<O>
 export declare const TimeSeriesScale: ChartComponent & {
   prototype: TimeSeriesScale;
-  new <O extends TimeScaleOptions = TimeScaleOptions>(cfg: AnyObject): TimeSeriesScale<O>;
+  new<O extends TimeScaleOptions = TimeScaleOptions>(cfg: AnyObject): TimeSeriesScale<O>;
 };
 
 export type RadialTickOptions = TickOptions & {
@@ -3582,17 +3813,25 @@ export type RadialLinearScaleOptions = CoreScaleOptions & {
 
 export interface RadialLinearScale<O extends RadialLinearScaleOptions = RadialLinearScaleOptions> extends Scale<O> {
   setCenterPoint(leftMovement: number, rightMovement: number, topMovement: number, bottomMovement: number): void;
+
   getIndexAngle(index: number): number;
+
   getDistanceFromCenterForValue(value: number): number;
+
   getValueForDistanceFromCenter(distance: number): number;
+
   getPointPosition(index: number, distanceFromCenter: number): { x: number; y: number; angle: number };
+
   getPointPositionForValue(index: number, value: number): { x: number; y: number; angle: number };
+
   getPointLabelPosition(index: number): ChartArea;
+
   getBasePosition(index: number): { x: number; y: number; angle: number };
 }
+
 export declare const RadialLinearScale: ChartComponent & {
   prototype: RadialLinearScale;
-  new <O extends RadialLinearScaleOptions = RadialLinearScaleOptions>(cfg: AnyObject): RadialLinearScale<O>;
+  new<O extends RadialLinearScaleOptions = RadialLinearScaleOptions>(cfg: AnyObject): RadialLinearScale<O>;
 };
 
 export interface CartesianScaleTypeRegistry {
@@ -3727,7 +3966,7 @@ export type ChartType = keyof ChartTypeRegistry;
 
 export type ScaleOptionsByType<TScale extends ScaleType = ScaleType> =
   { [key in ScaleType]: { type: key } & ScaleTypeRegistry[key]['options'] }[TScale]
-;
+  ;
 
 // Convenience alias for creating and manipulating scale options in user code
 export type ScaleOptions<TScale extends ScaleType = ScaleType> = DeepPartial<ScaleOptionsByType<TScale>>;
@@ -3745,12 +3984,12 @@ export type ScaleChartOptions<TType extends ChartType = ChartType> = {
 };
 
 export type ChartOptions<TType extends ChartType = ChartType> = DeepPartial<
-CoreChartOptions<TType> &
-ElementChartOptions<TType> &
-PluginChartOptions<TType> &
-DatasetChartOptions<TType> &
-ScaleChartOptions<TType> &
-ChartTypeRegistry[TType]['chartOptions']
+  CoreChartOptions<TType> &
+  ElementChartOptions<TType> &
+  PluginChartOptions<TType> &
+  DatasetChartOptions<TType> &
+  ScaleChartOptions<TType> &
+  ChartTypeRegistry[TType]['chartOptions']
 >;
 
 export type DefaultDataPoint<TType extends ChartType> = DistributiveArray<ChartTypeRegistry[TType]['defaultDataPoint']>;
@@ -3771,14 +4010,14 @@ export type ChartDataset<
   TType extends ChartType = ChartType,
   TData = DefaultDataPoint<TType>
 > = DeepPartial<
-{ [key in ChartType]: { type: key } & ChartTypeRegistry[key]['datasetOptions'] }[TType]
+  { [key in ChartType]: { type: key } & ChartTypeRegistry[key]['datasetOptions'] }[TType]
 > & ChartDatasetProperties<TType, TData>;
 
 export type ChartDatasetCustomTypesPerDataset<
   TType extends ChartType = ChartType,
   TData = DefaultDataPoint<TType>
 > = DeepPartial<
-{ [key in ChartType]: { type: key } & ChartTypeRegistry[key]['datasetOptions'] }[TType]
+  { [key in ChartType]: { type: key } & ChartTypeRegistry[key]['datasetOptions'] }[TType]
 > & ChartDatasetPropertiesCustomTypesPerDataset<TType, TData>;
 
 /**

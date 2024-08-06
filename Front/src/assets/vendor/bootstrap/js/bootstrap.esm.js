@@ -193,7 +193,8 @@ const findShadowRoot = element => {
   }
   return findShadowRoot(element.parentNode);
 };
-const noop = () => {};
+const noop = () => {
+};
 
 /**
  * Trick to restart an element's animation
@@ -257,8 +258,8 @@ const executeAfterTransition = (callback, transitionElement, waitForTransition =
   const emulatedDuration = getTransitionDurationFromElement(transitionElement) + durationPadding;
   let called = false;
   const handler = ({
-    target
-  }) => {
+                     target
+                   }) => {
     if (target !== transitionElement) {
       return;
     }
@@ -329,12 +330,14 @@ const nativeEvents = new Set(['click', 'dblclick', 'mouseup', 'mousedown', 'cont
 function makeEventUid(element, uid) {
   return uid && `${uid}::${uidEvent++}` || element.uidEvent || uidEvent++;
 }
+
 function getElementEvents(element) {
   const uid = makeEventUid(element);
   element.uidEvent = uid;
   eventRegistry[uid] = eventRegistry[uid] || {};
   return eventRegistry[uid];
 }
+
 function bootstrapHandler(element, fn) {
   return function handler(event) {
     hydrateObj(event, {
@@ -346,6 +349,7 @@ function bootstrapHandler(element, fn) {
     return fn.apply(element, [event]);
   };
 }
+
 function bootstrapDelegationHandler(element, selector, fn) {
   return function handler(event) {
     const domElements = element.querySelectorAll(selector);
@@ -367,9 +371,11 @@ function bootstrapDelegationHandler(element, selector, fn) {
     }
   };
 }
+
 function findHandler(events, callable, delegationSelector = null) {
   return Object.values(events).find(event => event.callable === callable && event.delegationSelector === delegationSelector);
 }
+
 function normalizeParameters(originalTypeEvent, handler, delegationFunction) {
   const isDelegated = typeof handler === 'string';
   // TODO: tooltip passes `false` instead of selector, so we need to check
@@ -380,6 +386,7 @@ function normalizeParameters(originalTypeEvent, handler, delegationFunction) {
   }
   return [isDelegated, callable, typeEvent];
 }
+
 function addHandler(element, originalTypeEvent, handler, delegationFunction, oneOff) {
   if (typeof originalTypeEvent !== 'string' || !element) {
     return;
@@ -414,6 +421,7 @@ function addHandler(element, originalTypeEvent, handler, delegationFunction, one
   handlers[uid] = fn;
   element.addEventListener(typeEvent, fn, isDelegated);
 }
+
 function removeHandler(element, events, typeEvent, handler, delegationSelector) {
   const fn = findHandler(events[typeEvent], handler, delegationSelector);
   if (!fn) {
@@ -422,6 +430,7 @@ function removeHandler(element, events, typeEvent, handler, delegationSelector) 
   element.removeEventListener(typeEvent, fn, Boolean(delegationSelector));
   delete events[typeEvent][fn.uidEvent];
 }
+
 function removeNamespacedHandlers(element, events, typeEvent, namespace) {
   const storeElementEvent = events[typeEvent] || {};
   for (const [handlerKey, event] of Object.entries(storeElementEvent)) {
@@ -430,11 +439,13 @@ function removeNamespacedHandlers(element, events, typeEvent, namespace) {
     }
   }
 }
+
 function getTypeEvent(event) {
   // allow to get the native events from namespaced events ('click.bs.button' --> 'click')
   event = event.replace(stripNameRegex, '');
   return customEvents[event] || event;
 }
+
 const EventHandler = {
   on(element, event, handler, delegationFunction) {
     addHandler(element, event, handler, delegationFunction, false);
@@ -505,6 +516,7 @@ const EventHandler = {
     return evt;
   }
 };
+
 function hydrateObj(obj, meta = {}) {
   for (const [key, value] of Object.entries(meta)) {
     try {
@@ -550,9 +562,11 @@ function normalizeData(value) {
     return value;
   }
 }
+
 function normalizeDataKey(key) {
   return key.replace(/[A-Z]/g, chr => `-${chr.toLowerCase()}`);
 }
+
 const Manipulator = {
   setDataAttribute(element, key, value) {
     element.setAttribute(`data-bs-${normalizeDataKey(key)}`, value);
@@ -595,21 +609,26 @@ class Config {
   static get Default() {
     return {};
   }
+
   static get DefaultType() {
     return {};
   }
+
   static get NAME() {
     throw new Error('You have to implement the static method "NAME", for each component!');
   }
+
   _getConfig(config) {
     config = this._mergeConfigObj(config);
     config = this._configAfterMerge(config);
     this._typeCheckConfig(config);
     return config;
   }
+
   _configAfterMerge(config) {
     return config;
   }
+
   _mergeConfigObj(config, element) {
     const jsonConfig = isElement(element) ? Manipulator.getDataAttribute(element, 'config') : {}; // try to parse
 
@@ -620,6 +639,7 @@ class Config {
       ...(typeof config === 'object' ? config : {})
     };
   }
+
   _typeCheckConfig(config, configTypes = this.constructor.DefaultType) {
     for (const [property, expectedTypes] of Object.entries(configTypes)) {
       const value = config[property];
@@ -669,9 +689,11 @@ class BaseComponent extends Config {
       this[propertyName] = null;
     }
   }
+
   _queueCallback(callback, element, isAnimated = true) {
     executeAfterTransition(callback, element, isAnimated);
   }
+
   _getConfig(config) {
     config = this._mergeConfigObj(config, this._element);
     config = this._configAfterMerge(config);
@@ -683,18 +705,23 @@ class BaseComponent extends Config {
   static getInstance(element) {
     return Data.get(getElement(element), this.DATA_KEY);
   }
+
   static getOrCreateInstance(element, config = {}) {
     return this.getInstance(element) || new this(element, typeof config === 'object' ? config : null);
   }
+
   static get VERSION() {
     return VERSION;
   }
+
   static get DATA_KEY() {
     return `bs.${this.NAME}`;
   }
+
   static get EVENT_KEY() {
     return `.${this.DATA_KEY}`;
   }
+
   static eventName(name) {
     return `${name}${this.EVENT_KEY}`;
   }
@@ -1008,9 +1035,11 @@ class Swipe extends Config {
   static get Default() {
     return Default$c;
   }
+
   static get DefaultType() {
     return DefaultType$c;
   }
+
   static get NAME() {
     return NAME$d;
   }
@@ -1030,6 +1059,7 @@ class Swipe extends Config {
       this._deltaX = event.clientX;
     }
   }
+
   _end(event) {
     if (this._eventIsPointerPenTouch(event)) {
       this._deltaX = event.clientX - this._deltaX;
@@ -1037,9 +1067,11 @@ class Swipe extends Config {
     this._handleSwipe();
     execute(this._config.endCallback);
   }
+
   _move(event) {
     this._deltaX = event.touches && event.touches.length > 1 ? 0 : event.touches[0].clientX - this._deltaX;
   }
+
   _handleSwipe() {
     const absDeltaX = Math.abs(this._deltaX);
     if (absDeltaX <= SWIPE_THRESHOLD) {
@@ -1052,6 +1084,7 @@ class Swipe extends Config {
     }
     execute(direction > 0 ? this._config.rightCallback : this._config.leftCallback);
   }
+
   _initEvents() {
     if (this._supportPointerEvents) {
       EventHandler.on(this._element, EVENT_POINTERDOWN, event => this._start(event));
@@ -1063,6 +1096,7 @@ class Swipe extends Config {
       EventHandler.on(this._element, EVENT_TOUCHEND, event => this._end(event));
     }
   }
+
   _eventIsPointerPenTouch(event) {
     return this._supportPointerEvents && (event.pointerType === POINTER_TYPE_PEN || event.pointerType === POINTER_TYPE_TOUCH);
   }
@@ -1164,9 +1198,11 @@ class Carousel extends BaseComponent {
   static get Default() {
     return Default$b;
   }
+
   static get DefaultType() {
     return DefaultType$b;
   }
+
   static get NAME() {
     return NAME$c;
   }
@@ -1175,6 +1211,7 @@ class Carousel extends BaseComponent {
   next() {
     this._slide(ORDER_NEXT);
   }
+
   nextWhenVisible() {
     // FIXME TODO use `document.visibilityState`
     // Don't call next when the page isn't visible
@@ -1183,20 +1220,24 @@ class Carousel extends BaseComponent {
       this.next();
     }
   }
+
   prev() {
     this._slide(ORDER_PREV);
   }
+
   pause() {
     if (this._isSliding) {
       triggerTransitionEnd(this._element);
     }
     this._clearInterval();
   }
+
   cycle() {
     this._clearInterval();
     this._updateInterval();
     this._interval = setInterval(() => this.nextWhenVisible(), this._config.interval);
   }
+
   _maybeEnableCycle() {
     if (!this._config.ride) {
       return;
@@ -1207,6 +1248,7 @@ class Carousel extends BaseComponent {
     }
     this.cycle();
   }
+
   to(index) {
     const items = this._getItems();
     if (index > items.length - 1 || index < 0) {
@@ -1223,6 +1265,7 @@ class Carousel extends BaseComponent {
     const order = index > activeIndex ? ORDER_NEXT : ORDER_PREV;
     this._slide(order, items[index]);
   }
+
   dispose() {
     if (this._swipeHelper) {
       this._swipeHelper.dispose();
@@ -1235,6 +1278,7 @@ class Carousel extends BaseComponent {
     config.defaultInterval = config.interval;
     return config;
   }
+
   _addEventListeners() {
     if (this._config.keyboard) {
       EventHandler.on(this._element, EVENT_KEYDOWN$1, event => this._keydown(event));
@@ -1247,6 +1291,7 @@ class Carousel extends BaseComponent {
       this._addTouchEventListeners();
     }
   }
+
   _addTouchEventListeners() {
     for (const img of SelectorEngine.find(SELECTOR_ITEM_IMG, this._element)) {
       EventHandler.on(img, EVENT_DRAG_START, event => event.preventDefault());
@@ -1277,6 +1322,7 @@ class Carousel extends BaseComponent {
     };
     this._swipeHelper = new Swipe(this._element, swipeConfig);
   }
+
   _keydown(event) {
     if (/input|textarea/i.test(event.target.tagName)) {
       return;
@@ -1287,9 +1333,11 @@ class Carousel extends BaseComponent {
       this._slide(this._directionToOrder(direction));
     }
   }
+
   _getItemIndex(element) {
     return this._getItems().indexOf(element);
   }
+
   _setActiveIndicatorElement(index) {
     if (!this._indicatorsElement) {
       return;
@@ -1303,6 +1351,7 @@ class Carousel extends BaseComponent {
       newActiveIndicator.setAttribute('aria-current', 'true');
     }
   }
+
   _updateInterval() {
     const element = this._activeElement || this._getActive();
     if (!element) {
@@ -1311,6 +1360,7 @@ class Carousel extends BaseComponent {
     const elementInterval = Number.parseInt(element.getAttribute('data-bs-interval'), 10);
     this._config.interval = elementInterval || this._config.defaultInterval;
   }
+
   _slide(order, element = null) {
     if (this._isSliding) {
       return;
@@ -1362,27 +1412,33 @@ class Carousel extends BaseComponent {
       this.cycle();
     }
   }
+
   _isAnimated() {
     return this._element.classList.contains(CLASS_NAME_SLIDE);
   }
+
   _getActive() {
     return SelectorEngine.findOne(SELECTOR_ACTIVE_ITEM, this._element);
   }
+
   _getItems() {
     return SelectorEngine.find(SELECTOR_ITEM, this._element);
   }
+
   _clearInterval() {
     if (this._interval) {
       clearInterval(this._interval);
       this._interval = null;
     }
   }
+
   _directionToOrder(direction) {
     if (isRTL()) {
       return direction === DIRECTION_LEFT ? ORDER_PREV : ORDER_NEXT;
     }
     return direction === DIRECTION_LEFT ? ORDER_NEXT : ORDER_PREV;
   }
+
   _orderToDirection(order) {
     if (isRTL()) {
       return order === ORDER_PREV ? DIRECTION_LEFT : DIRECTION_RIGHT;
@@ -1516,9 +1572,11 @@ class Collapse extends BaseComponent {
   static get Default() {
     return Default$a;
   }
+
   static get DefaultType() {
     return DefaultType$a;
   }
+
   static get NAME() {
     return NAME$b;
   }
@@ -1531,6 +1589,7 @@ class Collapse extends BaseComponent {
       this.show();
     }
   }
+
   show() {
     if (this._isTransitioning || this._isShown()) {
       return;
@@ -1571,6 +1630,7 @@ class Collapse extends BaseComponent {
     this._queueCallback(complete, this._element, true);
     this._element.style[dimension] = `${this._element[scrollSize]}px`;
   }
+
   hide() {
     if (this._isTransitioning || !this._isShown()) {
       return;
@@ -1600,6 +1660,7 @@ class Collapse extends BaseComponent {
     this._element.style[dimension] = '';
     this._queueCallback(complete, this._element, true);
   }
+
   _isShown(element = this._element) {
     return element.classList.contains(CLASS_NAME_SHOW$7);
   }
@@ -1610,9 +1671,11 @@ class Collapse extends BaseComponent {
     config.parent = getElement(config.parent);
     return config;
   }
+
   _getDimension() {
     return this._element.classList.contains(CLASS_NAME_HORIZONTAL) ? WIDTH : HEIGHT;
   }
+
   _initializeChildren() {
     if (!this._config.parent) {
       return;
@@ -1625,11 +1688,13 @@ class Collapse extends BaseComponent {
       }
     }
   }
+
   _getFirstLevelChildren(selector) {
     const children = SelectorEngine.find(CLASS_NAME_DEEPER_CHILDREN, this._config.parent);
     // remove children if greater depth
     return SelectorEngine.find(selector, this._config.parent).filter(element => !children.includes(element));
   }
+
   _addAriaAndCollapsedClass(triggerArray, isOpen) {
     if (!triggerArray.length) {
       return;
@@ -1764,9 +1829,11 @@ class Dropdown extends BaseComponent {
   static get Default() {
     return Default$9;
   }
+
   static get DefaultType() {
     return DefaultType$9;
   }
+
   static get NAME() {
     return NAME$a;
   }
@@ -1775,6 +1842,7 @@ class Dropdown extends BaseComponent {
   toggle() {
     return this._isShown() ? this.hide() : this.show();
   }
+
   show() {
     if (isDisabled(this._element) || this._isShown()) {
       return;
@@ -1803,6 +1871,7 @@ class Dropdown extends BaseComponent {
     this._element.classList.add(CLASS_NAME_SHOW$6);
     EventHandler.trigger(this._element, EVENT_SHOWN$5, relatedTarget);
   }
+
   hide() {
     if (isDisabled(this._element) || !this._isShown()) {
       return;
@@ -1812,12 +1881,14 @@ class Dropdown extends BaseComponent {
     };
     this._completeHide(relatedTarget);
   }
+
   dispose() {
     if (this._popper) {
       this._popper.destroy();
     }
     super.dispose();
   }
+
   update() {
     this._inNavbar = this._detectNavbar();
     if (this._popper) {
@@ -1848,6 +1919,7 @@ class Dropdown extends BaseComponent {
     Manipulator.removeDataAttribute(this._menu, 'popper');
     EventHandler.trigger(this._element, EVENT_HIDDEN$5, relatedTarget);
   }
+
   _getConfig(config) {
     config = super._getConfig(config);
     if (typeof config.reference === 'object' && !isElement(config.reference) && typeof config.reference.getBoundingClientRect !== 'function') {
@@ -1856,6 +1928,7 @@ class Dropdown extends BaseComponent {
     }
     return config;
   }
+
   _createPopper() {
     if (typeof Popper === 'undefined') {
       throw new TypeError('Bootstrap\'s dropdowns require Popper (https://popper.js.org)');
@@ -1871,9 +1944,11 @@ class Dropdown extends BaseComponent {
     const popperConfig = this._getPopperConfig();
     this._popper = Popper.createPopper(referenceElement, this._menu, popperConfig);
   }
+
   _isShown() {
     return this._menu.classList.contains(CLASS_NAME_SHOW$6);
   }
+
   _getPlacement() {
     const parentDropdown = this._parent;
     if (parentDropdown.classList.contains(CLASS_NAME_DROPEND)) {
@@ -1896,9 +1971,11 @@ class Dropdown extends BaseComponent {
     }
     return isEnd ? PLACEMENT_BOTTOMEND : PLACEMENT_BOTTOM;
   }
+
   _detectNavbar() {
     return this._element.closest(SELECTOR_NAVBAR) !== null;
   }
+
   _getOffset() {
     const {
       offset
@@ -1911,6 +1988,7 @@ class Dropdown extends BaseComponent {
     }
     return offset;
   }
+
   _getPopperConfig() {
     const defaultBsPopperConfig = {
       placement: this._getPlacement(),
@@ -1940,10 +2018,11 @@ class Dropdown extends BaseComponent {
       ...execute(this._config.popperConfig, [defaultBsPopperConfig])
     };
   }
+
   _selectMenuItem({
-    key,
-    target
-  }) {
+                    key,
+                    target
+                  }) {
     const items = SelectorEngine.find(SELECTOR_VISIBLE_ITEMS, this._menu).filter(element => isVisible(element));
     if (!items.length) {
       return;
@@ -1967,6 +2046,7 @@ class Dropdown extends BaseComponent {
       data[config]();
     });
   }
+
   static clearMenus(event) {
     if (event.button === RIGHT_MOUSE_BUTTON || event.type === 'keyup' && event.key !== TAB_KEY$1) {
       return;
@@ -1996,6 +2076,7 @@ class Dropdown extends BaseComponent {
       context._completeHide(relatedTarget);
     }
   }
+
   static dataApiKeydownHandler(event) {
     // If not an UP | DOWN | ESCAPE key => not a dropdown command
     // If input/textarea && if key is other than ESCAPE => not a dropdown command
@@ -2096,9 +2177,11 @@ class Backdrop extends Config {
   static get Default() {
     return Default$8;
   }
+
   static get DefaultType() {
     return DefaultType$8;
   }
+
   static get NAME() {
     return NAME$9;
   }
@@ -2119,6 +2202,7 @@ class Backdrop extends Config {
       execute(callback);
     });
   }
+
   hide(callback) {
     if (!this._config.isVisible) {
       execute(callback);
@@ -2130,6 +2214,7 @@ class Backdrop extends Config {
       execute(callback);
     });
   }
+
   dispose() {
     if (!this._isAppended) {
       return;
@@ -2151,11 +2236,13 @@ class Backdrop extends Config {
     }
     return this._element;
   }
+
   _configAfterMerge(config) {
     // use getElement() with the default "body" to get a fresh Element on each instantiation
     config.rootElement = getElement(config.rootElement);
     return config;
   }
+
   _append() {
     if (this._isAppended) {
       return;
@@ -2167,6 +2254,7 @@ class Backdrop extends Config {
     });
     this._isAppended = true;
   }
+
   _emulateAnimation(callback) {
     executeAfterTransition(callback, this._getElement(), this._config.isAnimated);
   }
@@ -2217,9 +2305,11 @@ class FocusTrap extends Config {
   static get Default() {
     return Default$7;
   }
+
   static get DefaultType() {
     return DefaultType$7;
   }
+
   static get NAME() {
     return NAME$8;
   }
@@ -2237,6 +2327,7 @@ class FocusTrap extends Config {
     EventHandler.on(document, EVENT_KEYDOWN_TAB, event => this._handleKeydown(event));
     this._isActive = true;
   }
+
   deactivate() {
     if (!this._isActive) {
       return;
@@ -2262,6 +2353,7 @@ class FocusTrap extends Config {
       elements[0].focus();
     }
   }
+
   _handleKeydown(event) {
     if (event.key !== TAB_KEY) {
       return;
@@ -2302,6 +2394,7 @@ class ScrollBarHelper {
     const documentWidth = document.documentElement.clientWidth;
     return Math.abs(window.innerWidth - documentWidth);
   }
+
   hide() {
     const width = this.getWidth();
     this._disableOverFlow();
@@ -2311,12 +2404,14 @@ class ScrollBarHelper {
     this._setElementAttributes(SELECTOR_FIXED_CONTENT, PROPERTY_PADDING, calculatedValue => calculatedValue + width);
     this._setElementAttributes(SELECTOR_STICKY_CONTENT, PROPERTY_MARGIN, calculatedValue => calculatedValue - width);
   }
+
   reset() {
     this._resetElementAttributes(this._element, 'overflow');
     this._resetElementAttributes(this._element, PROPERTY_PADDING);
     this._resetElementAttributes(SELECTOR_FIXED_CONTENT, PROPERTY_PADDING);
     this._resetElementAttributes(SELECTOR_STICKY_CONTENT, PROPERTY_MARGIN);
   }
+
   isOverflowing() {
     return this.getWidth() > 0;
   }
@@ -2326,6 +2421,7 @@ class ScrollBarHelper {
     this._saveInitialAttribute(this._element, 'overflow');
     this._element.style.overflow = 'hidden';
   }
+
   _setElementAttributes(selector, styleProperty, callback) {
     const scrollbarWidth = this.getWidth();
     const manipulationCallBack = element => {
@@ -2338,12 +2434,14 @@ class ScrollBarHelper {
     };
     this._applyManipulationCallback(selector, manipulationCallBack);
   }
+
   _saveInitialAttribute(element, styleProperty) {
     const actualValue = element.style.getPropertyValue(styleProperty);
     if (actualValue) {
       Manipulator.setDataAttribute(element, styleProperty, actualValue);
     }
   }
+
   _resetElementAttributes(selector, styleProperty) {
     const manipulationCallBack = element => {
       const value = Manipulator.getDataAttribute(element, styleProperty);
@@ -2357,6 +2455,7 @@ class ScrollBarHelper {
     };
     this._applyManipulationCallback(selector, manipulationCallBack);
   }
+
   _applyManipulationCallback(selector, callBack) {
     if (isElement(selector)) {
       callBack(selector);
@@ -2434,9 +2533,11 @@ class Modal extends BaseComponent {
   static get Default() {
     return Default$6;
   }
+
   static get DefaultType() {
     return DefaultType$6;
   }
+
   static get NAME() {
     return NAME$7;
   }
@@ -2445,6 +2546,7 @@ class Modal extends BaseComponent {
   toggle(relatedTarget) {
     return this._isShown ? this.hide() : this.show(relatedTarget);
   }
+
   show(relatedTarget) {
     if (this._isShown || this._isTransitioning) {
       return;
@@ -2462,6 +2564,7 @@ class Modal extends BaseComponent {
     this._adjustDialog();
     this._backdrop.show(() => this._showElement(relatedTarget));
   }
+
   hide() {
     if (!this._isShown || this._isTransitioning) {
       return;
@@ -2476,6 +2579,7 @@ class Modal extends BaseComponent {
     this._element.classList.remove(CLASS_NAME_SHOW$4);
     this._queueCallback(() => this._hideModal(), this._element, this._isAnimated());
   }
+
   dispose() {
     EventHandler.off(window, EVENT_KEY$4);
     EventHandler.off(this._dialog, EVENT_KEY$4);
@@ -2483,6 +2587,7 @@ class Modal extends BaseComponent {
     this._focustrap.deactivate();
     super.dispose();
   }
+
   handleUpdate() {
     this._adjustDialog();
   }
@@ -2495,11 +2600,13 @@ class Modal extends BaseComponent {
       isAnimated: this._isAnimated()
     });
   }
+
   _initializeFocusTrap() {
     return new FocusTrap({
       trapElement: this._element
     });
   }
+
   _showElement(relatedTarget) {
     // try to append dynamic modal
     if (!document.body.contains(this._element)) {
@@ -2527,6 +2634,7 @@ class Modal extends BaseComponent {
     };
     this._queueCallback(transitionComplete, this._dialog, this._isAnimated());
   }
+
   _addEventListeners() {
     EventHandler.on(this._element, EVENT_KEYDOWN_DISMISS$1, event => {
       if (event.key !== ESCAPE_KEY$1) {
@@ -2559,6 +2667,7 @@ class Modal extends BaseComponent {
       });
     });
   }
+
   _hideModal() {
     this._element.style.display = 'none';
     this._element.setAttribute('aria-hidden', true);
@@ -2572,9 +2681,11 @@ class Modal extends BaseComponent {
       EventHandler.trigger(this._element, EVENT_HIDDEN$4);
     });
   }
+
   _isAnimated() {
     return this._element.classList.contains(CLASS_NAME_FADE$3);
   }
+
   _triggerBackdropTransition() {
     const hideEvent = EventHandler.trigger(this._element, EVENT_HIDE_PREVENTED$1);
     if (hideEvent.defaultPrevented) {
@@ -2616,6 +2727,7 @@ class Modal extends BaseComponent {
       this._element.style[property] = `${scrollbarWidth}px`;
     }
   }
+
   _resetAdjustments() {
     this._element.style.paddingLeft = '';
     this._element.style.paddingRight = '';
@@ -2733,9 +2845,11 @@ class Offcanvas extends BaseComponent {
   static get Default() {
     return Default$5;
   }
+
   static get DefaultType() {
     return DefaultType$5;
   }
+
   static get NAME() {
     return NAME$6;
   }
@@ -2744,6 +2858,7 @@ class Offcanvas extends BaseComponent {
   toggle(relatedTarget) {
     return this._isShown ? this.hide() : this.show(relatedTarget);
   }
+
   show(relatedTarget) {
     if (this._isShown) {
       return;
@@ -2774,6 +2889,7 @@ class Offcanvas extends BaseComponent {
     };
     this._queueCallback(completeCallBack, this._element, true);
   }
+
   hide() {
     if (!this._isShown) {
       return;
@@ -2798,6 +2914,7 @@ class Offcanvas extends BaseComponent {
     };
     this._queueCallback(completeCallback, this._element, true);
   }
+
   dispose() {
     this._backdrop.dispose();
     this._focustrap.deactivate();
@@ -2824,11 +2941,13 @@ class Offcanvas extends BaseComponent {
       clickCallback: isVisible ? clickCallback : null
     });
   }
+
   _initializeFocusTrap() {
     return new FocusTrap({
       trapElement: this._element
     });
   }
+
   _addEventListeners() {
     EventHandler.on(this._element, EVENT_KEYDOWN_DISMISS, event => {
       if (event.key !== ESCAPE_KEY) {
@@ -2973,6 +3092,7 @@ const allowedAttribute = (attribute, allowedAttributeList) => {
   // Check if a regular expression validates the attribute.
   return allowedAttributeList.filter(attributeRegex => attributeRegex instanceof RegExp).some(regex => regex.test(attributeName));
 };
+
 function sanitizeHtml(unsafeHtml, allowList, sanitizeFunction) {
   if (!unsafeHtml.length) {
     return unsafeHtml;
@@ -3051,9 +3171,11 @@ class TemplateFactory extends Config {
   static get Default() {
     return Default$4;
   }
+
   static get DefaultType() {
     return DefaultType$4;
   }
+
   static get NAME() {
     return NAME$5;
   }
@@ -3062,9 +3184,11 @@ class TemplateFactory extends Config {
   getContent() {
     return Object.values(this._config.content).map(config => this._resolvePossibleFunction(config)).filter(Boolean);
   }
+
   hasContent() {
     return this.getContent().length > 0;
   }
+
   changeContent(content) {
     this._checkContent(content);
     this._config.content = {
@@ -3073,6 +3197,7 @@ class TemplateFactory extends Config {
     };
     return this;
   }
+
   toHtml() {
     const templateWrapper = document.createElement('div');
     templateWrapper.innerHTML = this._maybeSanitize(this._config.template);
@@ -3092,6 +3217,7 @@ class TemplateFactory extends Config {
     super._typeCheckConfig(config);
     this._checkContent(config.content);
   }
+
   _checkContent(arg) {
     for (const [selector, content] of Object.entries(arg)) {
       super._typeCheckConfig({
@@ -3100,6 +3226,7 @@ class TemplateFactory extends Config {
       }, DefaultContentType);
     }
   }
+
   _setContent(template, content, selector) {
     const templateElement = SelectorEngine.findOne(selector, template);
     if (!templateElement) {
@@ -3120,12 +3247,15 @@ class TemplateFactory extends Config {
     }
     templateElement.textContent = content;
   }
+
   _maybeSanitize(arg) {
     return this._config.sanitize ? sanitizeHtml(arg, this._config.allowList, this._config.sanitizeFn) : arg;
   }
+
   _resolvePossibleFunction(arg) {
     return execute(arg, [this]);
   }
+
   _putElementInTemplate(element, templateElement) {
     if (this._config.html) {
       templateElement.innerHTML = '';
@@ -3248,9 +3378,11 @@ class Tooltip extends BaseComponent {
   static get Default() {
     return Default$3;
   }
+
   static get DefaultType() {
     return DefaultType$3;
   }
+
   static get NAME() {
     return NAME$4;
   }
@@ -3259,12 +3391,15 @@ class Tooltip extends BaseComponent {
   enable() {
     this._isEnabled = true;
   }
+
   disable() {
     this._isEnabled = false;
   }
+
   toggleEnabled() {
     this._isEnabled = !this._isEnabled;
   }
+
   toggle() {
     if (!this._isEnabled) {
       return;
@@ -3276,6 +3411,7 @@ class Tooltip extends BaseComponent {
     }
     this._enter();
   }
+
   dispose() {
     clearTimeout(this._timeout);
     EventHandler.off(this._element.closest(SELECTOR_MODAL), EVENT_MODAL_HIDE, this._hideModalHandler);
@@ -3285,6 +3421,7 @@ class Tooltip extends BaseComponent {
     this._disposePopper();
     super.dispose();
   }
+
   show() {
     if (this._element.style.display === 'none') {
       throw new Error('Please use show on visible elements');
@@ -3331,6 +3468,7 @@ class Tooltip extends BaseComponent {
     };
     this._queueCallback(complete, this.tip, this._isAnimated());
   }
+
   hide() {
     if (!this._isShown()) {
       return;
@@ -3366,6 +3504,7 @@ class Tooltip extends BaseComponent {
     };
     this._queueCallback(complete, this.tip, this._isAnimated());
   }
+
   update() {
     if (this._popper) {
       this._popper.update();
@@ -3376,12 +3515,14 @@ class Tooltip extends BaseComponent {
   _isWithContent() {
     return Boolean(this._getTitle());
   }
+
   _getTipElement() {
     if (!this.tip) {
       this.tip = this._createTipElement(this._newContent || this._getContentForTemplate());
     }
     return this.tip;
   }
+
   _createTipElement(content) {
     const tip = this._getTemplateFactory(content).toHtml();
 
@@ -3399,6 +3540,7 @@ class Tooltip extends BaseComponent {
     }
     return tip;
   }
+
   setContent(content) {
     this._newContent = content;
     if (this._isShown()) {
@@ -3406,6 +3548,7 @@ class Tooltip extends BaseComponent {
       this.show();
     }
   }
+
   _getTemplateFactory(content) {
     if (this._templateFactory) {
       this._templateFactory.changeContent(content);
@@ -3420,11 +3563,13 @@ class Tooltip extends BaseComponent {
     }
     return this._templateFactory;
   }
+
   _getContentForTemplate() {
     return {
       [SELECTOR_TOOLTIP_INNER]: this._getTitle()
     };
   }
+
   _getTitle() {
     return this._resolvePossibleFunction(this._config.title) || this._element.getAttribute('data-bs-original-title');
   }
@@ -3433,17 +3578,21 @@ class Tooltip extends BaseComponent {
   _initializeOnDelegatedTarget(event) {
     return this.constructor.getOrCreateInstance(event.delegateTarget, this._getDelegateConfig());
   }
+
   _isAnimated() {
     return this._config.animation || this.tip && this.tip.classList.contains(CLASS_NAME_FADE$2);
   }
+
   _isShown() {
     return this.tip && this.tip.classList.contains(CLASS_NAME_SHOW$2);
   }
+
   _createPopper(tip) {
     const placement = execute(this._config.placement, [this, tip, this._element]);
     const attachment = AttachmentMap[placement.toUpperCase()];
     return Popper.createPopper(this._element, tip, this._getPopperConfig(attachment));
   }
+
   _getOffset() {
     const {
       offset
@@ -3456,9 +3605,11 @@ class Tooltip extends BaseComponent {
     }
     return offset;
   }
+
   _resolvePossibleFunction(arg) {
     return execute(arg, [this._element]);
   }
+
   _getPopperConfig(attachment) {
     const defaultBsPopperConfig = {
       placement: attachment,
@@ -3498,6 +3649,7 @@ class Tooltip extends BaseComponent {
       ...execute(this._config.popperConfig, [defaultBsPopperConfig])
     };
   }
+
   _setListeners() {
     const triggers = this._config.trigger.split(' ');
     for (const trigger of triggers) {
@@ -3528,6 +3680,7 @@ class Tooltip extends BaseComponent {
     };
     EventHandler.on(this._element.closest(SELECTOR_MODAL), EVENT_MODAL_HIDE, this._hideModalHandler);
   }
+
   _fixTitle() {
     const title = this._element.getAttribute('title');
     if (!title) {
@@ -3539,6 +3692,7 @@ class Tooltip extends BaseComponent {
     this._element.setAttribute('data-bs-original-title', title); // DO NOT USE IT. Is only for backwards compatibility
     this._element.removeAttribute('title');
   }
+
   _enter() {
     if (this._isShown() || this._isHovered) {
       this._isHovered = true;
@@ -3551,6 +3705,7 @@ class Tooltip extends BaseComponent {
       }
     }, this._config.delay.show);
   }
+
   _leave() {
     if (this._isWithActiveTrigger()) {
       return;
@@ -3562,13 +3717,16 @@ class Tooltip extends BaseComponent {
       }
     }, this._config.delay.hide);
   }
+
   _setTimeout(handler, timeout) {
     clearTimeout(this._timeout);
     this._timeout = setTimeout(handler, timeout);
   }
+
   _isWithActiveTrigger() {
     return Object.values(this._activeTrigger).includes(true);
   }
+
   _getConfig(config) {
     const dataAttributes = Manipulator.getDataAttributes(this._element);
     for (const dataAttribute of Object.keys(dataAttributes)) {
@@ -3585,6 +3743,7 @@ class Tooltip extends BaseComponent {
     this._typeCheckConfig(config);
     return config;
   }
+
   _configAfterMerge(config) {
     config.container = config.container === false ? document.body : getElement(config.container);
     if (typeof config.delay === 'number') {
@@ -3601,6 +3760,7 @@ class Tooltip extends BaseComponent {
     }
     return config;
   }
+
   _getDelegateConfig() {
     const config = {};
     for (const [key, value] of Object.entries(this._config)) {
@@ -3616,6 +3776,7 @@ class Tooltip extends BaseComponent {
     // `Object.fromEntries(keysWithDifferentValues)`
     return config;
   }
+
   _disposePopper() {
     if (this._popper) {
       this._popper.destroy();
@@ -3685,9 +3846,11 @@ class Popover extends Tooltip {
   static get Default() {
     return Default$2;
   }
+
   static get DefaultType() {
     return DefaultType$2;
   }
+
   static get NAME() {
     return NAME$3;
   }
@@ -3704,6 +3867,7 @@ class Popover extends Tooltip {
       [SELECTOR_CONTENT]: this._getContent()
     };
   }
+
   _getContent() {
     return this._resolvePossibleFunction(this._config.content);
   }
@@ -3801,9 +3965,11 @@ class ScrollSpy extends BaseComponent {
   static get Default() {
     return Default$1;
   }
+
   static get DefaultType() {
     return DefaultType$1;
   }
+
   static get NAME() {
     return NAME$2;
   }
@@ -3821,6 +3987,7 @@ class ScrollSpy extends BaseComponent {
       this._observer.observe(section);
     }
   }
+
   dispose() {
     this._observer.disconnect();
     super.dispose();
@@ -3838,6 +4005,7 @@ class ScrollSpy extends BaseComponent {
     }
     return config;
   }
+
   _maybeEnableSmoothScroll() {
     if (!this._config.smoothScroll) {
       return;
@@ -3864,6 +4032,7 @@ class ScrollSpy extends BaseComponent {
       }
     });
   }
+
   _getNewObserver() {
     const options = {
       root: this._rootElement,
@@ -3906,6 +4075,7 @@ class ScrollSpy extends BaseComponent {
       }
     }
   }
+
   _initializeTargetsAndObservables() {
     this._targetLinks = new Map();
     this._observableSections = new Map();
@@ -3924,6 +4094,7 @@ class ScrollSpy extends BaseComponent {
       }
     }
   }
+
   _process(target) {
     if (this._activeTarget === target) {
       return;
@@ -3936,6 +4107,7 @@ class ScrollSpy extends BaseComponent {
       relatedTarget: target
     });
   }
+
   _activateParents(target) {
     // Activate dropdown parents
     if (target.classList.contains(CLASS_NAME_DROPDOWN_ITEM)) {
@@ -3950,6 +4122,7 @@ class ScrollSpy extends BaseComponent {
       }
     }
   }
+
   _clearActiveClass(parent) {
     parent.classList.remove(CLASS_NAME_ACTIVE$1);
     const activeNodes = SelectorEngine.find(`${SELECTOR_TARGET_LINKS}.${CLASS_NAME_ACTIVE$1}`, parent);
@@ -4100,6 +4273,7 @@ class Tab extends BaseComponent {
     };
     this._queueCallback(complete, element, element.classList.contains(CLASS_NAME_FADE$1));
   }
+
   _deactivate(element, relatedElem) {
     if (!element) {
       return;
@@ -4122,6 +4296,7 @@ class Tab extends BaseComponent {
     };
     this._queueCallback(complete, element, element.classList.contains(CLASS_NAME_FADE$1));
   }
+
   _keydown(event) {
     if (![ARROW_LEFT_KEY, ARROW_RIGHT_KEY, ARROW_UP_KEY, ARROW_DOWN_KEY, HOME_KEY, END_KEY].includes(event.key)) {
       return;
@@ -4143,19 +4318,23 @@ class Tab extends BaseComponent {
       Tab.getOrCreateInstance(nextActiveElement).show();
     }
   }
+
   _getChildren() {
     // collection of inner elements
     return SelectorEngine.find(SELECTOR_INNER_ELEM, this._parent);
   }
+
   _getActiveElem() {
     return this._getChildren().find(child => this._elemIsActive(child)) || null;
   }
+
   _setInitialAttributes(parent, children) {
     this._setAttributeIfNotExists(parent, 'role', 'tablist');
     for (const child of children) {
       this._setInitialAttributesOnChild(child);
     }
   }
+
   _setInitialAttributesOnChild(child) {
     child = this._getInnerElement(child);
     const isActive = this._elemIsActive(child);
@@ -4172,6 +4351,7 @@ class Tab extends BaseComponent {
     // set attributes to the related panel too
     this._setInitialAttributesOnTargetPanel(child);
   }
+
   _setInitialAttributesOnTargetPanel(child) {
     const target = SelectorEngine.getElementFromSelector(child);
     if (!target) {
@@ -4182,6 +4362,7 @@ class Tab extends BaseComponent {
       this._setAttributeIfNotExists(target, 'aria-labelledby', `${child.id}`);
     }
   }
+
   _toggleDropDown(element, open) {
     const outerElem = this._getOuterElement(element);
     if (!outerElem.classList.contains(CLASS_DROPDOWN)) {
@@ -4197,11 +4378,13 @@ class Tab extends BaseComponent {
     toggle(SELECTOR_DROPDOWN_MENU, CLASS_NAME_SHOW$1);
     outerElem.setAttribute('aria-expanded', open);
   }
+
   _setAttributeIfNotExists(element, attribute, value) {
     if (!element.hasAttribute(attribute)) {
       element.setAttribute(attribute, value);
     }
   }
+
   _elemIsActive(elem) {
     return elem.classList.contains(CLASS_NAME_ACTIVE);
   }
@@ -4314,9 +4497,11 @@ class Toast extends BaseComponent {
   static get Default() {
     return Default;
   }
+
   static get DefaultType() {
     return DefaultType;
   }
+
   static get NAME() {
     return NAME;
   }
@@ -4341,6 +4526,7 @@ class Toast extends BaseComponent {
     this._element.classList.add(CLASS_NAME_SHOW, CLASS_NAME_SHOWING);
     this._queueCallback(complete, this._element, this._config.animation);
   }
+
   hide() {
     if (!this.isShown()) {
       return;
@@ -4357,6 +4543,7 @@ class Toast extends BaseComponent {
     this._element.classList.add(CLASS_NAME_SHOWING);
     this._queueCallback(complete, this._element, this._config.animation);
   }
+
   dispose() {
     this._clearTimeout();
     if (this.isShown()) {
@@ -4364,6 +4551,7 @@ class Toast extends BaseComponent {
     }
     super.dispose();
   }
+
   isShown() {
     return this._element.classList.contains(CLASS_NAME_SHOW);
   }
@@ -4381,20 +4569,19 @@ class Toast extends BaseComponent {
       this.hide();
     }, this._config.delay);
   }
+
   _onInteraction(event, isInteracting) {
     switch (event.type) {
       case 'mouseover':
-      case 'mouseout':
-        {
-          this._hasMouseInteraction = isInteracting;
-          break;
-        }
+      case 'mouseout': {
+        this._hasMouseInteraction = isInteracting;
+        break;
+      }
       case 'focusin':
-      case 'focusout':
-        {
-          this._hasKeyboardInteraction = isInteracting;
-          break;
-        }
+      case 'focusout': {
+        this._hasKeyboardInteraction = isInteracting;
+        break;
+      }
     }
     if (isInteracting) {
       this._clearTimeout();
@@ -4406,12 +4593,14 @@ class Toast extends BaseComponent {
     }
     this._maybeScheduleHide();
   }
+
   _setListeners() {
     EventHandler.on(this._element, EVENT_MOUSEOVER, event => this._onInteraction(event, true));
     EventHandler.on(this._element, EVENT_MOUSEOUT, event => this._onInteraction(event, false));
     EventHandler.on(this._element, EVENT_FOCUSIN, event => this._onInteraction(event, true));
     EventHandler.on(this._element, EVENT_FOCUSOUT, event => this._onInteraction(event, false));
   }
+
   _clearTimeout() {
     clearTimeout(this._timeout);
     this._timeout = null;
@@ -4443,5 +4632,5 @@ enableDismissTrigger(Toast);
 
 defineJQueryPlugin(Toast);
 
-export { Alert, Button, Carousel, Collapse, Dropdown, Modal, Offcanvas, Popover, ScrollSpy, Tab, Toast, Tooltip };
+export {Alert, Button, Carousel, Collapse, Dropdown, Modal, Offcanvas, Popover, ScrollSpy, Tab, Toast, Tooltip};
 //# sourceMappingURL=bootstrap.esm.js.map

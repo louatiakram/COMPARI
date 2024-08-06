@@ -1,5 +1,5 @@
 tinymce.Resource.add('tinymce.html-i18n.help-keynav.da',
-'<h1>Start tastaturnavigation</h1>\n' +
+  '<h1>Start tastaturnavigation</h1>\n' +
   '\n' +
   '<dl>\n' +
   '  <dt>Fokuser på menulinjen</dt>\n' +

@@ -1,5 +1,6 @@
-import type { ChartArea, FontSpec, Point } from '../types/index.js';
-import type { TRBL, TRBLCorners } from '../types/geometric.js';
+import type {ChartArea, FontSpec, Point} from '../types/index.js';
+import type {TRBL, TRBLCorners} from '../types/geometric.js';
+
 /**
  * @alias Chart.helpers.options
  * @namespace
@@ -13,12 +14,14 @@ import type { TRBL, TRBLCorners } from '../types/geometric.js';
  * @since 2.7.0
  */
 export declare function toLineHeight(value: number | string, size: number): number;
+
 /**
  * @param value
  * @param props
  */
 export declare function _readValueToProps<K extends string>(value: number | Record<K, number>, props: K[]): Record<K, number>;
 export declare function _readValueToProps<K extends string, T extends string>(value: number | Record<K & T, number>, props: Record<T, K>): Record<T, number>;
+
 /**
  * Converts the given value into a TRBL object.
  * @param value - If a number, set the value to all TRBL component,
@@ -28,6 +31,7 @@ export declare function _readValueToProps<K extends string, T extends string>(va
  * @since 3.0.0
  */
 export declare function toTRBL(value: number | TRBL | Point): Record<"left" | "top" | "bottom" | "right", number>;
+
 /**
  * Converts the given value into a TRBL corners object (similar with css border-radius).
  * @param value - If a number, set the value to all TRBL corner components,
@@ -36,6 +40,7 @@ export declare function toTRBL(value: number | TRBL | Point): Record<"left" | "t
  * @since 3.0.0
  */
 export declare function toTRBLCorners(value: number | TRBLCorners): Record<"topLeft" | "topRight" | "bottomLeft" | "bottomRight", number>;
+
 /**
  * Converts the given value into a padding object with pre-computed width/height.
  * @param value - If a number, set the value to all TRBL component,
@@ -45,6 +50,7 @@ export declare function toTRBLCorners(value: number | TRBLCorners): Record<"topL
  * @since 2.7.0
  */
 export declare function toPadding(value?: number | TRBL): ChartArea;
+
 /**
  * Parses font options and returns the font object.
  * @param options - A object that contains font options to be parsed.
@@ -53,13 +59,14 @@ export declare function toPadding(value?: number | TRBL): ChartArea;
  * @private
  */
 export declare function toFont(options: Partial<FontSpec>, fallback?: Partial<FontSpec>): {
-    family: string;
-    lineHeight: number;
-    size: number;
-    style: "normal" | "inherit" | "italic" | "oblique" | "initial";
-    weight: number | "bold" | "normal" | "lighter" | "bolder";
-    string: string;
+  family: string;
+  lineHeight: number;
+  size: number;
+  style: "normal" | "inherit" | "italic" | "oblique" | "initial";
+  weight: number | "bold" | "normal" | "lighter" | "bolder";
+  string: string;
 };
+
 /**
  * Evaluates the given `inputs` sequentially and returns the first defined value.
  * @param inputs - An array of values, falling back to the last value.
@@ -72,8 +79,9 @@ export declare function toFont(options: Partial<FontSpec>, fallback?: Partial<Fo
  * @since 2.7.0
  */
 export declare function resolve(inputs: Array<unknown>, context?: object, index?: number, info?: {
-    cacheable: boolean;
+  cacheable: boolean;
 }): unknown;
+
 /**
  * @param minmax
  * @param grace
@@ -81,12 +89,13 @@ export declare function resolve(inputs: Array<unknown>, context?: object, index?
  * @private
  */
 export declare function _addGrace(minmax: {
-    min: number;
-    max: number;
+  min: number;
+  max: number;
 }, grace: number | string, beginAtZero: boolean): {
-    min: number;
-    max: number;
+  min: number;
+  max: number;
 };
+
 /**
  * Create a context inheriting parentContext
  * @param parentContext

@@ -1,5 +1,5 @@
 tinymce.Resource.add('tinymce.html-i18n.help-keynav.it',
-'<h1>Iniziare la navigazione tramite tastiera</h1>\n' +
+  '<h1>Iniziare la navigazione tramite tastiera</h1>\n' +
   '\n' +
   '<dl>\n' +
   '  <dt>Impostare lo stato attivo per la barra dei menu</dt>\n' +

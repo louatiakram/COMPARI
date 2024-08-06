@@ -1,4 +1,3 @@
-
 /*
 * Licensed to the Apache Software Foundation (ASF) under one
 * or more contributor license agreements.  See the NOTICE file
@@ -20,9 +19,10 @@
 
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('echarts')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'echarts'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.bmap = {}, global.echarts));
-}(this, (function (exports, echarts) { 'use strict';
+    typeof define === 'function' && define.amd ? define(['exports', 'echarts'], factory) :
+      (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.bmap = {}, global.echarts));
+}(this, (function (exports, echarts) {
+  'use strict';
 
   function BMapCoordSys(bmap, api) {
     this._bmap = bmap;
@@ -31,6 +31,7 @@
     this._api = api;
     this._projection = new BMap.MercatorProjection();
   }
+
   BMapCoordSys.prototype.type = 'bmap';
   BMapCoordSys.prototype.dimensions = ['lng', 'lat'];
   BMapCoordSys.prototype.setZoom = function (zoom) {
@@ -99,6 +100,7 @@
   BMapCoordSys.prototype.convertFromPixel = function (ecModel, finder, value) {
     return this.pointToData(value);
   };
+
   function dataToCoordSize(dataSize, dataItem) {
     dataItem = dataItem || [0, 0];
     return echarts.util.map([0, 1], function (dimIdx) {
@@ -112,13 +114,16 @@
       return Math.abs(this.dataToPoint(p1)[dimIdx] - this.dataToPoint(p2)[dimIdx]);
     }, this);
   }
+
   var Overlay;
   // For deciding which dimensions to use when creating list data
   BMapCoordSys.dimensions = BMapCoordSys.prototype.dimensions;
+
   function createOverlayCtor() {
     function Overlay(root) {
       this._root = root;
     }
+
     Overlay.prototype = new BMap.Overlay();
     /**
      * 初始化
@@ -133,9 +138,11 @@
     /**
      * @override
      */
-    Overlay.prototype.draw = function () {};
+    Overlay.prototype.draw = function () {
+    };
     return Overlay;
   }
+
   BMapCoordSys.create = function (ecModel, api) {
     var bmapCoordSys;
     var root = api.getDom();
@@ -216,6 +223,7 @@
   function v2Equal(a, b) {
     return a && b && a[0] === b[0] && a[1] === b[1];
   }
+
   echarts.extendComponentModel({
     type: 'bmap',
     getBMap: function () {
@@ -251,6 +259,7 @@
     }
     return true;
   }
+
   echarts.extendComponentView({
     type: 'bmap',
     render: function (bMapModel, ecModel, api) {
@@ -283,6 +292,7 @@
           }
         });
       };
+
       function zoomEndHandler() {
         if (rendering) {
           return;
@@ -294,6 +304,7 @@
           }
         });
       }
+
       bmap.removeEventListener('moving', this._oldMoveHandler);
       bmap.removeEventListener('moveend', this._oldMoveHandler);
       bmap.removeEventListener('zoomend', this._oldZoomEndHandler);
@@ -362,7 +373,7 @@
 
   exports.version = version;
 
-  Object.defineProperty(exports, '__esModule', { value: true });
+  Object.defineProperty(exports, '__esModule', {value: true});
 
 })));
 //# sourceMappingURL=bmap.js.map

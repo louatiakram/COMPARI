@@ -10,7 +10,6 @@ var helpers_segment = require('./chunks/helpers.segment.cjs');
 require('@kurkle/color');
 
 
-
 exports.HALF_PI = helpers_segment.HALF_PI;
 exports.INFINITY = helpers_segment.INFINITY;
 exports.PI = helpers_segment.PI;

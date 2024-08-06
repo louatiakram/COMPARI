@@ -1,5 +1,5 @@
 tinymce.Resource.add('tinymce.html-i18n.help-keynav.hi',
-'<h1>कीबोर्ड नेविगेशन शुरू करें</h1>\n' +
+  '<h1>कीबोर्ड नेविगेशन शुरू करें</h1>\n' +
   '\n' +
   '<dl>\n' +
   '  <dt>मेन्यू बार पर फ़ोकस करें</dt>\n' +

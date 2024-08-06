@@ -1,5 +1,5 @@
 tinymce.Resource.add('tinymce.html-i18n.help-keynav.ms',
-'<h1>Mulakan navigasi papan kekunci</h1>\n' +
+  '<h1>Mulakan navigasi papan kekunci</h1>\n' +
   '\n' +
   '<dl>\n' +
   '  <dt>Fokus bar Menu</dt>\n' +

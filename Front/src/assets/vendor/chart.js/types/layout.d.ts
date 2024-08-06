@@ -1,6 +1,8 @@
 import {ChartArea} from './geometric.js';
 
-export type LayoutPosition = 'left' | 'top' | 'right' | 'bottom' | 'center' | 'chartArea' | {[scaleId: string]: number};
+export type LayoutPosition = 'left' | 'top' | 'right' | 'bottom' | 'center' | 'chartArea' | {
+  [scaleId: string]: number
+};
 
 export interface LayoutItem {
   /**
@@ -44,18 +46,22 @@ export interface LayoutItem {
    * Called before the layout process starts
    */
   beforeLayout?(): void;
+
   /**
    * Draws the element
    */
   draw(chartArea: ChartArea): void;
+
   /**
    * Returns an object with padding on the edges
    */
   getPadding?(): ChartArea;
+
   /**
    * returns true if the layout item is horizontal (ie. top or bottom)
    */
   isHorizontal(): boolean;
+
   /**
    * Takes two parameters: width and height.
    * @param width

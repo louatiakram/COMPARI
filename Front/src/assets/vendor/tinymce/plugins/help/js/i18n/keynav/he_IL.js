@@ -1,5 +1,5 @@
 tinymce.Resource.add('tinymce.html-i18n.help-keynav.he_IL',
-'<h1>התחל ניווט במקלדת</h1>\n' +
+  '<h1>התחל ניווט במקלדת</h1>\n' +
   '\n' +
   '<dl>\n' +
   '  <dt>התמקד בשורת התפריטים</dt>\n' +

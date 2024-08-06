@@ -1,5 +1,5 @@
 tinymce.Resource.add('tinymce.html-i18n.help-keynav.nl',
-'<h1>Toetsenbordnavigatie starten</h1>\n' +
+  '<h1>Toetsenbordnavigatie starten</h1>\n' +
   '\n' +
   '<dl>\n' +
   '  <dt>Focus op de menubalk instellen</dt>\n' +

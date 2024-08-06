@@ -1,9 +1,11 @@
-import type { ChartArea } from '../types/index.js';
-import type { SplinePoint } from '../types/geometric.js';
+import type {ChartArea} from '../types/index.js';
+import type {SplinePoint} from '../types/geometric.js';
+
 export declare function splineCurve(firstPoint: SplinePoint, middlePoint: SplinePoint, afterPoint: SplinePoint, t: number): {
-    previous: SplinePoint;
-    next: SplinePoint;
+  previous: SplinePoint;
+  next: SplinePoint;
 };
+
 /**
  * This function calculates Bézier control points in a similar way than |splineCurve|,
  * but preserves monotonicity of the provided data and ensures no local extremums are added
@@ -11,6 +13,7 @@ export declare function splineCurve(firstPoint: SplinePoint, middlePoint: Spline
  * See : https://en.wikipedia.org/wiki/Monotone_cubic_interpolation
  */
 export declare function splineCurveMonotone(points: SplinePoint[], indexAxis?: 'x' | 'y'): void;
+
 /**
  * @private
  */
