@@ -38,7 +38,7 @@
               "src/assets/css/style.css"
             ],
             "scripts": [
-              "src/assets/vendor/echarts/echarts.min.js",
+              "node_modules/echarts/dist/echarts.min.js",
               "src/assets/vendor/apexcharts/apexcharts.min.js",
               "src/assets/vendor/bootstrap/js/bootstrap.bundle.min.js",
               "src/assets/vendor/chart.js/chart.umd.js",
