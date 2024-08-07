@@ -22,12 +22,33 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "public",
+                "output": "/public/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/bootstrap-icons/font", 
+                "output": "/assets/fonts/bootstrap-icons/"
+              }
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/style.css"
+            
+              
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/modernizr.js",
+              "src/assets/js/jquery-1.11.0.min.js",
+              "src/assets/js/bootstrap.bundle.min.js",
+              "src/assets/js/plugins.js",
+              "src/assets/js/script.js"
+  
+            ]
           },
           "configurations": {
             "production": {
@@ -74,6 +95,10 @@
             "browserTarget": "Front_User:build"
           }
         },
+
+
+
+
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
@@ -87,7 +112,6 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
             ],
             "scripts": []
           }
