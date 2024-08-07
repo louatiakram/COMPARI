@@ -3,9 +3,20 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Front_User": {
+    "Front-User": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "standalone": true
+        },
+        "@schematics/angular:directive": {
+          "standalone": true
+        },
+        "@schematics/angular:pipe": {
+          "standalone": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -20,35 +31,15 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "public",
-                "output": "/public/"
-              },
-              {
-                "glob": "**/*",
-                "input": "node_modules/bootstrap-icons/font", 
-                "output": "/assets/fonts/bootstrap-icons/"
-              }
+              "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
-              "src/assets/css/bootstrap.min.css",
-              "src/assets/css/style.css"
-            
-              
+              "src/styles.scss"
             ],
-            "scripts": [
-              "src/assets/js/modernizr.js",
-              "src/assets/js/jquery-1.11.0.min.js",
-              "src/assets/js/bootstrap.bundle.min.js",
-              "src/assets/js/plugins.js",
-              "src/assets/js/script.js"
-  
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -81,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Front_User:build:production"
+              "browserTarget": "Front-User:build:production"
             },
             "development": {
-              "browserTarget": "Front_User:build:development"
+              "browserTarget": "Front-User:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -92,13 +83,9 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Front_User:build"
+            "browserTarget": "Front-User:build"
           }
         },
-
-
-
-
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
@@ -107,11 +94,13 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
+              "src/styles.scss"
             ],
             "scripts": []
           }
