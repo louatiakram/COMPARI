@@ -6,11 +6,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { SearchComponent } from './components/search/search.component';
 import { ProductsComponent } from './components/products/products.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ComServiceComponent } from './components/com-service/com-service.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, BillboardComponent, HeaderComponent, SearchComponent, ProductsComponent, FooterComponent],
+  imports: [CommonModule, RouterOutlet, BillboardComponent, HeaderComponent, SearchComponent, ProductsComponent, FooterComponent, ComServiceComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
