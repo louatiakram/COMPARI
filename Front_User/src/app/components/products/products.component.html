@@ -9,37 +9,12 @@
       </div>
       <div class="swiper product-swiper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
+          <!-- Loop through products and display each one in a slide -->
+          <div *ngFor="let product of products" class="swiper-slide">
             <div class="product-card position-relative">
-              <app-single-product></app-single-product>
+              <app-single-product [product]="product"></app-single-product>
             </div>
           </div>
-          <div class="swiper-slide">
-            <div class="product-card position-relative">
-              <app-single-product></app-single-product>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-card position-relative">
-              <app-single-product></app-single-product>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-card position-relative">
-              <app-single-product></app-single-product>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-card position-relative">
-              <app-single-product></app-single-product>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-card position-relative">
-              <app-single-product></app-single-product>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
