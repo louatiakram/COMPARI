@@ -1,7 +1,6 @@
 // src/app/components/single-product/single-product.component.ts
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Product } from 'src/app/modules/products/products.module';
 
 @Component({
   selector: 'app-single-product',
