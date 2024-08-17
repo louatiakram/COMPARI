@@ -11,13 +11,27 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductResponseDto {
-    private int productID;
+    private Long id;
     private String name;
+    private String processor;
+    private String processorRef;
+    private String memory;
+    private String hardDrive;
+    private String gpu;
+    private String gpuRef;
+    private String screenSize;
+    private String screenType;
+    private String touchScreen;
+    private String network;
+    private String camera;
+    private String warranty;
+    private String refreshRate;
+    private String color;
+    private Double price;
     private String description;
     private String image;
     private List<StoreProductResponseDto> storeProduct;
     private List<RatingResponseDto> ratings;
-    /* private List<WishlistResponseDto> wishlists;*/
 
 }
  

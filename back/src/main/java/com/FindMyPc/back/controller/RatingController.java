@@ -33,7 +33,7 @@ public class RatingController {
 
     @PostMapping("/product/{productId}/user/{userId}")
     public ResponseEntity<RatingResponseDto> createProductRating(@RequestBody RatingResponseDto ratingResponseDto,
-                                                                 @PathVariable("productId") Integer productId,
+                                                                 @PathVariable("productId") Long productId,
                                                                  @PathVariable("userId") Integer userId) {
         RatingResponseDto savedRating = ratingService.saveProductRating(ratingResponseDto, userId, productId);
         return new ResponseEntity<>(savedRating, HttpStatus.CREATED);
@@ -49,7 +49,7 @@ public class RatingController {
 
     @PutMapping("/product/{productId}/user/{userId}")
     public ResponseEntity<RatingResponseDto> updateProductRating(@RequestBody RatingResponseDto ratingResponseDto,
-                                                                 @PathVariable("productId") Integer productId,
+                                                                 @PathVariable("productId") Long productId,
                                                                  @PathVariable("userId") Integer userId) {
         RatingResponseDto updatedRating = ratingService.updateProductRating(ratingResponseDto, userId, productId);
         return new ResponseEntity<>(updatedRating, HttpStatus.OK);

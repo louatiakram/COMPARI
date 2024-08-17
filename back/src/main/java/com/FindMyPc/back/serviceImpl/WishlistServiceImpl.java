@@ -50,7 +50,7 @@ public class WishlistServiceImpl implements WishlistService {
     }
 
     @Override
-    public WishlistResponseDto saveToWishlist(Integer userId, Integer productId) {
+    public WishlistResponseDto saveToWishlist(Integer userId, Long productId) {
         logger.info("Saving to wishlist for user ID: " + userId + " and product ID: " + productId);
 
         User user = userRepository.findById(userId)

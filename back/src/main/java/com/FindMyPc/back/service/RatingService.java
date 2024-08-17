@@ -11,11 +11,11 @@ public interface RatingService {
     Optional<RatingResponseDto> getRatingById(int id);
 
 
-    RatingResponseDto saveProductRating(RatingResponseDto RatingResponseDto, Integer userId, Integer productID);
+    RatingResponseDto saveProductRating(RatingResponseDto RatingResponseDto, Integer userId, Long productID);
 
     RatingResponseDto saveStoreRating(RatingResponseDto RatingResponseDto, Integer storeID, Integer userId);
 
-    RatingResponseDto updateProductRating(RatingResponseDto RatingResponseDto, Integer userId, Integer productID);
+    RatingResponseDto updateProductRating(RatingResponseDto RatingResponseDto, Integer userId, Long productID);
 
     RatingResponseDto updateStoreRating(RatingResponseDto RatingResponseDto, Integer storeID, Integer userId);
 

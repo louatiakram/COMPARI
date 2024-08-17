@@ -51,7 +51,7 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
-    public RatingResponseDto saveProductRating(RatingResponseDto ratingResponseDto, Integer userId, Integer productId) {
+    public RatingResponseDto saveProductRating(RatingResponseDto ratingResponseDto, Integer userId, Long productId) {
         User user = userRepository.findById(userId).orElse(null);
         Product product = productRepository.findById(productId).orElse(null);
 
@@ -77,7 +77,7 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
-    public RatingResponseDto updateProductRating(RatingResponseDto ratingResponseDto, Integer userId, Integer productId) {
+    public RatingResponseDto updateProductRating(RatingResponseDto ratingResponseDto, Integer userId, Long productId) {
         User user = userRepository.findById(userId).orElse(null);
         Product product = productRepository.findById(productId).orElse(null);
 

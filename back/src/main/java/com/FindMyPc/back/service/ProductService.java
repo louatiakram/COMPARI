@@ -9,13 +9,13 @@ import java.util.Optional;
 public interface ProductService {
     List<ProductResponseDto> getAllProducts();
 
-    Optional<ProductResponseDto> getProductById(int id);
+    Optional<ProductResponseDto> getProductById(long id);
 
     ProductResponseDto saveProduct(ProductResponseDto productResponseDto);
 
     ProductResponseDto updateProduct(ProductResponseDto productResponseDto);
 
-    void deleteProduct(int id);
+    void deleteProduct(long id);
 
     Page<ProductResponseDto> getProductsPaginated(int page, int size);
 }

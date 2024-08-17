@@ -10,7 +10,7 @@ public interface WishlistService {
 
     Optional<WishlistResponseDto> getWishlistById(int id);
 
-    WishlistResponseDto saveToWishlist(Integer userId, Integer productId);
+    WishlistResponseDto saveToWishlist(Integer userId, Long productId);
 
     void deleteFromWishlist(int id);
 }

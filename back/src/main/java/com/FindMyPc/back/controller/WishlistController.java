@@ -37,7 +37,7 @@ public class WishlistController {
     @PostMapping("/user/{userId}/products/{productId}")
     public ResponseEntity<WishlistResponseDto> saveToWishlist(
             @PathVariable Integer userId,
-            @PathVariable Integer productId) {
+            @PathVariable Long productId) {
 
         WishlistResponseDto savedWishlist = wishlistService.saveToWishlist(userId, productId);
         return new ResponseEntity<>(savedWishlist, HttpStatus.CREATED);

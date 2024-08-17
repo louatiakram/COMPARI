@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<ProductResponseDto> getProductById(int id) {
+    public Optional<ProductResponseDto> getProductById(long id) {
         return productRepository.findById(id)
                 .map(product -> modelMapper.map(product, ProductResponseDto.class));
     }
@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponseDto updateProduct(ProductResponseDto productResponseDto) {
-        if (productRepository.existsById(productResponseDto.getProductID())) {
+        if (productRepository.existsById(productResponseDto.getId())) {
             Product product = modelMapper.map(productResponseDto, Product.class);
             Product updatedProduct = productRepository.save(product);
             return modelMapper.map(updatedProduct, ProductResponseDto.class);
@@ -56,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProduct(int id) {
+    public void deleteProduct(long id) {
         if (productRepository.existsById(id)) {
             productRepository.deleteById(id);
         }
