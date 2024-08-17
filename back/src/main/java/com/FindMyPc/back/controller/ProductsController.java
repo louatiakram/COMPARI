@@ -1,7 +1,7 @@
 package com.FindMyPc.back.controller;
 
-import com.FindMyPc.back.ResponseDto.ProductResponseDto;
-import com.FindMyPc.back.service.ProductService;
+import com.FindMyPc.back.ResponseDto.ProductsResponseDto;
+import com.FindMyPc.back.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -14,34 +14,34 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/products")
-public class ProductController {
+public class ProductsController {
 
     @Autowired
-    private ProductService productService;
+    private ProductsService productsService;
 
     @GetMapping
-    public ResponseEntity<List<ProductResponseDto>> getAllProducts() {
-        List<ProductResponseDto> products = productService.getAllProducts();
+    public ResponseEntity<List<ProductsResponseDto>> getAllProducts() {
+        List<ProductsResponseDto> products = productsService.getAllProducts();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponseDto> getProductById(@PathVariable int id) {
-        Optional<ProductResponseDto> product = productService.getProductById(id);
+    public ResponseEntity<ProductsResponseDto> getProductById(@PathVariable int id) {
+        Optional<ProductsResponseDto> product = productsService.getProductById(id);
         return product.map(response -> new ResponseEntity<>(response, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
-    public ResponseEntity<ProductResponseDto> createProduct(@RequestBody ProductResponseDto productResponseDto) {
-        ProductResponseDto savedProduct = productService.saveProduct(productResponseDto);
+    public ResponseEntity<ProductsResponseDto> createProduct(@RequestBody ProductsResponseDto productsResponseDto) {
+        ProductsResponseDto savedProduct = productsService.saveProduct(productsResponseDto);
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponseDto> updateProduct(@PathVariable long id, @RequestBody ProductResponseDto productResponseDto) {
-        productResponseDto.setId(id);
-        ProductResponseDto updatedProduct = productService.updateProduct(productResponseDto);
+    public ResponseEntity<ProductsResponseDto> updateProduct(@PathVariable long id, @RequestBody ProductsResponseDto productsResponseDto) {
+        productsResponseDto.setId(id);
+        ProductsResponseDto updatedProduct = productsService.updateProduct(productsResponseDto);
         if (updatedProduct != null) {
             return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
         }
@@ -50,13 +50,13 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable int id) {
-        productService.deleteProduct(id);
+        productsService.deleteProduct(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/paginated")
-    public ResponseEntity<Page<ProductResponseDto>> getProductsPaginated(@RequestParam int page, @RequestParam int size) {
-        Page<ProductResponseDto> productPage = productService.getProductsPaginated(page, size);
+    public ResponseEntity<Page<ProductsResponseDto>> getProductsPaginated(@RequestParam int page, @RequestParam int size) {
+        Page<ProductsResponseDto> productPage = productsService.getProductsPaginated(page, size);
         return new ResponseEntity<>(productPage, HttpStatus.OK);
     }
 }

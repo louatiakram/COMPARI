@@ -1,15 +1,15 @@
 package com.FindMyPc.back.repository;
 
-import com.FindMyPc.back.entity.Product;
+import com.FindMyPc.back.entity.Products;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
-    Page<Product> findAll(Pageable pageable);
+public interface ProductsRepository extends JpaRepository<Products, Long> {
+    Page<Products> findAll(Pageable pageable);
 
-    List<Product> findByNameContaining(String name);
+    List<Products> findByNameContaining(String name);
 
 }

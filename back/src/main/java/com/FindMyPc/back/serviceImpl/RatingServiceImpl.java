@@ -1,11 +1,11 @@
 package com.FindMyPc.back.serviceImpl;
 
 import com.FindMyPc.back.ResponseDto.RatingResponseDto;
-import com.FindMyPc.back.entity.Product;
+import com.FindMyPc.back.entity.Products;
 import com.FindMyPc.back.entity.Rating;
 import com.FindMyPc.back.entity.Store;
 import com.FindMyPc.back.entity.User;
-import com.FindMyPc.back.repository.ProductRepository;
+import com.FindMyPc.back.repository.ProductsRepository;
 import com.FindMyPc.back.repository.RatingRepository;
 import com.FindMyPc.back.repository.StoreRepository;
 import com.FindMyPc.back.repository.UserRepository;
@@ -28,7 +28,7 @@ public class RatingServiceImpl implements RatingService {
     private UserRepository userRepository;
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductsRepository productsRepository;
 
     @Autowired
     private StoreRepository storeRepository;
@@ -53,11 +53,11 @@ public class RatingServiceImpl implements RatingService {
     @Override
     public RatingResponseDto saveProductRating(RatingResponseDto ratingResponseDto, Integer userId, Long productId) {
         User user = userRepository.findById(userId).orElse(null);
-        Product product = productRepository.findById(productId).orElse(null);
+        Products products = productsRepository.findById(productId).orElse(null);
 
         Rating rating = modelMapper.map(ratingResponseDto, Rating.class);
         rating.setUser(user);
-        rating.setProduct(product);
+        rating.setProducts(products);
 
         Rating savedRating = ratingRepository.save(rating);
         return modelMapper.map(savedRating, RatingResponseDto.class);
@@ -79,12 +79,12 @@ public class RatingServiceImpl implements RatingService {
     @Override
     public RatingResponseDto updateProductRating(RatingResponseDto ratingResponseDto, Integer userId, Long productId) {
         User user = userRepository.findById(userId).orElse(null);
-        Product product = productRepository.findById(productId).orElse(null);
+        Products products = productsRepository.findById(productId).orElse(null);
 
         if (ratingRepository.existsById(ratingResponseDto.getRatingID())) {
             Rating rating = modelMapper.map(ratingResponseDto, Rating.class);
             rating.setUser(user);
-            rating.setProduct(product);
+            rating.setProducts(products);
 
             Rating updatedRating = ratingRepository.save(rating);
             return modelMapper.map(updatedRating, RatingResponseDto.class);

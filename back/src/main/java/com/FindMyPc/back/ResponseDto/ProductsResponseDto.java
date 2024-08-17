@@ -1,8 +1,6 @@
-package com.FindMyPc.back.entity;
+package com.FindMyPc.back.ResponseDto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,12 +10,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductsResponseDto {
     private Long id;
-
     private String name;
     private String processor;
     private String processorRef;
@@ -36,16 +30,8 @@ public class Product {
     private Double price;
     private String description;
     private String image;
+    private List<StoreProductResponseDto> storeProduct;
+    private List<RatingResponseDto> ratings;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<StoreProduct> storeProduct;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Rating> ratings;
-
-    @ManyToMany(mappedBy = "products")
-    @JsonManagedReference
-    private List<Wishlist> wishlists;
 }
+ 

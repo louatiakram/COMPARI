@@ -21,7 +21,7 @@ public class StoreProduct {
     @ManyToOne
     @JoinColumn(name = "product_id")
     @JsonManagedReference
-    private Product product;
+    private Products products;
 
     @ManyToOne
     @JoinColumn(name = "store_id")

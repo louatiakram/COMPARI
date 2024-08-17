@@ -689,7 +689,7 @@ h3.cart-title {
   }
 }
 
-/* 4. Product
+/* 4. Products
 /*----------------------------------------------*/
 .product-store .product-card .cart-concern {
     bottom: 75px;
@@ -913,9 +913,9 @@ figure.instagram-item img.insta-image {
 }
 
 
-/* 10. Single Product Page
+/* 10. Single Products Page
 /*----------------------------------------------*/
-/*------------ Product Info -----------*/
+/*------------ Products Info -----------*/
 .product-info .rating svg.star-fill {
     fill: var(--dark-color);
 }
@@ -954,7 +954,7 @@ figure.instagram-item img.insta-image {
     font-size: 1.2em;
 }
 
-/*------------ Product Info Tabs -----------*/
+/*------------ Products Info Tabs -----------*/
 .product-info-tabs .tabs-listing button {
     font-size: 2em;
     color: var(--dark-color);

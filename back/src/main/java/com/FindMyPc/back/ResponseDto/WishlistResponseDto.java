@@ -13,6 +13,6 @@ import java.util.List;
 public class WishlistResponseDto {
     private int wishlistID;
     private UserResponseDto user;
-    private List<ProductResponseDto> products;
+    private List<ProductsResponseDto> products;
 
 }
