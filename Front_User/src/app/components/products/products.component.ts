@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ProductService } from 'src/app/services/products.service';
-import { SingleProductComponent } from '../single-product/single-product.component';
-import { Product } from 'src/app/modules/products/products.module';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ProductService} from 'src/app/services/products.service';
+import {SingleProductComponent} from '../single-product/single-product.component';
+import {Product} from 'src/app/modules/products/products.module';
 
 @Component({
   selector: 'app-products',
@@ -14,12 +14,13 @@ import { Product } from 'src/app/modules/products/products.module';
 export class ProductsComponent implements OnInit {
   products: Product[] = []; // Use the Product interface
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService) {
+  }
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((data: Product[]) => {
       console.log("results", data)
-      this.products = data; 
+      this.products = data;
     });
   }
 }

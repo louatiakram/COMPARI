@@ -1,32 +1,32 @@
 <section class="sign-in" style="padding-top: 100px;">
-	<div class="container">
-		<div class="signin-content">
-			<div class="signin-image">
-				<figure><img src="../assets/images/signin-image.jpg" alt="sing up image"></figure>
-				<a href="#" class="signup-image-link">Create an account</a>
-			</div>
+  <div class="container">
+    <div class="signin-content">
+      <div class="signin-image">
+        <figure><img alt="sing up image" src="../assets/images/signin-image.jpg"></figure>
+        <a class="signup-image-link" href="#">Create an account</a>
+      </div>
 
-			<div class="signin-form">
-				<h2 class="form-title">Sign in</h2>
-				<form method="POST" class="register-form" id="login-form">
-					<div class="form-group">
-						<label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-						<input type="text" name="your_name" id="your_name" placeholder="Your Name"/>
-					</div>
-					<div class="form-group">
-						<label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-						<input type="password" name="your_pass" id="your_pass" placeholder="Password"/>
-					</div>
-					<div class="form-group">
-						<input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
-						<label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
-					</div>
-					<div class="form-group form-button">
-						<input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
-					</div>
-				</form>
-				
-			</div>
-		</div>
-	</div>
+      <div class="signin-form">
+        <h2 class="form-title">Sign in</h2>
+        <form class="register-form" id="login-form" method="POST">
+          <div class="form-group">
+            <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+            <input id="your_name" name="your_name" placeholder="Your Name" type="text"/>
+          </div>
+          <div class="form-group">
+            <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+            <input id="your_pass" name="your_pass" placeholder="Password" type="password"/>
+          </div>
+          <div class="form-group">
+            <input class="agree-term" id="remember-me" name="remember-me" type="checkbox"/>
+            <label class="label-agree-term" for="remember-me"><span><span></span></span>Remember me</label>
+          </div>
+          <div class="form-group form-button">
+            <input class="form-submit" id="signin" name="signin" type="submit" value="Log in"/>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
 </section>

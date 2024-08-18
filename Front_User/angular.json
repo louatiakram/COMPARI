@@ -42,7 +42,7 @@
               },
               {
                 "glob": "**/*",
-                "input": "node_modules/bootstrap-icons/font", 
+                "input": "node_modules/bootstrap-icons/font",
                 "output": "/assets/fonts/bootstrap-icons/"
               }
             ],
@@ -57,7 +57,7 @@
               "src/assets/js/modernizr.js",
               "src/assets/js/jquery-1.11.0.min.js",
               "src/assets/js/bootstrap.bundle.min.js",
-              "node_modules/swiper/swiper-bundle.min.js", 
+              "node_modules/swiper/swiper-bundle.min.js",
               "src/assets/js/plugins.js",
               "src/assets/js/script.js"
             ]

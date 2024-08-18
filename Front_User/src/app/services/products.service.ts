@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Product } from '../modules/products/products.module';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Product} from '../modules/products/products.module';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,8 @@ import { Product } from '../modules/products/products.module';
 export class ProductService {
   private apiUrl = 'http://localhost:8082/api/products'; // Adjust the URL if needed
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl);

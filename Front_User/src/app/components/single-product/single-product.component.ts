@@ -1,6 +1,6 @@
 // src/app/components/single-product/single-product.component.ts
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {Component, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-single-product',
@@ -10,9 +10,10 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./single-product.component.scss'],
 })
 export class SingleProductComponent {
-  @Input() product: any={}; // Accept product data from parent component
-  
-  constructor() { }
+  @Input() product: any = {}; // Accept product data from parent component
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

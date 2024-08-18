@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ComServiceComponent } from './com-service.component';
+import {ComServiceComponent} from './com-service.component';
 
 describe('ComServiceComponent', () => {
   let component: ComServiceComponent;
