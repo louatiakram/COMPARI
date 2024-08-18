@@ -32,7 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 
-### ScrappedImg ###
-/img
+# Ignore the entire img directory and all its contents
 img/
-img
+
+# Ignore any file or folder named img
+/img
