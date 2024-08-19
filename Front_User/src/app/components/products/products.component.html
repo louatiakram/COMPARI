@@ -1,13 +1,74 @@
-<div class="swiper-container product-swiper">
-  <div class="swiper-wrapper">
-    <!-- Loop through products and display each one in a slide -->
-    <div *ngFor="let product of products" class="swiper-slide">
-      <app-single-product [product]="product"></app-single-product>
+<section id="mobile-products" class="product-store position-relative padding-large no-padding-top" style="padding: 50 PX;">
+  <div class="container">
+    <div class="row">
+      <div class="display-header d-flex justify-content-between pb-3" style="margin-bottom: 50px;">
+        <h2 class="display-7 text-dark text-uppercase">Top 5 Higher Priced Products</h2>
+        <div class="btn-right">
+          <a href="shop.html" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+        </div>
+      </div>
+      <div class="swiper product-swiper" >
+        <div class="swiper-wrapper" style="margin-bottom: 100px; ">
+          <div *ngFor="let product of getTop5HigherPricedProducts()" class="swiper-slide">
+            <app-single-product [product]="product" ></app-single-product>
+          </div>
+        </div>
+        <div class="swiper-pagination position-absolute text-center" ></div>
+      </div>
+    </div>
+
+    <!-- 5 Products Containing "Apple MacBook" -->
+    <div class="row mt-5">
+      <div class="display-header d-flex justify-content-between pb-3" style="margin-bottom: 50px;">
+        <h2 class="display-7 text-dark text-uppercase">Products Containing "Apple MacBook"</h2>
+        <div class="btn-right">
+          <a href="shop.html" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+        </div>
+      </div>
+      <div class="swiper product-swiper">
+        <div class="swiper-wrapper" style="margin-bottom: 100px; ">
+          <div *ngFor="let product of getAppleMacbookProducts()" class="swiper-slide">
+            <app-single-product [product]="product"></app-single-product>
+          </div>
+        </div>
+        <div class="swiper-pagination position-absolute text-center"></div>
+      </div>
+    </div>
+
+    <!-- 5 Products Priced Between 2500-3000 -->
+    <div class="row mt-5">
+      <div class="display-header d-flex justify-content-between pb-3" style="margin-bottom: 50px;">
+        <h2 class="display-7 text-dark text-uppercase">Products Priced Between 2500-3000</h2>
+        <div class="btn-right">
+          <a href="shop.html" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+        </div>
+      </div>
+      <div class="swiper product-swiper">
+        <div class="swiper-wrapper" style="margin-bottom: 100px; ">
+          <div *ngFor="let product of getProductsInRange2500To3000()" class="swiper-slide">
+            <app-single-product [product]="product"></app-single-product>
+          </div>
+        </div>
+        <div class="swiper-pagination position-absolute text-center" ></div>
+      </div>
+    </div>
+
+    <!-- Products Priced Between 2000-2500 -->
+    <div class="row mt-5">
+      <div class="display-header d-flex justify-content-between pb-3" style="margin-bottom: 50px;">
+        <h2 class="display-7 text-dark text-uppercase">Products Priced Between 2000-2500</h2>
+        <div class="btn-right">
+          <a href="shop.html" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+        </div>
+      </div>
+      <div class="swiper product-swiper">
+        <div class="swiper-wrapper" style="margin-bottom: 100px; ">
+          <div *ngFor="let product of getProductsInRange2000To2500()" class="swiper-slide">
+            <app-single-product [product]="product"></app-single-product>
+          </div>
+        </div>
+        <div class="swiper-pagination position-absolute text-center"></div>
+      </div>
     </div>
   </div>
-  <!-- Remove these lines to exclude navigation arrows -->
-  <!-- <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div> -->
-  <!-- Optional: Pagination -->
-  <div class="swiper-pagination"></div>
-</div>
+</section>

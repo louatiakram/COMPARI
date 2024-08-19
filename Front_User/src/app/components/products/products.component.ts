@@ -24,6 +24,22 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     });
   }
 
+  getTop5HigherPricedProducts(): Product[] {
+    return this.products.sort((a, b) => b.price - a.price).slice(0, 5);
+  }
+
+  getAppleMacbookProducts(): Product[] {
+    return this.products.filter(product => product.name.toLowerCase().includes('apple')).slice(0, 5);
+  }
+
+  getProductsInRange2500To3000(): Product[] {
+    return this.products.filter(product => product.price >= 2500 && product.price <= 3000).slice(0, 5);
+  }
+
+  getProductsInRange2000To2500(): Product[] {
+    return this.products.filter(product => product.price >= 2000 && product.price <= 2500).slice(0, 5);
+  }
+
   ngAfterViewInit(): void {
     new Swiper('.product-swiper', {
       slidesPerView: 1, // Adjust this value based on your design
