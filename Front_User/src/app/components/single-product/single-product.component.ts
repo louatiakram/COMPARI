@@ -21,13 +21,14 @@ export class SingleProductComponent {
   }
 
   getFirstImage(): { url: string, name: string } {
-    // Check if the product has an images list and return the URL of the first image
+    // Check if the product has an images list and return the URL and name of the first image
     if (this.product.images && this.product.images.length > 0) {
       const firstImage = this.product.images[0]; // Get the first image name
       const imageUrl = this.getImageUrl(this.product.name, firstImage);
       return { url: imageUrl, name: firstImage };
     }
+    //
     // Return a placeholder image URL if no images are available
-    return { url: 'assets/img/Apple MacBook Air M2/apple-macbook-pro-m2-8go-256-go-silver.jpg', name: 'placeholder-image.jpg' };
+    return { url: 'assets/img/Apple MacBook Air M2/apple-macbook-pro-m2-8go-256-go-silver.jpg', name: 'No image available' };
   }
 }

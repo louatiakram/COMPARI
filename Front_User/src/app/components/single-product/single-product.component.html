@@ -1,7 +1,7 @@
 <div class="product-card">
   <div class="image-holder">
-    <!-- Display the first image of the product or fallback to an empty image if none are available -->
-    <img [src]="getFirstImage()?.url || 'assets/img/placeholder-image.jpg'" [alt]="getFirstImage()?.name ">
+    <!-- Display the first image of the product or fallback to a placeholder if none are available -->
+    <img [src]="getFirstImage().url || 'assets/img/placeholder-image.jpg'" [alt]="getFirstImage().name || 'No image available'">
   </div>
   <div class="card-content">
     <div class="cart-concern">
