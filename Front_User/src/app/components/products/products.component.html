@@ -1,25 +1,13 @@
-<!-- src/app/components/products/products.component.html -->
-
-<section class="product-store position-relative padding-large no-padding-top" id="mobile-products">
-  <div class="container">
-    <div class="row">
-      <div class="display-header d-flex justify-content-between pb-3">
-        <h2 class="display-7 text-dark text-uppercase">Mobile Products</h2>
-        <div class="btn-right">
-          <a class="btn btn-medium btn-normal text-uppercase" href="shop.html">Go to Shop</a>
-        </div>
-      </div>
-      <div class="swiper product-swiper">
-        <div class="swiper-wrapper">
-          <!-- Loop through products and display each one in a slide -->
-          <div *ngFor="let product of products" class="swiper-slide">
-            <div class="product-card position-relative">
-              <app-single-product [product]="product"></app-single-product>
-            </div>
-          </div>
-        </div>
-      </div>
+<div class="swiper-container product-swiper">
+  <div class="swiper-wrapper">
+    <!-- Loop through products and display each one in a slide -->
+    <div *ngFor="let product of products" class="swiper-slide">
+      <app-single-product [product]="product"></app-single-product>
     </div>
   </div>
-  <div class="swiper-pagination position-absolute text-center"></div>
-</section>
+  <!-- Remove these lines to exclude navigation arrows -->
+  <!-- <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div> -->
+  <!-- Optional: Pagination -->
+  <div class="swiper-pagination"></div>
+</div>

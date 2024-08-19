@@ -1,0 +1,46 @@
+.product-card {
+  border: 1px solid #ddd; /* Add border if needed */
+  border-radius: 8px; /* Optional: rounded corners */
+  overflow: hidden; /* Ensure contents do not overflow */
+}
+
+.image-holder {
+  position: relative;
+  width: 100%;
+  height: 200px; /* Adjust based on your design */
+  overflow: hidden;
+}
+
+.image-holder img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensures the image fits within the container while maintaining aspect ratio */
+  object-position: center; /* Centers the image within the container */
+}
+
+.card-content {
+  padding: 16px; /* Adjust padding as needed */
+}
+
+.cart-concern {
+  margin-bottom: 16px; /* Space below cart concern section */
+}
+
+.cart-button {
+  text-align: center; /* Center the button */
+}
+
+.card-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.card-title {
+  font-size: 1.25rem; /* Adjust font size as needed */
+}
+
+.item-price {
+  font-size: 1.25rem; /* Adjust font size as needed */
+  color: #007bff; /* Adjust color as needed */
+}

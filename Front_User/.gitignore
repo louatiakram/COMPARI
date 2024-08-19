@@ -42,7 +42,7 @@ testem.log
 Thumbs.db
 
 # Ignore the entire img directory and all its contents
-img/
+src/assets/img/
 
 # Ignore any file or folder named img
-/img
+/src/assets/img
