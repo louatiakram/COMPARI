@@ -49,6 +49,8 @@
             "styles": [
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "node_modules/swiper/swiper-bundle.min.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
               "src/assets/css/bootstrap.min.css",
               "src/assets/css/vendor.css",
               "src/assets/css/style.css"
