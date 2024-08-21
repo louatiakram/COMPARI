@@ -65,4 +65,15 @@ public class UserServiceImpl implements UserService {
         }
         // Handle the case where the user does not exist
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    @Override
+    public UserResponseDto getUserByEmail(String email) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        return userOptional.map(user -> modelMapper.map(user, UserResponseDto.class)).orElse(null);
+    }
 }

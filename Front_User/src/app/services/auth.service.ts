@@ -9,13 +9,16 @@ import { UserRequestDto } from '../modules/authmodule/user-request-dto/user-requ
 })
 export class AuthService {
   private apiUrl = 'http://localhost:8082/api/users';
+  private loginUrl = 'http://localhost:8082/api/users/login'; // Update with your backend API URL
+
+  
 
   constructor(private http: HttpClient) {}
 
   signUp(user: UserRequestDto): Observable<any> {
     return this.http.post(`${this.apiUrl}`, user);
   }
-  signIn(username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { username, password });
+  login(credentials: { email: string; password: string; rememberMe: boolean }): Observable<any> {
+    return this.http.post<any>(this.loginUrl, credentials);
   }
 }

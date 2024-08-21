@@ -16,4 +16,7 @@ public class UserResponseDto {
     private String email;
     private String image;
     private Set<RoleResponseDto> roles;
+    private String password;
+
+
 }
