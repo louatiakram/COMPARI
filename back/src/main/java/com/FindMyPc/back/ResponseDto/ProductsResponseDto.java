@@ -1,6 +1,7 @@
 package com.FindMyPc.back.ResponseDto;
 
 
+import com.FindMyPc.back.entity.ProductsImgs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,9 +29,8 @@ public class ProductsResponseDto {
     private String refreshRate;
     private String color;
     private Double price;
-    private String description;
-    private String image;
     private List<StoreProductResponseDto> storeProduct;
+    private List<ProductsImgsResponseDto> productsImgs;
     private List<RatingResponseDto> ratings;
 
 }

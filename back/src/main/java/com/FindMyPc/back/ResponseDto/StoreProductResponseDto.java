@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class StoreProductResponseDto {
     private int id;
-    private float priceBD;
-    private float priceAD;
+
+    private float priceAD; // Price from the product
+    private double priceBD; // Price from the scraping source
+    private int storeId; // Store ID (constant 1 for now)
     private StoreResponseDto store;
 }

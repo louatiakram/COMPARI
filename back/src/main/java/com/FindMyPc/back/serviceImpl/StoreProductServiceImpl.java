@@ -69,4 +69,5 @@ public class StoreProductServiceImpl implements StoreProductService {
         Page<StoreProduct> storeProductPage = storeProductRepository.findAll(pageable);
         return storeProductPage.map(storeProduct -> modelMapper.map(storeProduct, StoreProductResponseDto.class));
     }
+
 }

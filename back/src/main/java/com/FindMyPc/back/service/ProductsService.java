@@ -1,6 +1,7 @@
 package com.FindMyPc.back.service;
 
 import com.FindMyPc.back.ResponseDto.ProductsResponseDto;
+import com.FindMyPc.back.entity.Products;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface ProductsService {
     void deleteProduct(long id);
 
     Page<ProductsResponseDto> getProductsPaginated(int page, int size);
+
+    Products getProductByNameAndPrice(String name, Double price);
 }

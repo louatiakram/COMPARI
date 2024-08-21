@@ -69,4 +69,9 @@ public class ProductsServiceImpl implements ProductsService {
         Page<Products> productPage = productsRepository.findAll(pageable);
         return productPage.map(product -> modelMapper.map(product, ProductsResponseDto.class));
     }
+
+    @Override
+    public Products getProductByNameAndPrice(String name, Double price) {
+        return productsRepository.findByNameAndPrice(name, price).stream().findFirst().orElse(null);
+    }
 }

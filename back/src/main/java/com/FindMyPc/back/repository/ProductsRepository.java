@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface ProductsRepository extends JpaRepository<Products, Long> {
     Page<Products> findAll(Pageable pageable);
+    List<Products> findByNameAndPrice(String name, Double price);
 
     List<Products> findByNameContaining(String name);
 
