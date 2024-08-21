@@ -16,7 +16,7 @@ export interface Product {
   refreshRate: string;       // Added
   color: string;             // Added
   price: number;             // Added
-  description: string;
+  description: string; 
   image: string;
   storeProduct: StoreProduct[];
   ratings: Rating[];

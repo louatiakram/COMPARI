@@ -2,30 +2,29 @@
   <div class="container">
     <div class="signin-content">
       <div class="signin-image">
-        <figure><img alt="sing up image" src="../assets/images/signin-image.jpg"></figure>
-        <a class="signup-image-link" href="#">Create an account</a>
+        <figure><img alt="sign in image" src="../assets/images/signin-image.jpg"></figure>
+        <a class="signup-image-link" routerLink="/signup">Create an account</a>
       </div>
 
       <div class="signin-form">
         <h2 class="form-title">Sign in</h2>
-        <form class="register-form" id="login-form" method="POST">
+        <form [formGroup]="loginForm" (ngSubmit)="signIn()" class="register-form" id="login-form">
           <div class="form-group">
-            <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-            <input id="your_name" name="your_name" placeholder="Your Name" type="text"/>
+            <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+            <input id="username" formControlName="username" placeholder="Username" type="text"/>
           </div>
           <div class="form-group">
-            <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-            <input id="your_pass" name="your_pass" placeholder="Password" type="password"/>
+            <label for="password"><i class="zmdi zmdi-lock"></i></label>
+            <input id="password" formControlName="password" placeholder="Password" type="password"/>
           </div>
           <div class="form-group">
-            <input class="agree-term" id="remember-me" name="remember-me" type="checkbox"/>
+            <input class="agree-term" id="remember-me" formControlName="rememberMe" type="checkbox"/>
             <label class="label-agree-term" for="remember-me"><span><span></span></span>Remember me</label>
           </div>
           <div class="form-group form-button">
-            <input class="form-submit" id="signin" name="signin" type="submit" value="Log in"/>
+            <input class="form-submit" id="signin" type="submit" value="Log in"/>
           </div>
         </form>
-
       </div>
     </div>
   </div>
