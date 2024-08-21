@@ -1,0 +1,72 @@
+<c-row>
+  <c-col xs="12">
+    <app-docs-callout href="charts">
+      CoreUI Angular wrapper component for Chart.js 4.4, the most popular charting library.
+      <br>
+    </app-docs-callout>
+  </c-col>
+  <c-col lg="6" xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        Bar Chart
+      </c-card-header>
+      <c-card-body>
+        <c-chart [data]="chartBarData" [options]="options" type="bar"/>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col lg="6" xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        Line Chart
+      </c-card-header>
+      <c-card-body>
+        <c-chart [data]="chartLineData" [options]="options" type="line"/>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+<c-row>
+  <c-col lg="6" xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        Doughnut Chart
+      </c-card-header>
+      <c-card-body>
+        <c-chart [data]="chartDoughnutData" [options]="options" type="doughnut"/>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col lg="6" xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        Pie Chart
+      </c-card-header>
+      <c-card-body>
+        <c-chart [data]="chartPieData" [options]="options" type="pie"/>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+<c-row>
+  <c-col lg="6" xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        Polar Area Chart
+      </c-card-header>
+      <c-card-body>
+        <c-chart [data]="chartPolarAreaData" [options]="options" type="polarArea"/>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col lg="6" xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        Radar Chart
+      </c-card-header>
+      <c-card-body>
+        <c-chart [data]="chartRadarData" [options]="options" type="radar"/>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
