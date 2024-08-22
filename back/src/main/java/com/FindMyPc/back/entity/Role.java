@@ -1,22 +1,40 @@
 package com.FindMyPc.back.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-@Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+import com.FindMyPc.back.user.Permission;
 
-public class Role {
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-    @Id
-    private Integer roleId;
+import static com.FindMyPc.back.user.Permission.ADMIN_CREATE;
+import static com.FindMyPc.back.user.Permission.ADMIN_DELETE;
+import static com.FindMyPc.back.user.Permission.ADMIN_READ;
+import static com.FindMyPc.back.user.Permission.ADMIN_UPDATE;
 
-    private String role;
+@RequiredArgsConstructor
+public enum Role {
 
+    USER(Collections.emptySet()),
+    ADMIN(Set.of(
+            ADMIN_READ,
+            ADMIN_UPDATE,
+            ADMIN_DELETE,
+            ADMIN_CREATE
+    ));
 
+    @Getter
+    private final Set<Permission> permissions;
+
+    public List<SimpleGrantedAuthority> getAuthorities() {
+        var authorities = permissions.stream()
+                .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
+                .collect(Collectors.toList());
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
+        return authorities;
+    }
 }

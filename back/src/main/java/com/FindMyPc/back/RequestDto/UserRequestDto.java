@@ -1,8 +1,11 @@
 package com.FindMyPc.back.RequestDto;
 
 
+import com.FindMyPc.back.entity.Role;
+
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserRequestDto {
 
     @NotEmpty(message = "{User.username.invalid}")
@@ -25,4 +29,6 @@ public class UserRequestDto {
     private String password;
 
     private String image;
+    private Role role;
+
 }

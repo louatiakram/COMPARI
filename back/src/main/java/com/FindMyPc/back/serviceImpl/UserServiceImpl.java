@@ -1,5 +1,6 @@
 package com.FindMyPc.back.serviceImpl;
 
+import com.FindMyPc.back.RequestDto.ChangePasswordRequest;
 import com.FindMyPc.back.RequestDto.UserRequestDto;
 import com.FindMyPc.back.ResponseDto.UserResponseDto;
 import com.FindMyPc.back.entity.User;
@@ -7,8 +8,13 @@ import com.FindMyPc.back.repository.UserRepository;
 import com.FindMyPc.back.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
+
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,6 +27,29 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ModelMapper modelMapper;
+    
+    private  PasswordEncoder passwordEncoder;
+
+    @Override
+    public void changePassword(ChangePasswordRequest request, Principal connectedUser) {
+        var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
+
+        // Check if the current password is correct
+        if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
+            throw new IllegalStateException("Wrong password");
+        }
+
+        // Check if the two new passwords are the same
+        if (!request.getNewPassword().equals(request.getConfirmationPassword())) {
+            throw new IllegalStateException("Passwords are not the same");
+        }
+
+        // Update the password
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+
+        // Save the new password
+        userRepository.save(user);
+    }
 
     @Override
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
@@ -64,16 +93,5 @@ public class UserServiceImpl implements UserService {
             userRepository.deleteById(userId);
         }
         // Handle the case where the user does not exist
-    }
-
-    @Override
-    public boolean existsByEmail(String email) {
-        return userRepository.existsByEmail(email);
-    }
-
-    @Override
-    public UserResponseDto getUserByEmail(String email) {
-        Optional<User> userOptional = userRepository.findByEmail(email);
-        return userOptional.map(user -> modelMapper.map(user, UserResponseDto.class)).orElse(null);
     }
 }

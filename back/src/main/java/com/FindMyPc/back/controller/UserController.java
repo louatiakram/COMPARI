@@ -1,16 +1,18 @@
 package com.FindMyPc.back.controller;
 
+import com.FindMyPc.back.RequestDto.ChangePasswordRequest;
 import com.FindMyPc.back.RequestDto.UserRequestDto;
 import com.FindMyPc.back.ResponseDto.UserResponseDto;
 import com.FindMyPc.back.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -47,13 +49,13 @@ public class UserController {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-    @PostMapping("/login")
-    public ResponseEntity<UserResponseDto> loginUser(@RequestBody UserRequestDto userRequestDto) {
-        UserResponseDto user = userService.getUserByEmail(userRequestDto.getEmail());
-        if (user != null && userRequestDto.getPassword().equals(user.getPassword())) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    
+    @PatchMapping
+    public ResponseEntity<?> changePassword(
+          @RequestBody ChangePasswordRequest request,
+          Principal connectedUser
+    ) {
+    	userService.changePassword(request, connectedUser);
+        return ResponseEntity.ok().build();
     }
 }
