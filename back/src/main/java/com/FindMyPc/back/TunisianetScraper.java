@@ -50,8 +50,8 @@ public class TunisianetScraper implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         // Keep the application running indefinitely
-        //keepRunning();
-        startScraping();
+        keepRunning();
+        //startScraping();
     }
     private void keepRunning() {
         // Keep the application running after scraping completes
