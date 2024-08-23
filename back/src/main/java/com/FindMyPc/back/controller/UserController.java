@@ -20,11 +20,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
+/*    @PostMapping
     public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto userRequestDto) {
         UserResponseDto createdUser = userService.createUser(userRequestDto);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
+    */
 
     @GetMapping
     public ResponseEntity<List<UserResponseDto>> getAllUsers() {
