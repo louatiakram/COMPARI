@@ -3,7 +3,6 @@ package com.FindMyPc.back.config;
 import com.FindMyPc.back.auditing.ApplicationAuditAware;
 import com.FindMyPc.back.repository.UserRepository;
 import org.modelmapper.ModelMapper;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,8 +24,8 @@ public class ApplicationConfig {
 
   @Bean
   public UserDetailsService userDetailsService() {
-    return username -> repository.findByEmail(username)
-        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    return email -> repository.findByEmail(email)
+        .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
   }
 
   @Bean
@@ -56,5 +55,4 @@ public class ApplicationConfig {
   public ModelMapper modelMapper() {
     return new ModelMapper();
   }
-
 }

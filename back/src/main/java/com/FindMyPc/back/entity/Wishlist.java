@@ -29,4 +29,5 @@ public class Wishlist {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Products> products;
+    
 }

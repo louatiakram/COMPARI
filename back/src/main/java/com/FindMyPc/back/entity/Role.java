@@ -27,14 +27,14 @@ public enum Role {
             ADMIN_CREATE
     ));
 
-    @Getter
-    private final Set<Permission> permissions;
+	  @Getter
+	    private final Set<Permission> permissions;
 
-    public List<SimpleGrantedAuthority> getAuthorities() {
-        var authorities = permissions.stream()
-                .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
-                .collect(Collectors.toList());
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
-        return authorities;
-    }
-}
+	    public List<SimpleGrantedAuthority> getAuthorities() {
+	        var authorities = permissions.stream()
+	                .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
+	                .collect(Collectors.toList());
+	        authorities.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
+	        return authorities;
+	    }
+	}

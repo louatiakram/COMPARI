@@ -50,8 +50,8 @@ public class TunisianetScraper implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         // Keep the application running indefinitely
-        keepRunning();
-        //startScraping();
+         keepRunning();
+         //startScraping();
     }
     private void keepRunning() {
         // Keep the application running after scraping completes
@@ -207,7 +207,7 @@ public class TunisianetScraper implements ApplicationRunner {
 
         // Create a sanitized product name for folder path
         String sanitizedProductName = sanitizeFileName(productName);
-        Path imgFolderPath = Paths.get("C:\\Users\\ASUS\\Desktop\\A\\Website\\COMPARI-ADMIN\\Front_User\\src\\assets\\img", sanitizedProductName);
+        Path imgFolderPath = Paths.get("D:\\COMPARI-ADMIN\\Front_User\\src\\assets\\img", sanitizedProductName);
         if (!Files.exists(imgFolderPath)) {
             try {
                 Files.createDirectories(imgFolderPath);

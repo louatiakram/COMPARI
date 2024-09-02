@@ -13,42 +13,56 @@ import Swiper from 'swiper';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit, AfterViewInit {
-  products: Product[] = []; // Use the Product interface
+  products: Product[] = [];
 
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((data: Product[]) => {
-      console.log("results", data);
       this.products = data;
+      console.log('All Products:', this.products); // Check if products are being loaded correctly
+        setTimeout(() => this.initializeSwiper(), 0); // Initialize Swiper after data is loaded
     });
   }
+  
 
   getTop5HigherPricedProducts(): Product[] {
-    return this.products.sort((a, b) => b.price - a.price).slice(0, 5);
+    const filtered = this.products.sort((a, b) => b.price - a.price).slice(0, 5);
+    console.log('getTop5HigherPricedProducts:', filtered); // Check if products are being filtered correctly
+    return filtered;
   }
 
   getAppleMacbookProducts(): Product[] {
-    return this.products.filter(product => product.name.toLowerCase().includes('apple')).slice(0, 5);
+    const filtered = this.products.filter(product => product.name.toLowerCase().includes('apple macbook')).slice(0, 5);
+    console.log('Apple MacBook Products:', filtered); // Check if products are being filtered correctly
+    return filtered;
   }
-
+  
   getProductsInRange2500To3000(): Product[] {
-    return this.products.filter(product => product.price >= 2500 && product.price <= 3000).slice(0, 5);
+    const filtered = this.products.filter(product => product.price >= 2500 && product.price <= 3000).slice(0, 5);
+    console.log('Products in Range 2500-3000:', filtered); // Check if products are being filtered correctly
+    return filtered;
   }
-
+  
   getProductsInRange2000To2500(): Product[] {
-    return this.products.filter(product => product.price >= 2000 && product.price <= 2500).slice(0, 5);
+    const filtered = this.products.filter(product => product.price >= 2000 && product.price <= 2500).slice(0, 5);
+    console.log('Products in Range 2000-2500:', filtered); // Check if products are being filtered correctly
+    return filtered;
   }
+  
 
   ngAfterViewInit(): void {
+    this.initializeSwiper();
+  }
+
+  initializeSwiper(): void {
     new Swiper('.product-swiper', {
-      slidesPerView: 1, // Adjust this value based on your design
-      spaceBetween: 10,
+      slidesPerView: 1,
+      spaceBetween: 10, // Adjust spacing between slides as needed
       pagination: {
         el: '.swiper-pagination',
-        clickable: true, // Enable pagination dots if needed
+        clickable: true,
       },
-      navigation: false, // Disable navigation arrows
       mousewheel: true,
       keyboard: true,
       breakpoints: {

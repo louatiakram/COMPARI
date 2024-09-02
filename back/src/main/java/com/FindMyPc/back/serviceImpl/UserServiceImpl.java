@@ -8,13 +8,10 @@ import com.FindMyPc.back.repository.UserRepository;
 import com.FindMyPc.back.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-
-
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,34 +25,54 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private ModelMapper modelMapper;
     
-    private  PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
-    public void changePassword(ChangePasswordRequest request, Principal connectedUser) {
-        var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
+    public UserResponseDto updateUser(int userId, UserRequestDto userRequestDto, Authentication authentication) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            if (userRequestDto != null) {
+                // Ensure this sets the correct value for username
+                if (userRequestDto.getUsername() != null) {
+                    user.setUsername(userRequestDto.getUsername());
+                }
+                if (userRequestDto.getEmail() != null) {
+                    user.setEmail(userRequestDto.getEmail());
+                }
+                if (userRequestDto.getPassword() != null) {
+                    user.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
+                }
+            }
+
+            User updatedUser = userRepository.save(user);
+            return modelMapper.map(updatedUser, UserResponseDto.class);
+        }
+        return null;
+    }
+
+
+    @Override
+    public void changePassword(ChangePasswordRequest request, Authentication authentication) {
+        var user = (User) authentication.getPrincipal();
 
         // Check if the current password is correct
         if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
             throw new IllegalStateException("Wrong password");
         }
 
-        // Check if the two new passwords are the same
+        // Check if the new passwords match
         if (!request.getNewPassword().equals(request.getConfirmationPassword())) {
             throw new IllegalStateException("Passwords are not the same");
         }
 
-        // Update the password
+        /* Update the password
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
 
         // Save the new password
-        userRepository.save(user);
-    }
-
-    @Override
-    public UserResponseDto createUser(UserRequestDto userRequestDto) {
-        User user = modelMapper.map(userRequestDto, User.class);
-        User savedUser = userRepository.save(user);
-        return modelMapper.map(savedUser, UserResponseDto.class);
+        userRepository.save(user);*/
     }
 
     @Override
@@ -70,21 +87,6 @@ public class UserServiceImpl implements UserService {
     public UserResponseDto getUserById(int userId) {
         Optional<User> userOptional = userRepository.findById(userId);
         return userOptional.map(user -> modelMapper.map(user, UserResponseDto.class)).orElse(null);
-    }
-
-    @Override
-    public UserResponseDto updateUser(int userId, UserRequestDto userRequestDto) {
-        Optional<User> userOptional = userRepository.findById(userId);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            user.setUsername(userRequestDto.getUsername());
-            user.setEmail(userRequestDto.getEmail());
-            user.setPassword(userRequestDto.getPassword());
-            // set other fields if needed
-            User updatedUser = userRepository.save(user);
-            return modelMapper.map(updatedUser, UserResponseDto.class);
-        }
-        return null; // or throw an exception if appropriate
     }
 
     @Override

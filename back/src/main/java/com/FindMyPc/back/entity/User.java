@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.FindMyPc.back.token.Token;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,13 +39,21 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Token> tokens;
-
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)  // Ensure wishlists are deleted when user is deleted
+    private Set<Wishlist> wishlists = new HashSet<>();
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-      return role.getAuthorities();
-    } @Override
+        if (role == null) {
+            return Collections.emptyList(); // or handle this case appropriately
+        }
+        return role.getAuthorities();
+    }
+
+    @Override
     public String getPassword() {
         return password;
       }

@@ -1,0 +1,15 @@
+
+
+// Custom styles for Swiper
+.product-swiper {
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Ensure Swiper slides are centered */
+  }
+
+  .swiper-pagination {
+    bottom: 10px; // Adjust as needed
+  }
+}

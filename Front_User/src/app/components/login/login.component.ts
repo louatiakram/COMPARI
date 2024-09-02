@@ -3,20 +3,23 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common'; // Import CommonModule
 import { AuthService } from '../../services/auth.service';
-import { UserRequestDto } from 'src/app/modules/authmodule/user-request-dto/user-request-dto.module';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  imports: [ReactiveFormsModule, HttpClientModule, CommonModule],// Add CommonModule here,
   standalone: true,
+  imports: [ReactiveFormsModule, HttpClientModule, CommonModule], // Add CommonModule here
   styleUrls: ['./login.component.scss'] // Add this if you have a CSS file
 })
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -28,10 +31,14 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
         next: (response: any) => {
-          // Assuming response contains userId
-          alert(`Login successful! Your user ID is ${response.userId}`);
-          // Optionally store user info or JWT token
-          localStorage.setItem('userId', response.userId);
+          const userName = response.name; // Adjust based on your API response
+          const userId = response.userId; // Adjust based on your API response
+          const token = response.token; // Adjust based on your API response
+          
+          alert(`Login successful! Welcome ${userName}. Your user ID is ${userId}`);
+          
+          // Store the token or user info if needed
+          localStorage.setItem('userToken', token);
           this.router.navigate(['/']); // Redirect to home or any other page
         },
         error: (error) => {

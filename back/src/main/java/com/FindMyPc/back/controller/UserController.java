@@ -8,9 +8,9 @@ import com.FindMyPc.back.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -19,13 +19,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-/*    @PostMapping
-    public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto userRequestDto) {
-        UserResponseDto createdUser = userService.createUser(userRequestDto);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
-    }
-    */
 
     @GetMapping
     public ResponseEntity<List<UserResponseDto>> getAllUsers() {
@@ -40,8 +33,12 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponseDto> updateUser(@PathVariable int id, @RequestBody UserRequestDto userRequestDto) {
-        UserResponseDto updatedUser = userService.updateUser(id, userRequestDto);
+    public ResponseEntity<UserResponseDto> updateUser(
+          @PathVariable int id,
+          @RequestBody(required = false) UserRequestDto userRequestDto,
+         Authentication authentication
+    ) {
+        UserResponseDto updatedUser = userService.updateUser(id, userRequestDto, authentication);
         return updatedUser != null ? new ResponseEntity<>(updatedUser, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
@@ -49,14 +46,5 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-    
-    @PatchMapping
-    public ResponseEntity<?> changePassword(
-          @RequestBody ChangePasswordRequest request,
-          Principal connectedUser
-    ) {
-    	userService.changePassword(request, connectedUser);
-        return ResponseEntity.ok().build();
     }
 }
