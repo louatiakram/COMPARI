@@ -1,1 +1,10 @@
-<p>wishlist works!</p>
+<div class="wishlist-content">
+  <h4>Your Wishlist</h4>
+  <ul>
+    <li *ngFor="let item of wishlistItems">
+      {{ item }}
+      <button (click)="removeItem(item)">Remove</button>
+    </li>
+  </ul>
+  <button (click)="clearWishlist()">Clear Wishlist</button>
+</div>

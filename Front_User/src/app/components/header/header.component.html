@@ -3,13 +3,12 @@
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="">
         <img class="logo" src="../assets/images/COMPARILOGOBLACK.png" height="50px">
-
       </a>
       <button aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation"
               class="navbar-toggler d-flex d-lg-none order-3 p-2" data-bs-target="#bdNavbar" data-bs-toggle="offcanvas"
               type="button">
         <svg class="navbar-icon">
-          <use xlink:routerLink="#navbar-icon"></use>
+          <use xlink:href="#navbar-icon"></use>
         </svg>
       </button>
       <div aria-labelledby="bdNavbarOffcanvasLabel" class="offcanvas offcanvas-end" id="bdNavbar" tabindex="-1">
@@ -32,11 +31,9 @@
             <li class="nav-item">
               <a class="nav-link me-4" href="#mobile-products">Products</a>
             </li>
-
             <li class="nav-item">
               <a class="nav-link me-4" href="#yearly-sale">Sale</a>
             </li>
-
             <li class="nav-item">
               <div class="user-items ps-5">
                 <ul class="d-flex justify-content-end list-unstyled">
@@ -55,9 +52,9 @@
                     </a>
                   </li>
                   <li>
-                    <a routerLink="cart.html">
-                      <svg class="cart">
-                        <use xlink:href="#cart"></use>
+                    <a (click)="toggleWishlist()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                        <path d="M8 6.236L7.534 5.808C6.054 4.512 3.721 3.906 2.34 5.385 1.127 6.585 1.89 8.375 3.12 9.574L7.88 13.575L12.641 9.574C13.87 8.375 14.632 6.585 13.419 5.385 12.038 3.906 9.705 4.512 8.225 5.808L8 6.236z"/>
                       </svg>
                     </a>
                   </li>
@@ -69,4 +66,9 @@
       </div>
     </div>
   </nav>
+
+  <!-- Wishlist Popout -->
+  <div *ngIf="isWishlistVisible" class="wishlist-popout">
+    <app-wishlist></app-wishlist>
+  </div>
 </header>
