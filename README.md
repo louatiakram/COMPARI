@@ -1,4 +1,4 @@
-# COMPARI
+# COMPARI(Project Dev Still Unfinished)
 
 ## Project Description
 
