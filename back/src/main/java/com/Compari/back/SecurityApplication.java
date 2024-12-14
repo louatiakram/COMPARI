@@ -5,18 +5,13 @@ import com.Compari.back.RequestDto.UserRequestDto;
 import com.Compari.back.auth.AuthenticationService;
 
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-@SpringBootApplication
+@Configuration
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class SecurityApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(SecurityApplication.class, args);
-    }
 
     @Bean
     public CommandLineRunner commandLineRunner(
@@ -30,7 +25,7 @@ public class SecurityApplication {
                     .image("") // If applicable
                     .role(Role.ADMIN) // Ensure this matches your Role setup
                     .build();
-            
+
             // Ensure AuthenticationService is updated to handle UserRequestDto
             var response = service.register(admin); // Adjust if needed
             System.out.println("Admin token: " + response.getAccessToken());

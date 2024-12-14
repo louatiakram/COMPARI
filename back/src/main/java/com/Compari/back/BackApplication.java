@@ -2,8 +2,10 @@ package com.Compari.back;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
+@Import(SecurityApplication.class) // Import SecurityApplication for security configuration
 public class BackApplication {
 
     public static void main(String[] args) {
