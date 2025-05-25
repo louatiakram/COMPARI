@@ -38,3 +38,34 @@ Follow these steps to set up the project locally:
    ./mvnw spring-boot:run
 
 ### Front-end (Angular)
+
+1. Navigate to the `front` directory:
+   ```bash
+   cd front
+   npm install -g @angular/cli
+   npm install
+
+2. Run the Angular app:
+   ```bash
+   ng serve
+
+3. Open your browser at:
+   ```bash
+   http://localhost:4200/
+
+## Here are some screenshots of our application:
+# Interfaces Utilisateur
+<p align="center">
+ <img src="front/src/assets/images//homepage.png">
+ <img src="front/src/assets/images//login.png">
+ <img src="front/src/assets/images//Signup.png">
+ <img src="front/src/assets/images//comparator24.png">
+ <img src="front/src/assets/images//Contact.png">
+</p>
+
+# Interfaces Administrateur
+<p align="center">
+ <img src="front/src/assets/images//Scrap.png">
+ <img src="front/src/assets/images//scrapeddata.png">
+ <img src="front/src/assets/images//PotmanTest.png">
+</p>
