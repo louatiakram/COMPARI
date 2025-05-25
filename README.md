@@ -54,7 +54,7 @@ Follow these steps to set up the project locally:
    http://localhost:4200/
 
 ## Here are some screenshots of our application:
-# Interfaces Utilisateur
+# User Interface
 <p align="center">
  <img src="front/src/assets/images//homepage.png">
  <img src="front/src/assets/images//login.png">
@@ -63,7 +63,7 @@ Follow these steps to set up the project locally:
  <img src="front/src/assets/images//Contact.png">
 </p>
 
-# Interfaces Administrateur
+# Admin Interface
 <p align="center">
  <img src="front/src/assets/images//Scrap.png">
  <img src="front/src/assets/images//scrapeddata.png">
